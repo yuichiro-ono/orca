@@ -1,0 +1,96 @@
+body {
+	font-family: "メイリオ", sans-serif;
+	background: #296112;
+	margin-left: auto;
+	margin-right: auto;
+	color: #FFFFFF;
+	overflow: hidden;
+}
+
+#site-box { min-width : 1024px ; }
+
+div.next {
+	float: left;
+	width: calc(50% - 5px);
+	padding-top: 50px;
+	border-right: 5px solid #E3E3ED;
+	height: 400px;
+}
+
+div.other {
+	float: right;
+	width: calc(50%);
+	padding-top: 50px;
+}
+
+div.footer {
+	clear: left;
+	width: 100%;
+	text-align: right;
+	font-size: 20pt;
+}
+
+div.title {
+	color: #FFFFFF;
+	//background-color: #7EB808;
+	background: #245410;
+	font-size: 80pt;
+	font-weight: bold;
+//	border-bottom: solid 5px #64A135;
+//	border-left: solid 5px #64A135;
+	border: solid 0px #E3E3ED;
+//	border-radius: 10px;
+	padding-left: 10px;
+	margin-left: 0px;
+	margin-top: 0px;
+	letter-spacing: 15px;
+	width: 100%;
+	text-align: center;
+	line-height: 200px;
+}
+
+div .subtitle {
+	font-size: 25pt;
+	font-weight: bold;
+	text-align: center;
+}
+
+table.frame {
+	margin-top: 20px;
+	height: 70px;
+	border-collapse: separate;
+	border-spacing: 10px;
+	margin-left: auto; 
+	margin-right: auto;
+}
+
+table.numbers_next {
+	border-radius: 20px;
+	border: solid 0px #ffffff;
+	width: 100px;
+	//background: #EDB000;
+	background: #7A0C00;
+	//background: #ED9F13;
+}
+
+td.number_cell_next {
+	font-size: 80pt;
+	font-weight: bold;
+	padding: 5px;
+	text-align: center;
+}
+
+table.numbers_other {
+	border-radius: 10px;
+//	border: solid 7px #ffffff;
+	width: 100px;
+//	background: #ffffff;
+	border-spacing: 10px;
+}
+
+td.number_cell_other {
+	font-size: 45pt;
+//	font-weight: bold;
+	padding: 5px;
+	text-align: center;
+}

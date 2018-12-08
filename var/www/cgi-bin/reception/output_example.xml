@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmlio2>
+  <acceptlstres type="record">
+    <Information_Date type="string">2018-10-13</Information_Date>
+    <Information_Time type="string">07:46:03</Information_Time>
+    <Api_Result type="string">00</Api_Result>
+    <Api_Result_Message type="string">処理終了</Api_Result_Message>
+    <Reskey type="string">Patient Info</Reskey>
+    <Acceptance_Date type="string">2018-10-13</Acceptance_Date>
+    <Acceptlst_Information type="array">
+      <Acceptlst_Information_child type="record">
+        <Acceptance_Time type="string">07:39:29</Acceptance_Time>
+        <Acceptance_Id type="string">00001</Acceptance_Id>
+        <Department_Code type="string">01</Department_Code>
+        <Department_WholeName type="string">内科</Department_WholeName>
+        <Physician_Code type="string">10000</Physician_Code>
+        <Physician_WholeName type="string">小野　祐一郎</Physician_WholeName>
+        <Medical_Information type="string">01</Medical_Information>
+        <Patient_Information type="record">
+          <Patient_ID type="string">00002</Patient_ID><PhoneNumber type="string"/>
+          <WholeName type="string">小野　佳名</WholeName>
+          <WholeName_inKana type="string">オノ　カナ</WholeName_inKana>
+          <BirthDate type="string">1967-04-05</BirthDate>
+          <Sex type="string">2</Sex>
+        </Patient_Information>
+      </Acceptlst_Information_child>
+      <Acceptlst_Information_child type="record">
+        <Acceptance_Time type="string">07:39:34</Acceptance_Time>
+        <Acceptance_Id type="string">00002</Acceptance_Id>
+        <Department_Code type="string">01</Department_Code>
+        <Department_WholeName type="string">内科</Department_WholeName>
+        <Physician_Code type="string">10000</Physician_Code>
+        <Physician_WholeName type="string">小野　祐一郎</Physician_WholeName>
+        <Medical_Information type="string">01</Medical_Information>
+        <Patient_Information type="record">
+          <Patient_ID type="string">00003</Patient_ID><PhoneNumber type="string"/>
+          <WholeName type="string">小野　功</WholeName>
+          <WholeName_inKana type="string">オノ　タクミ</WholeName_inKana>
+          <BirthDate type="string">1955-05-19</BirthDate>
+          <Sex type="string">1</Sex>
+        </Patient_Information>
+      </Acceptlst_Information_child>
+      <Acceptlst_Information_child type="record">
+        <Acceptance_Time type="string">07:39:37</Acceptance_Time>
+        <Acceptance_Id type="string">00003</Acceptance_Id>
+        <Department_Code type="string">01</Department_Code>
+        <Department_WholeName type="string">内科</Department_WholeName>
+        <Physician_Code type="string">10000</Physician_Code>
+        <Physician_WholeName type="string">小野　祐一郎</Physician_WholeName>
+        <Medical_Information type="string">01</Medical_Information>
+        <Patient_Information type="record">
+          <Patient_ID type="string">00004</Patient_ID><PhoneNumber type="string">080-222-2222</PhoneNumber>
+          <WholeName type="string">横山　雅文</WholeName>
+          <WholeName_inKana type="string">ヨコヤマ　マサフミ</WholeName_inKana>
+          <BirthDate type="string">1972-12-25</BirthDate>
+          <Sex type="string">1</Sex>
+        </Patient_Information>
+      </Acceptlst_Information_child>
+      <Acceptlst_Information_child type="record">
+        <Acceptance_Time type="string">07:39:42</Acceptance_Time>
+        <Acceptance_Id type="string">00004</Acceptance_Id>
+        <Department_Code type="string">01</Department_Code>
+        <Department_WholeName type="string">内科</Department_WholeName>
+        <Physician_Code type="string">10000</Physician_Code>
+        <Physician_WholeName type="string">小野　祐一郎</Physician_WholeName>
+        <Medical_Information type="string">01</Medical_Information>
+        <Patient_Information type="record">
+          <Patient_ID type="string">00001</Patient_ID><PhoneNumber type="string">09019686476</PhoneNumber>
+          <WholeName type="string">小野　加奈</WholeName>
+          <WholeName_inKana type="string">オノ　カナ</WholeName_inKana>
+          <BirthDate type="string">1988-07-24</BirthDate>
+          <Sex type="string">2</Sex>
+        </Patient_Information>
+      </Acceptlst_Information_child>
+    </Acceptlst_Information>
+  </acceptlstres>
+</xmlio2>

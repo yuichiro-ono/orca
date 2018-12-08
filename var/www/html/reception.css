@@ -1,0 +1,38 @@
+
+body {
+	font-size: 9pt;
+}
+table{
+  border-collapse:collapse;
+  margin:0 auto;
+  font-size: 10pt;
+}
+td,th{
+  padding:10px;
+}
+th{
+  color:#fff;
+  background:#005ab3;
+}
+table tr:nth-child(odd){
+  background:#e6f2ff;
+}
+td{
+  border-bottom:2px solid #80bcff;
+}
+
+.square_btn{
+    display: inline-block;
+    padding: 0.5em 1em;
+    text-decoration: none;
+    background: #668ad8;/*ボタン色*/
+    color: #FFF;
+    border-bottom: solid 4px #627295;
+    border-radius: 3px;
+}
+.square_btn:active {/*ボタンを押したとき*/
+    -ms-transform: translateY(4px);
+    -webkit-transform: translateY(4px);
+    transform: translateY(4px);/*下に動く*/
+    border-bottom: none;/*線を消す*/
+}

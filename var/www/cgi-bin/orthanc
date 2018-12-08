@@ -1,0 +1,7 @@
+orthanc
+
+orthanc-postgresql plugin
+ロール設定：
+　ロール：orthanc
+　/etc/passwdにもorthancを追加する必要がある
+
