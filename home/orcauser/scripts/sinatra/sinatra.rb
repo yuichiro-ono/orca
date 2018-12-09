@@ -44,7 +44,7 @@ end
 get '/wait/:acceptid' do |id|
 	@acceptID = id
 	code = "<%= #{id} %>"
-	erb code
+	erb :wait
 end
 
 get '/' do
