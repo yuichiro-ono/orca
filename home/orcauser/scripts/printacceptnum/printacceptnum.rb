@@ -8,14 +8,17 @@ HOME_DIR = '/home/orcauser/printacceptnum'
 logger = Logger.new("#{HOME_DIR}/error.log")
 
 def printAcceptanceNumber(body_hash)
-  puts "#{body_hash["Accept_Id"]} #{body_hash["Patient_ID"]} #{body_hash["Accept_Date"]} #{body_hash["Accept_Time"]}"
+  system("python printToThermprt.py #{body_hash["Accept_Id"]} #{body_hash["Accept_Date"]} #{body_hash["Accept_Time"]}")
 end
 
 EM.run {
   ws = Faye::WebSocket::Client.new('ws://192.168.0.3:9400/ws', [], :headers => {'X-GINBEE-TENANT-ID' => '1'})
 
   subId = ''
+  # ORCA PUSH APIへのリクエストID
   req_id  = "PatientAcceptReq_#{Time.now}"
+
+  # ORCA PUSH APIへのリクエスト
   req_str = <<EOS
 {
 "command" : "subscribe",
