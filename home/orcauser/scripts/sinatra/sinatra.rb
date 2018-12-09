@@ -42,7 +42,8 @@ post '/post' do
 end
 
 get '/wait/:acceptid' do |id|
-	"Hello, #{id}"
+	@acceptID = id
+	erb :wait
 end
 
 get '/' do
