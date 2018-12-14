@@ -151,7 +151,7 @@ def isSelected(option_index, option_value)
     if option_value == option_index
         return 'selected'
     else
-        return ''
+        return 'error'
     end
 end
 
@@ -241,7 +241,7 @@ def renderedHTML
             <td>#{acceptantPatient["namekana"]}</td>
             <td>#{acceptantPatient["sex"]}</td>
             <td>#{acceptantPatient["birthday"]}</td>
-            <td>isSelected</td>
+            <td>#{acceptantPatient["physician"]}</td>
             <td>
                 <select class="waiting_status" patid="#{acceptantPatient["patient_id"]}">
                     <option value="診察待ち" #{isSelected(0,acceptantPatient["waitingstatus"])}>診察待ち</option>
