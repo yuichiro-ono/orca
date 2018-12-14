@@ -44,7 +44,7 @@ def renderedHTML
             <td>
               <table class="numbers_next">
                 <tr>
-                  <td class="number_cell_next">#{acceptantPatients["acceptance_id"]}</td>
+                  <td class="number_cell_next">#{acceptantPatients[0]["acceptance_id"]}</td>
                 </tr>
               </table>
             </td>
