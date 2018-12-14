@@ -112,8 +112,7 @@ module ConstantValues
             currentOrdNo = lastOrdNo.nil? ? 1 : lastOrdNo + 1
 
             newPatientIDs.each do |id|
-            	puts "empty" if id == ""
-                DB.exec("UPDATE t_orca_reception SET order_no = #{currentOrdNo} WHERE (patient_id == \'#{id}\');")
+                DB.exec("UPDATE t_orca_reception SET order_no = #{currentOrdNo} WHERE (patient_id = \'#{id}\');")
                 currentOrdNo += 1
             end
 
