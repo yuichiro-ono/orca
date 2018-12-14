@@ -186,6 +186,7 @@ def renderedHTML
               <th>性別</th>
               <th>生年月日</th>
               <th>主治医</th>
+              <th>状態</th>
               <th>10分前<br />呼び出し</th>
             </tr>
         </thead>
