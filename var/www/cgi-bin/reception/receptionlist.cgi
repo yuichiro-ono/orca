@@ -233,9 +233,9 @@ def renderedHTML
             <td>#{acceptantPatient["physician"]}</td>
             <td>
                 <select class="waiting_status" patid="#{acceptantPatient["patient_id"]}">
-                    <option value="診察待ち" #{"selected" if acceptantPatient["waitingstatus"] == 0}>診察待ち</option>
-                    <option value="診察中断" #{"selected" if acceptantPatient["waitingstatus"] == 1}>診察中断</option>
-                    <option value="診察終了" #{"selected" if acceptantPatient["waitingstatus"] == 2}>診察終了</option>
+                    <option value="診察待ち" #{"selected" if acceptantPatient["waitingstatus"] == 0}>診察待ち #{acceptantPatient["waitingstatus"]}</option>
+                    <option value="診察中断" #{"selected" if acceptantPatient["waitingstatus"] == 1}>診察中断 #{acceptantPatient["waitingstatus"]}</option>
+                    <option value="診察終了" #{"selected" if acceptantPatient["waitingstatus"] == 2}>診察終了 #{acceptantPatient["waitingstatus"]}</option>
                 </select>
             </td>
             <td><a href="#{CGI_URI}?smsto=#{acceptantPatient["Phonenumber"]}" class="square_btn">Send SMS</a></td>
