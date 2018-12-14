@@ -76,15 +76,15 @@ module ConstantValues
                         Date.today.strftime('%Y-%m-%d'),                # 今日の日付
                         patientInfo.at_xpath('Acceptance_Id').text,     # AcceptanceID
                         patientInfo.at_xpath('Acceptance_Time').text,   # AcceptanceTime
-                        patientInfo.at_xpath('Appointment_Time').nil? ? '': patientInfo.at_xpath('Appointment_Time').text,  # AppointmentTime
+                        patientInfo.at_xpath('Appointment_Time').nil? ? 'null': patientInfo.at_xpath('Appointment_Time').text,  # AppointmentTime
                         '',                                             # OrdNo (後で割り付ける)
                         patientInfo.at_xpath('Patient_Information/Patient_ID').text,    # ID_Patient
                         patientInfo.at_xpath('Patient_Information/WholeName').text,     # NameKanji
                         patientInfo.at_xpath('Patient_Information/WholeName_inKana').text,           # NameKana
                         patientInfo.at_xpath('Patient_Information/Sex').text == '1' ? '男' : '女',    # Sex
-                        patientInfo.at_xpath('Patient_Information/BirthDate').nil? ? '': patientInfo.at_xpath('Patient_Information/BirthDate').text,     # Birthday
+                        patientInfo.at_xpath('Patient_Information/BirthDate').nil? ? 'null': patientInfo.at_xpath('Patient_Information/BirthDate').text,     # Birthday
                         patientInfo.at_xpath('Physician_WholeName').text,               # Physician
-                        patientInfo.at_xpath('Patient_Information/PhoneNumber').nil? ? '': patientInfo.at_xpath('Patient_Information/PhoneNumber').text,  # Phonenumber
+                        patientInfo.at_xpath('Patient_Information/PhoneNumber').nil? ? 'null': patientInfo.at_xpath('Patient_Information/PhoneNumber').text,  # Phonenumber
                         0
                     ]
           DB.exec("INSERT INTO t_orca_reception VALUES (\'#{newLine.join("\', \'")}\');")
