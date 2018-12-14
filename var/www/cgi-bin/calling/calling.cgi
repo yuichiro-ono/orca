@@ -10,7 +10,7 @@ require '../constantvals'
 include ConstantValues
 
 def renderedHTML
-  acceptantPatients = DB.exec('SELECT * FROM t_reception_today ORDER BY order_no ASC WHERE waitingstatus = 0;')
+  acceptantPatients = DB.exec('SELECT * FROM t_reception_today WHERE (waitingstatus = 0) ORDER BY order_no ASC;')
 
   outHTML = Array.new
 
