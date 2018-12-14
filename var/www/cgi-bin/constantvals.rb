@@ -123,7 +123,7 @@ module ConstantValues
         # 受付取り消し患者のT_RECEPTIONからの削除
         if !canceledPatientIDs.empty?
             # T_RECEPTIONに新規受付情報を追加
-            DB.exec("DELETE FROM t_reception WHERE t_reception.patient_id IN (\'#{canceledPatientIDs.join("\', \'")}\");')
+            DB.exec("DELETE FROM t_reception WHERE t_reception.patient_id IN (\'#{canceledPatientIDs.join("\', \'")}\");")
         end       
 
         DB.exec('COMMIT;')
