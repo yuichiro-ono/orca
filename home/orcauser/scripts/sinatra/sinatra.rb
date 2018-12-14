@@ -12,7 +12,6 @@ set :environment, :production
 
 configure do
   enable :cross_origin
-  File.open('updateOrderNo.pid', 'w') {|f| f.write Process.pid }
 end
 
 before do
@@ -33,11 +32,11 @@ post '/ordno' do
 #	"#{orderNos} #{patientIds}"
 #	"UPDATE T_RECEPTION SET OrdNo = #{orderNos[0]} WHERE (ID_Patient = \"#{patientIds[0]}\" And Date = \"#{date}\");"
 
-	DB.transaction do
-		for i in 0..(patientIds.length-1) do
-			DB.execute("UPDATE T_RECEPTION SET OrdNo = #{i + 1} WHERE (ID_Patient = '#{patientIds[i]}' And Date = '#{date}');")
-		end
- 	end
+	DB.exec('BEGIN;')
+	for i in 0..(patientIds.length-1) do
+		DB.exec("UPDATE T_RECEPTION SET OrdNo = #{i + 1} WHERE (ID_Patient = '#{patientIds[i]}' And Date = '#{date}');")
+	end
+ 	DB.exec('COMMIT;')
 
 end
 
