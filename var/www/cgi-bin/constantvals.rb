@@ -77,7 +77,7 @@ module ConstantValues
                         patientInfo.at_xpath('Acceptance_Id').text,     # AcceptanceID
                         patientInfo.at_xpath('Acceptance_Time').text,   # AcceptanceTime
                         patientInfo.at_xpath('Appointment_Time').nil? ? '00:00:00': patientInfo.at_xpath('Appointment_Time').text,  # AppointmentTime
-                        '',                                             # OrdNo (後で割り付ける)
+                        0,                                             # OrdNo (後で割り付ける)
                         patientInfo.at_xpath('Patient_Information/Patient_ID').text,    # ID_Patient
                         patientInfo.at_xpath('Patient_Information/WholeName').text,     # NameKanji
                         patientInfo.at_xpath('Patient_Information/WholeName_inKana').text,           # NameKana
