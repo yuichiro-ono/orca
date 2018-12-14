@@ -76,7 +76,7 @@ module ConstantValues
                         Date.today.strftime('%Y-%m-%d'),                # 今日の日付
                         patientInfo.at_xpath('Acceptance_Id').text,     # AcceptanceID
                         patientInfo.at_xpath('Acceptance_Time').text,   # AcceptanceTime
-                        patientInfo.at_xpath('Appointment_Time').nil? ? '0': patientInfo.at_xpath('Appointment_Time').text,  # AppointmentTime
+                        patientInfo.at_xpath('Appointment_Time').nil? ? '00:00:00': patientInfo.at_xpath('Appointment_Time').text,  # AppointmentTime
                         '',                                             # OrdNo (後で割り付ける)
                         patientInfo.at_xpath('Patient_Information/Patient_ID').text,    # ID_Patient
                         patientInfo.at_xpath('Patient_Information/WholeName').text,     # NameKanji
