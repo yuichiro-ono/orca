@@ -148,7 +148,7 @@ def combineWithPhonenumber(receptionXML)
 end
 
 def isSelected(option_index, option_value)
-    if option_index == option_value
+    if option_index.to_i == option_value.to_i
         return 'selected'
     else
         return 'error'
@@ -244,7 +244,7 @@ def renderedHTML
             <td>#{acceptantPatient["physician"]}</td>
             <td>
                 <select class="waiting_status" patid="#{acceptantPatient["patient_id"]}">
-                    <option value="診察待ち" #{acceptantPatient['waitingstatus']}>診察待ち</option>
+                    <option value="診察待ち" #{isSelected(0,acceptantPatient['waitingstatus'])}>診察待ち</option>
                     <option value="診察中断" #{isSelected(1,acceptantPatient['waitingstatus'])}>診察中断</option>
                     <option value="診察終了" #{isSelected(2,acceptantPatient['waitingstatus'])}>診察終了</option>
                 </select>
