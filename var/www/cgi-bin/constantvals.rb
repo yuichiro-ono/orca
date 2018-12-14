@@ -68,7 +68,7 @@ module ConstantValues
             birthday text,
             physician text,
             phonenumber text,
-            waitingstatus text
+            waitingstatus integer
             );')
 
         receptionXML.xpath('//Acceptlst_Information_child').each do |patientInfo|
