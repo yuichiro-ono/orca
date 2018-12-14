@@ -147,86 +147,9 @@ def combineWithPhonenumber(receptionXML)
 
 end
 
-def writeReceptionListToDb(receptionXML)
-    newPatientIDs = Array.new
-    canceledPatientIDs = Array.new
-
-    DB.transaction do 
-        # 当日（TODAY）のORCA上の受付患者を収める一時テーブル（T_ORCA_RECEPTION）
-        DB.execute('CREATE TEMPORARY TABLE T_ORCA_RECEPTION (
-            Date text,
-            AcceptanceID text,
-            AcceptanceTime text,
-            AppointmentTime text,
-            OrdNo integer,
-            ID_Patient text NOT NULL,
-            NameKanji text,
-            NameKana text,
-            Sex text,
-            Birthday text,
-            Physician text,
-            Phonenumber text
-            );')
-
-        receptionXML.xpath('//Acceptlst_Information_child').each do |patientInfo|
-          newLine = [   
-                        Date.today.strftime('%Y-%m-%d'),                # 今日の日付
-                        patientInfo.at_xpath('Acceptance_Id').text,     # AcceptanceID
-                        patientInfo.at_xpath('Acceptance_Time').text,   # AcceptanceTime
-                        patientInfo.at_xpath('Appointment_Time').nil? ? '': patientInfo.at_xpath('Appointment_Time').text,  # AppointmentTime
-                        '',                                             # OrdNo (後で割り付ける)
-                        patientInfo.at_xpath('Patient_Information/Patient_ID').text,    # ID_Patient
-                        patientInfo.at_xpath('Patient_Information/WholeName').text,     # NameKanji
-                        patientInfo.at_xpath('Patient_Information/WholeName_inKana').text,           # NameKana
-                        patientInfo.at_xpath('Patient_Information/Sex').text == '1' ? '男' : '女',    # Sex
-                        patientInfo.at_xpath('Patient_Information/BirthDate').nil? ? '': patientInfo.at_xpath('Patient_Information/BirthDate').text,     # Birthday
-                        patientInfo.at_xpath('Physician_WholeName').text,               # Physician
-                        patientInfo.at_xpath('Patient_Information/PhoneNumber').nil? ? '': patientInfo.at_xpath('Patient_Information/PhoneNumber').text  # Phonenumber                                           # Phonenumber
-                    ]
-          DB.execute("INSERT INTO T_ORCA_RECEPTION VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);", *newLine)
-        end
-
-        # 新規受付患者のIDリスト (newPatientIDs) 取得
-        DB.execute('SELECT T_ORCA_RECEPTION.ID_Patient FROM T_ORCA_RECEPTION LEFT OUTER JOIN T_RECEPTION_TODAY
-                    ON (T_ORCA_RECEPTION.ID_Patient = T_RECEPTION_TODAY.ID_Patient)
-                    WHERE T_RECEPTION_TODAY.ID_Patient IS NULL
-                    ORDER BY T_ORCA_RECEPTION.AcceptanceTime ASC').each do |id|
-            newPatientIDs << id[0]
-        end
-
-        # 受付取り消し患者のIDリスト (canceledPatientIDs) 取得
-        DB.execute('SELECT T_RECEPTION_TODAY.ID_Patient FROM T_RECEPTION_TODAY LEFT OUTER JOIN T_ORCA_RECEPTION
-                    ON (T_RECEPTION_TODAY.ID_Patient = T_ORCA_RECEPTION.ID_Patient AND T_RECEPTION_TODAY.Date = T_ORCA_RECEPTION.Date)
-                    WHERE T_ORCA_RECEPTION.ID_Patient is null').each do |id|
-            canceledPatientIDs << id[0]
-        end
-
-        # 新規受付患者のT_RECEPTIONへの追加
-        if !newPatientIDs.empty?
-            lastOrdNo = DB.execute('SELECT MAX(OrdNo) FROM T_RECEPTION_TODAY')[0][0] 
-            currentOrdNo = lastOrdNo.nil? ? 1 : lastOrdNo + 1
-
-            newPatientIDs.each do |id|
-                DB.execute("UPDATE T_ORCA_RECEPTION SET OrdNo = #{currentOrdNo} WHERE ID_Patient = \"#{id}\";")
-                currentOrdNo += 1
-            end
-
-            # T_RECEPTIONに新規受付情報を追加
-            DB.execute("INSERT INTO T_RECEPTION SELECT * FROM T_ORCA_RECEPTION WHERE T_ORCA_RECEPTION.ID_Patient IN (\"#{newPatientIDs.join('","')}\");")
-        end
-
-        # 受付取り消し患者のT_RECEPTIONからの削除
-        if !canceledPatientIDs.empty?
-            # T_RECEPTIONに新規受付情報を追加
-            DB.execute("DELETE FROM T_RECEPTION WHERE T_RECEPTION.ID_Patient IN (\"#{canceledPatientIDs.join('","')}\");")
-        end       
-
-    end
-end
-
 def renderedHTML
     DB.results_as_hash = true
-    acceptantPatients = DB.execute("SELECT * FROM T_RECEPTION_TODAY ORDER BY T_RECEPTION_TODAY.OrdNo ASC;")
+    acceptantPatients = DB.exec("SELECT * FROM t_reception_today ORDER BY t_reception_today.order_no ASC;")
 
     outHTML = Array.new
 
@@ -237,6 +160,7 @@ def renderedHTML
       <title>受付患者一覧</title>
       <meta charset="utf-8" />
       <link rel="stylesheet" type="text/css" href="/reception.css" />
+      <link rel="stylesheet" type="text/css" href="/jquery-ui.css" />
       <meta http-equiv="refresh" content="60" />
     </head> 
     
@@ -274,8 +198,8 @@ def renderedHTML
     nowTime = Time.local(2018, 11, 21, t.hour, t.min)
 
     acceptantPatients.each do |acceptantPatient|
-        acceptantTime_min = acceptantPatient["AcceptanceTime"].match(/([0-9][0-9]):([0-9][0-9]):([0-9][0-9])/)[2]
-        acceptantTime_hour = acceptantPatient["AcceptanceTime"].match(/([0-9][0-9]):([0-9][0-9]):([0-9][0-9])/)[1]
+        acceptantTime_min = acceptantPatient["acceptance_time"].match(/([0-9][0-9]):([0-9][0-9]):([0-9][0-9])/)[2]
+        acceptantTime_hour = acceptantPatient["acceptance_time"].match(/([0-9][0-9]):([0-9][0-9]):([0-9][0-9])/)[1]
         acceptantTime = Time.local(2018, 11, 21, acceptantTime_hour, acceptantTime_min)
         waitingTime_hour = (nowTime - acceptantTime).to_i/60/60
         waitingTime_min  = (nowTime - acceptantTime).to_i/60%60
@@ -292,21 +216,28 @@ def renderedHTML
             waitingTime_min_str = waitingTime_min.to_s
         end
 
-        acceptantPatient["WaitingPeriod"] = "#{waitingTime_hour_str}:#{waitingTime_min_str}"
+        acceptantPatient["waitingperiod"] = "#{waitingTime_hour_str}:#{waitingTime_min_str}"
 
         outHTML.push(<<-"TOHERE")
-            <tr patid="#{acceptantPatient["ID_Patient"]}">
+            <tr patid="#{acceptantPatient["patient_id"]}">
             <td style="text-align: end;" class="rank">#{acceptantPatient["OrdNo"]}</td>
-            <td>#{acceptantPatient["AcceptanceID"]}</td>
-            <td>#{acceptantPatient["AcceptanceTime"]}</td>
-            <td>#{acceptantPatient["AppointmentTime"]}</td>
-            <td>#{acceptantPatient["WaitingPeriod"]}</td>
-            <td>#{acceptantPatient["ID_Patient"]}</td>
-            <td>#{acceptantPatient["NameKanji"]}</td>
-            <td>#{acceptantPatient["NameKana"]}</td>
-            <td>#{acceptantPatient["Sex"]}</td>
-            <td>#{acceptantPatient["Birthday"]}</td>
-            <td>#{acceptantPatient["Physician"]}</td>
+            <td>#{acceptantPatient["acceptance_id"]}</td>
+            <td>#{acceptantPatient["acceptance_time"]}</td>
+            <td>#{acceptantPatient["appointment_time"]}</td>
+            <td>#{acceptantPatient["waitingperiod"]}</td>
+            <td>#{acceptantPatient["patient_id"]}</td>
+            <td>#{acceptantPatient["namekanji"]}</td>
+            <td>#{acceptantPatient["namekana"]}</td>
+            <td>#{acceptantPatient["sex"]}</td>
+            <td>#{acceptantPatient["birthday"]}</td>
+            <td>#{acceptantPatient["physician"]}</td>
+            <td>
+                <select class="waiting_status" patid="#{acceptantPatient["patient_id"]}">
+                    <option value="診察待ち" #{"selected" if acceptantPatient["waitingstatus"] == 0}>診察待ち</option>
+                    <option value="診察中断" #{"selected" if acceptantPatient["waitingstatus"] == 1}>診察中断</option>
+                    <option value="診察終了" #{"selected" if acceptantPatient["waitingstatus"] == 2}>診察終了</option>
+                </select>
+            </td>
             <td><a href="#{CGI_URI}?smsto=#{acceptantPatient["Phonenumber"]}" class="square_btn">Send SMS</a></td>
             </tr>
             TOHERE
@@ -336,7 +267,7 @@ def renderedHTML
                update: function(){
                  var ajax = $.ajax({
                       type: 'POST',
-                      url: '#{DBUPDATE_URI}',
+                      url: '#{DBUPDATE_ORDERNO_URI}',
                       data: { patientids: $(this).sortable("toArray", {attribute: "patid"}).join(",")}
                  });
 
@@ -350,6 +281,19 @@ def renderedHTML
                   }
 
                 }
+          });
+
+          $('.waiting_status').change(function() {
+                 var ajax = $.ajax({
+                      type: 'POST',
+                      url: '#{DBUPDATE_WAITINGSTATUS_URI}',
+                      data: { patientid: $(this).attr('patid'), newstatus: $(this).val() }
+                 });
+
+                 ajax.fail(function( XMLHttpRequest, textStatus, errorThrown ) {
+                    alert( "XMLHttpRequest : " + XMLHttpRequest.status + "; textStatus     : " + textStatus + "; errorThrown    : " + errorThrown.message );
+                  });
+
           })
         })
     </script>

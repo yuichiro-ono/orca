@@ -26,7 +26,7 @@ options "*" do
   200
 end
 
-post '/post' do 
+post '/ordno' do 
 	patientIds = params["patientids"].split(',')
 	date = Date.today.strftime('%Y-%m-%d')
 
@@ -41,10 +41,22 @@ post '/post' do
 
 end
 
-get '/wait/:acceptid' do |id|
-	@acceptID = id
-	code = "<%= #{id} %>"
-	erb :wait
+post '/wtst' do 
+	patientId = params["patientid"]
+	if params["newstatus"] == "診察待ち"
+		newStatus = 0
+	elsif params["newstatus"] == "診察中断"
+		newStatus = 1
+	else 
+		newStatus = 2
+	end
+
+	date = Date.today.strftime('%Y-%m-%d')
+
+#	"#{orderNos} #{patientIds}"
+#	"UPDATE T_RECEPTION SET OrdNo = #{orderNos[0]} WHERE (ID_Patient = \"#{patientIds[0]}\" And Date = \"#{date}\");"
+
+	DB.exec("UPDATE t_reception SET waitingstatus = #{newStatus} WHERE (ID_Patient = '#{patientId}' And Date = '#{date}');")
 end
 
 get '/' do
