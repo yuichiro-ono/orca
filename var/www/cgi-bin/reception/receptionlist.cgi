@@ -147,6 +147,14 @@ def combineWithPhonenumber(receptionXML)
 
 end
 
+def isSelected(option_index, option_value)
+    if option_value == option_index
+        return 'selected'
+    else
+        return ''
+    end
+end
+
 def renderedHTML
     acceptantPatients = DB.exec("SELECT * FROM t_reception_today ORDER BY t_reception_today.order_no ASC;")
 
@@ -197,6 +205,9 @@ def renderedHTML
     t = Time.now
     nowTime = Time.local(2018, 11, 21, t.hour, t.min)
 
+    # 診察状態
+    waiting_status = ['診察待ち', '診察中断', '診察終了']
+
     acceptantPatients.each do |acceptantPatient|
         acceptantTime_min = acceptantPatient["acceptance_time"].match(/([0-9][0-9]):([0-9][0-9]):([0-9][0-9])/)[2]
         acceptantTime_hour = acceptantPatient["acceptance_time"].match(/([0-9][0-9]):([0-9][0-9]):([0-9][0-9])/)[1]
@@ -230,12 +241,12 @@ def renderedHTML
             <td>#{acceptantPatient["namekana"]}</td>
             <td>#{acceptantPatient["sex"]}</td>
             <td>#{acceptantPatient["birthday"]}</td>
-            <td>#{acceptantPatient["physician"]}</td>
+            <td>isSelected</td>
             <td>
                 <select class="waiting_status" patid="#{acceptantPatient["patient_id"]}">
-                    <option value="診察待ち" #{print "selected" if acceptantPatient["waitingstatus"] == 0}>診察待ち</option>
-                    <option value="診察中断" #{print "selected" if acceptantPatient["waitingstatus"] == 1}>診察中断</option>
-                    <option value="診察終了" #{print "selected" if acceptantPatient["waitingstatus"] == 2}>診察終了</option>
+                    <option value="診察待ち" #{isSelected(0,acceptantPatient["waitingstatus"])}>診察待ち</option>
+                    <option value="診察中断" #{isSelected(1,acceptantPatient["waitingstatus"])}>診察中断</option>
+                    <option value="診察終了" #{isSelected(2,acceptantPatient["waitingstatus"])}>診察終了</option>
                 </select>
             </td>
             <td><a href="#{CGI_URI}?smsto=#{acceptantPatient["Phonenumber"]}" class="square_btn">Send SMS</a></td>
