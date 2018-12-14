@@ -53,7 +53,7 @@ def renderedHTML
         </div>
     TOHERE
 
-    if acceptantPatients.length >= 2
+    if acceptantPatients.to_a.length >= 2
       outHTML.push(<<-"TOHERE")
       <div class="other">
         <div class="subtitle">
