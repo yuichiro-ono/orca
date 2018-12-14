@@ -87,7 +87,7 @@ module ConstantValues
                         patientInfo.at_xpath('Patient_Information/PhoneNumber').nil? ? '': patientInfo.at_xpath('Patient_Information/PhoneNumber').text,  # Phonenumber
                         0
                     ]
-          DB.exec("INSERT INTO t_orca_reception VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);", *newLine)
+          DB.exec("INSERT INTO t_orca_reception VALUES (#{newLine.join(", ")});", *newLine)
         end
 
         # 新規受付患者のIDリスト (newPatientIDs) 取得
