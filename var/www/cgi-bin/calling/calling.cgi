@@ -5,14 +5,12 @@ require 'rexml/document'
 require 'date'
 require 'cgi'
 require 'rubygems'
-require 'sqlite3'
 require '../constantvals'
 
 include ConstantValues
 
 def renderedHTML
-  DB.results_as_hash = true
-  acceptantPatients = DB.execute('SELECT * FROM T_RECEPTION_TODAY ORDER BY T_RECEPTION_TODAY.OrdNo ASC;')
+  acceptantPatients = DB.exec'SELECT * FROM t_reception_today ORDER BY t_reception_today.order_no ASC;')
 
   outHTML = Array.new
 
@@ -46,7 +44,7 @@ def renderedHTML
             <td>
               <table class="numbers_next">
                 <tr>
-                  <td class="number_cell_next">#{acceptantPatients[0]["AcceptanceID"]}</td>
+                  <td class="number_cell_next">#{acceptantPatients["acceptance_id"]}</td>
                 </tr>
               </table>
             </td>
@@ -70,7 +68,7 @@ def renderedHTML
         outHTML.push(<<-"TOHERE")
           <td>
             <table class="numbers_other">
-              <tr><td class="number_cell_other">#{patient["AcceptanceID"]}</td></tr>
+              <tr><td class="number_cell_other">#{patient["acceptance_id"]}</td></tr>
             </table>
           </td>
           TOHERE
