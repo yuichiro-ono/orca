@@ -28,7 +28,7 @@ def renderedHTML
         <div class="next">
   TOHERE
 
-  if acceptantPatients.empty? 
+  if acceptantPatients.result_status == PG::Result.PGRES_EMPTY_QUERY
     outHTML.push(<<-"TOHERE")
           <div class="subtitle">現在受付中の方はおられません</div>
         </div>
