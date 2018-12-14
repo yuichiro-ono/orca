@@ -58,8 +58,8 @@ module ConstantValues
         DB.exec('CREATE TEMPORARY TABLE t_orca_reception (
             acceptance_date text,
             acceptance_id text,
-            acceptance_time text,
-            appointment_time text,
+            acceptance_time time,
+            appointment_time time,
             order_no integer,
             patient_id text not null,
             namekanji text,
