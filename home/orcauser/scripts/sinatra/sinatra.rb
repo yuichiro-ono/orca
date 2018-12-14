@@ -4,9 +4,9 @@ require 'sinatra/cross_origin'
 require 'sqlite3'
 require 'rubygems'
 require 'date'
+require '/var/www/cgi-bin/constantvals'
 
-DB_FILE = "/var/www/cgi-bin/reception/reception.db".freeze
-DB = SQLite3::Database.new(DB_FILE)
+include ConstantValues
  
 set :environment, :production
 
