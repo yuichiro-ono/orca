@@ -117,7 +117,9 @@ module ConstantValues
             end
 
             # T_RECEPTIONに新規受付情報を追加
-            DB.exec("INSERT INTO t_reception SELECT * FROM t_orca_reception WHERE t_orca_reception.patient_id IN (\'#{newPatientIDs[0].join("\', \'")}\");")
+            newPatientIDs.each do |id| 
+	            DB.exec("INSERT INTO t_reception SELECT * FROM t_orca_reception WHERE (t_orca_reception.patient_id = \'#{id}\');")
+	      	end
         end
 
         # 受付取り消し患者のT_RECEPTIONからの削除
