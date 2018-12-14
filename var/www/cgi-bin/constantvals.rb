@@ -95,16 +95,15 @@ module ConstantValues
                     ON (t_orca_reception.patient_id = t_reception_today.patient_id)
                     WHERE t_reception_today.patient_id IS NULL
                     ORDER BY t_orca_reception.acceptance_time ASC').each do |id|
-            newPatientIDs << id[0]
+            newPatientIDs << id["patient_id"]
         end
-
-        puts "III"
+        puts newPatientIDs
 
         # 受付取り消し患者のIDリスト (canceledPatientIDs) 取得
         DB.exec('SELECT t_reception_today.patient_id FROM t_reception_today LEFT OUTER JOIN t_orca_reception
                     ON (t_reception_today.patient_id = T_ORCA_RECEPTION.patient_id AND t_reception_today.acceptance_date = t_orca_reception.acceptance_date)
                     WHERE t_orca_reception.patient_id is null').each do |id|
-            canceledPatientIDs << id[0]
+            canceledPatientIDs << id["patient_id"]
         end
 
         # 新規受付患者のT_RECEPTIONへの追加
