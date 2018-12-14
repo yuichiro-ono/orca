@@ -98,7 +98,7 @@ module ConstantValues
             newPatientIDs << id[0]
         end
 
-        puts newPatientIDs
+        puts "III"
 
         # 受付取り消し患者のIDリスト (canceledPatientIDs) 取得
         DB.exec('SELECT t_reception_today.patient_id FROM t_reception_today LEFT OUTER JOIN t_orca_reception
