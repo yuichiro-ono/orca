@@ -34,7 +34,7 @@ post '/ordno' do
 
 	DB.exec('BEGIN;')
 	for i in 0..(patientIds.length-1) do
-		DB.exec("UPDATE T_RECEPTION SET OrdNo = #{i + 1} WHERE (ID_Patient = '#{patientIds[i]}' And Date = '#{date}');")
+		DB.exec("UPDATE t_reception SET order_no = #{i + 1} WHERE (patient_id = '#{patientIds[i]}' And acceptance_date = '#{date}');")
 	end
  	DB.exec('COMMIT;')
 
@@ -55,7 +55,7 @@ post '/wtst' do
 #	"#{orderNos} #{patientIds}"
 #	"UPDATE T_RECEPTION SET OrdNo = #{orderNos[0]} WHERE (ID_Patient = \"#{patientIds[0]}\" And Date = \"#{date}\");"
 
-	DB.exec("UPDATE t_reception SET waitingstatus = #{newStatus} WHERE (ID_Patient = '#{patientId}' And Date = '#{date}');")
+	DB.exec("UPDATE t_reception SET waitingstatus = #{newStatus} WHERE (patient_id = '#{patientId}' And acceptance_date = '#{date}');")
 end
 
 get '/' do
