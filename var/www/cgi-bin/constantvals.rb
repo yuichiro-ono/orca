@@ -53,79 +53,79 @@ module ConstantValues
 	    newPatientIDs = Array.new
 	    canceledPatientIDs = Array.new
 
-	    DB.transaction do 
-	        # 当日（TODAY）のORCA上の受付患者を収める一時テーブル（T_ORCA_RECEPTION）
-	        DB.exec('CREATE TEMPORARY TABLE t_orca_reception (
-	            acceptance_date text,
-	            acceptance_id text,
-	            acceptance_time text,
-	            appointment_time text,
-	            order_no integer,
-	            patient_id text not null,
-	            namekanji text,
-	            namekana text,
-	            sex text,
-	            birthday text,
-	            physician text,
-	            phonenumber text,
-	            waitingstatus
-	            );')
+	    DB.exec('BEGIN;') 
+        # 当日（TODAY）のORCA上の受付患者を収める一時テーブル（T_ORCA_RECEPTION）
+        DB.exec('CREATE TEMPORARY TABLE t_orca_reception (
+            acceptance_date text,
+            acceptance_id text,
+            acceptance_time text,
+            appointment_time text,
+            order_no integer,
+            patient_id text not null,
+            namekanji text,
+            namekana text,
+            sex text,
+            birthday text,
+            physician text,
+            phonenumber text,
+            waitingstatus
+            );')
 
-	        receptionXML.xpath('//Acceptlst_Information_child').each do |patientInfo|
-	          newLine = [   
-	                        Date.today.strftime('%Y-%m-%d'),                # 今日の日付
-	                        patientInfo.at_xpath('Acceptance_Id').text,     # AcceptanceID
-	                        patientInfo.at_xpath('Acceptance_Time').text,   # AcceptanceTime
-	                        patientInfo.at_xpath('Appointment_Time').nil? ? '': patientInfo.at_xpath('Appointment_Time').text,  # AppointmentTime
-	                        '',                                             # OrdNo (後で割り付ける)
-	                        patientInfo.at_xpath('Patient_Information/Patient_ID').text,    # ID_Patient
-	                        patientInfo.at_xpath('Patient_Information/WholeName').text,     # NameKanji
-	                        patientInfo.at_xpath('Patient_Information/WholeName_inKana').text,           # NameKana
-	                        patientInfo.at_xpath('Patient_Information/Sex').text == '1' ? '男' : '女',    # Sex
-	                        patientInfo.at_xpath('Patient_Information/BirthDate').nil? ? '': patientInfo.at_xpath('Patient_Information/BirthDate').text,     # Birthday
-	                        patientInfo.at_xpath('Physician_WholeName').text,               # Physician
-	                        patientInfo.at_xpath('Patient_Information/PhoneNumber').nil? ? '': patientInfo.at_xpath('Patient_Information/PhoneNumber').text,  # Phonenumber
-	                        0
-	                    ]
-	          DB.exec("INSERT INTO t_orca_reception VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);", *newLine)
-	        end
+        receptionXML.xpath('//Acceptlst_Information_child').each do |patientInfo|
+          newLine = [   
+                        Date.today.strftime('%Y-%m-%d'),                # 今日の日付
+                        patientInfo.at_xpath('Acceptance_Id').text,     # AcceptanceID
+                        patientInfo.at_xpath('Acceptance_Time').text,   # AcceptanceTime
+                        patientInfo.at_xpath('Appointment_Time').nil? ? '': patientInfo.at_xpath('Appointment_Time').text,  # AppointmentTime
+                        '',                                             # OrdNo (後で割り付ける)
+                        patientInfo.at_xpath('Patient_Information/Patient_ID').text,    # ID_Patient
+                        patientInfo.at_xpath('Patient_Information/WholeName').text,     # NameKanji
+                        patientInfo.at_xpath('Patient_Information/WholeName_inKana').text,           # NameKana
+                        patientInfo.at_xpath('Patient_Information/Sex').text == '1' ? '男' : '女',    # Sex
+                        patientInfo.at_xpath('Patient_Information/BirthDate').nil? ? '': patientInfo.at_xpath('Patient_Information/BirthDate').text,     # Birthday
+                        patientInfo.at_xpath('Physician_WholeName').text,               # Physician
+                        patientInfo.at_xpath('Patient_Information/PhoneNumber').nil? ? '': patientInfo.at_xpath('Patient_Information/PhoneNumber').text,  # Phonenumber
+                        0
+                    ]
+          DB.exec("INSERT INTO t_orca_reception VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);", *newLine)
+        end
 
-	        # 新規受付患者のIDリスト (newPatientIDs) 取得
-	        DB.exec('SELECT t_orca_reception.patient_id FROM t_orca_reception LEFT OUTER JOIN t_reception_today
-	                    ON (t_orca_reception.patient_id = t_reception_today.patient_id)
-	                    WHERE t_reception_today.patient_id IS NULL
-	                    ORDER BY t_orca_reception.acceptance_time ASC').each do |id|
-	            newPatientIDs << id[0]
-	        end
+        # 新規受付患者のIDリスト (newPatientIDs) 取得
+        DB.exec('SELECT t_orca_reception.patient_id FROM t_orca_reception LEFT OUTER JOIN t_reception_today
+                    ON (t_orca_reception.patient_id = t_reception_today.patient_id)
+                    WHERE t_reception_today.patient_id IS NULL
+                    ORDER BY t_orca_reception.acceptance_time ASC').each do |id|
+            newPatientIDs << id[0]
+        end
 
-	        # 受付取り消し患者のIDリスト (canceledPatientIDs) 取得
-	        DB.exec('SELECT t_reception_today.patient_id FROM t_reception_today LEFT OUTER JOIN t_orca_reception
-	                    ON (t_reception_today.patient_id = T_ORCA_RECEPTION.patient_id AND t_reception_today.acceptance_date = t_orca_reception.acceptance_date)
-	                    WHERE t_orca_reception.patient_id is null').each do |id|
-	            canceledPatientIDs << id[0]
-	        end
+        # 受付取り消し患者のIDリスト (canceledPatientIDs) 取得
+        DB.exec('SELECT t_reception_today.patient_id FROM t_reception_today LEFT OUTER JOIN t_orca_reception
+                    ON (t_reception_today.patient_id = T_ORCA_RECEPTION.patient_id AND t_reception_today.acceptance_date = t_orca_reception.acceptance_date)
+                    WHERE t_orca_reception.patient_id is null').each do |id|
+            canceledPatientIDs << id[0]
+        end
 
-	        # 新規受付患者のT_RECEPTIONへの追加
-	        if !newPatientIDs.empty?
-	            lastOrdNo = DB.exec('SELECT MAX(Order_no) FROM t_reception_today')[0][0] 
-	            currentOrdNo = lastOrdNo.nil? ? 1 : lastOrdNo + 1
+        # 新規受付患者のT_RECEPTIONへの追加
+        if !newPatientIDs.empty?
+            lastOrdNo = DB.exec('SELECT MAX(Order_no) FROM t_reception_today')[0][0] 
+            currentOrdNo = lastOrdNo.nil? ? 1 : lastOrdNo + 1
 
-	            newPatientIDs.each do |id|
-	                DB.exec("UPDATE t_orca_reception SET OrdNo = #{currentOrdNo} WHERE patient_id = \"#{id}\";")
-	                currentOrdNo += 1
-	            end
+            newPatientIDs.each do |id|
+                DB.exec("UPDATE t_orca_reception SET OrdNo = #{currentOrdNo} WHERE patient_id = \"#{id}\";")
+                currentOrdNo += 1
+            end
 
-	            # T_RECEPTIONに新規受付情報を追加
-	            DB.exec("INSERT INTO t_reception SELECT * FROM t_orca_reception WHERE t_orca_reception.patient_id IN (\"#{newPatientIDs.join('","')}\");")
-	        end
+            # T_RECEPTIONに新規受付情報を追加
+            DB.exec("INSERT INTO t_reception SELECT * FROM t_orca_reception WHERE t_orca_reception.patient_id IN (\"#{newPatientIDs.join('","')}\");")
+        end
 
-	        # 受付取り消し患者のT_RECEPTIONからの削除
-	        if !canceledPatientIDs.empty?
-	            # T_RECEPTIONに新規受付情報を追加
-	            DB.exec("DELETE FROM t_reception WHERE t_reception.patient_id IN (\"#{canceledPatientIDs.join('","')}\");")
-	        end       
+        # 受付取り消し患者のT_RECEPTIONからの削除
+        if !canceledPatientIDs.empty?
+            # T_RECEPTIONに新規受付情報を追加
+            DB.exec("DELETE FROM t_reception WHERE t_reception.patient_id IN (\"#{canceledPatientIDs.join('","')}\");")
+        end       
 
-	    end
+        DB.exec('COMMIT;')
 	end
 
 end
