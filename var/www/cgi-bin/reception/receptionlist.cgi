@@ -148,7 +148,7 @@ def combineWithPhonenumber(receptionXML)
 end
 
 def isSelected(option_index, option_value)
-    if option_value == option_index
+    if option_index == option_value
         return 'selected'
     else
         return 'error'
@@ -231,7 +231,7 @@ def renderedHTML
 
         outHTML.push(<<-"TOHERE")
             <tr patid="#{acceptantPatient["patient_id"]}">
-            <td style="text-align: end;" class="rank">#{acceptantPatient["OrdNo"]}</td>
+            <td style="text-align: end;" class="rank">#{acceptantPatient["order_no"]}</td>
             <td>#{acceptantPatient["acceptance_id"]}</td>
             <td>#{acceptantPatient["acceptance_time"]}</td>
             <td>#{acceptantPatient["appointment_time"]}</td>
@@ -244,9 +244,9 @@ def renderedHTML
             <td>#{acceptantPatient["physician"]}</td>
             <td>
                 <select class="waiting_status" patid="#{acceptantPatient["patient_id"]}">
-                    <option value="診察待ち" #{isSelected(0,acceptantPatient["waitingstatus"])}>診察待ち</option>
-                    <option value="診察中断" #{isSelected(1,acceptantPatient["waitingstatus"])}>診察中断</option>
-                    <option value="診察終了" #{isSelected(2,acceptantPatient["waitingstatus"])}>診察終了</option>
+                    <option value="診察待ち" #{isSelected(0,acceptantPatient['waitingstatus'])}>診察待ち</option>
+                    <option value="診察中断" #{isSelected(1,acceptantPatient['waitingstatus'])}>診察中断</option>
+                    <option value="診察終了" #{isSelected(2,acceptantPatient['waitingstatus'])}>診察終了</option>
                 </select>
             </td>
             <td><a href="#{CGI_URI}?smsto=#{acceptantPatient["Phonenumber"]}" class="square_btn">Send SMS</a></td>
