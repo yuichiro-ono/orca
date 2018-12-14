@@ -148,7 +148,6 @@ def combineWithPhonenumber(receptionXML)
 end
 
 def renderedHTML
-    DB.results_as_hash = true
     acceptantPatients = DB.exec("SELECT * FROM t_reception_today ORDER BY t_reception_today.order_no ASC;")
 
     outHTML = Array.new
