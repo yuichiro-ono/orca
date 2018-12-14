@@ -98,6 +98,8 @@ module ConstantValues
             newPatientIDs << id[0]
         end
 
+        puts newPatientIDs
+
         # 受付取り消し患者のIDリスト (canceledPatientIDs) 取得
         DB.exec('SELECT t_reception_today.patient_id FROM t_reception_today LEFT OUTER JOIN t_orca_reception
                     ON (t_reception_today.patient_id = T_ORCA_RECEPTION.patient_id AND t_reception_today.acceptance_date = t_orca_reception.acceptance_date)
@@ -111,8 +113,8 @@ module ConstantValues
             currentOrdNo = lastOrdNo.nil? ? 1 : lastOrdNo + 1
 
             newPatientIDs.each do |id|
-            	puts "empty" if id ==""
-                DB.exec("UPDATE t_orca_reception SET order_no = #{currentOrdNo} WHERE patient_id == \'#{id}\';")
+            	puts "empty" if id == ""
+                DB.exec("UPDATE t_orca_reception SET order_no = #{currentOrdNo} WHERE (patient_id == \'#{id}\');")
                 currentOrdNo += 1
             end
 
