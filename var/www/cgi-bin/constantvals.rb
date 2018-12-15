@@ -1,5 +1,4 @@
 require 'rexml/document'
-require 'sqlite3'
 require 'twilio-ruby'
 require 'faraday'
 require 'pg'
@@ -29,8 +28,6 @@ module ConstantValues
 	SMSFROM = '+18503785426'.freeze # Your Twilio number
 
 	# DB
-	DB_FILE = "/var/www/cgi-bin/reception/reception.db".freeze
-	#DB = SQLite3::Database.new(DB_FILE)
 	DB = PG::connect(:host => "localhost", :user => "orcauser", :password => "orca", :dbname => "reception_db")
 	DB.internal_encoding = "UTF-8"
 
@@ -129,5 +126,13 @@ module ConstantValues
 
         DB.exec('COMMIT;')
 	end
+
+    def exportDataToHeroku
+        DB.exec('DROP TABLE t_export;')
+        DB.exec("CREATE TABLE t_export AS SELECT acceptance_date, acceptance_id, acceptance_time, order_no, waitingstatus from t_reception_today;")
+        system('pg_dump --no-acl --no-owner -h localhost -U orcauser -t t_export reception_db > /var/tmp/export.dump')
+        system('DATABASE_URL=$(heroku config:get DATABASE_URL --app wait-1210) heroku pg:psql -a wait-1210 < /var/tmp/export.dump')
+        system('rm /var/tmp/export.dump')
+    end
 
 end

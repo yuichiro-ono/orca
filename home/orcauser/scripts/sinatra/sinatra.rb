@@ -1,7 +1,6 @@
 require 'sinatra'
 require 'sinatra/reloader'
 require 'sinatra/cross_origin'
-require 'sqlite3'
 require 'rubygems'
 require 'date'
 require '/var/www/cgi-bin/constantvals'
@@ -38,6 +37,7 @@ post '/ordno' do
 	end
  	DB.exec('COMMIT;')
 
+ 	exportDataToHeroku
 end
 
 post '/wtst' do 
@@ -51,11 +51,9 @@ post '/wtst' do
 	end
 
 	date = Date.today.strftime('%Y-%m-%d')
-
-#	"#{orderNos} #{patientIds}"
-#	"UPDATE T_RECEPTION SET OrdNo = #{orderNos[0]} WHERE (ID_Patient = \"#{patientIds[0]}\" And Date = \"#{date}\");"
-
 	DB.exec("UPDATE t_reception SET waitingstatus = #{newStatus} WHERE (patient_id = '#{patientId}' And acceptance_date = '#{date}');")
+
+	exportDataToHeroku
 end
 
 get '/' do
