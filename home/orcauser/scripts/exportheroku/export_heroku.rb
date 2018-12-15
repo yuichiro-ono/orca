@@ -1,5 +1,6 @@
 require '/var/www/cgi-bin/constantvals'
 require 'clockwork'
+require 'active_support/time'
 
 include Clockwork
 include ConstantValues
