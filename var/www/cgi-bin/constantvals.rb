@@ -125,6 +125,7 @@ module ConstantValues
         end       
 
         DB.exec('COMMIT;')
+        exportDataToHeroku
 	end
 
     def exportDataToHeroku
