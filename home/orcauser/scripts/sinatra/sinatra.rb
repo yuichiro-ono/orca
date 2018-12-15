@@ -36,8 +36,6 @@ post '/ordno' do
 		DB.exec("UPDATE t_reception SET order_no = #{i + 1} WHERE (patient_id = '#{patientIds[i]}' And acceptance_date = '#{date}');")
 	end
  	DB.exec('COMMIT;')
-
- 	exportDataToHeroku
 end
 
 post '/wtst' do 
@@ -52,8 +50,6 @@ post '/wtst' do
 
 	date = Date.today.strftime('%Y-%m-%d')
 	DB.exec("UPDATE t_reception SET waitingstatus = #{newStatus} WHERE (patient_id = '#{patientId}' And acceptance_date = '#{date}');")
-
-	exportDataToHeroku
 end
 
 get '/' do
