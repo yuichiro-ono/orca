@@ -1,4 +1,4 @@
-import * from escpos
+from escpos import * 
 import sys
 import datetime
 
