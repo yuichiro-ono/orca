@@ -56,7 +56,7 @@ Seiko.text(accept_ID + '\n')
 Seiko.set("left", width=1, height=1)
 #Seiko.ln(2)
 Seiko.qr("http://ashiyaekimaeclinic.aaa.com/wait/" + accept_ID)
-#Seiko.ln(1)
+Seiko.cut()
 
 
 #Seiko.text("8ef3957493fa8e9e8146H" + acceptDatetime_outtext)
@@ -71,4 +71,3 @@ Seiko.qr("http://ashiyaekimaeclinic.aaa.com/wait/" + accept_ID)
 Seiko.text("81aa8fe382cc51528352815b836882f093c782dd8d9e82de82c6908492e891d282bf8e9e8ad482aa955c8ea682b382ea82dc82b781aaH")
 
 '''
-Seiko.cut()
