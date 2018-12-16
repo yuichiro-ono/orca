@@ -56,8 +56,7 @@ Seiko.text(accept_ID + '\n')
 Seiko.set("center", width=1, height=1)
 #Seiko.ln(2)
 Seiko.qr("http://ashiyaekimaeclinic.aaa.com/wait/" + accept_ID, size=5)
-Seiko.print_and_feed(n=5)
-Seiko.cut()
+Seiko.text('\n\n\n')
 Seiko.cut()
 
 
