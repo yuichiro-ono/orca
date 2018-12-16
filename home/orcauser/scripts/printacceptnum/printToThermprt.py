@@ -55,7 +55,7 @@ Seiko.set("center", text_type="bold", width=8, height=8)
 Seiko.text(accept_ID + '\n')
 Seiko.set("center", width=1, height=1)
 #Seiko.ln(2)
-Seiko.qr("http://ashiyaekimaeclinic.aaa.com/wait/" + accept_ID)
+Seiko.qr("http://ashiyaekimaeclinic.aaa.com/wait/" + accept_ID, QR_ECLEVEL_L, 7, QR_MODEL_2)
 Seiko.text('\n\n\n')
 Seiko.cut()
 
