@@ -57,6 +57,7 @@ Seiko.set("center", width=1, height=1)
 #Seiko.ln(2)
 Seiko.qr("http://ashiyaekimaeclinic.aaa.com/wait/" + accept_ID)
 Seiko._raw(b'\x1b\x64\x05')
+Seiko._raw(b'\x1B \x69')
 Seiko.cut()
 
 
