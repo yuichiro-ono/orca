@@ -13,16 +13,16 @@ def jpText(printer, txt, dw=False, dh=False):
 
 	txt = txt.decode('utf-8')
 	printer._raw(b'\x1c\x26')         # Kanji mode ON
-    n = 0x00
-    if (dw):
-        n += 0x04
+	n = 0x00
+	if (dw):
+		n += 0x04
     if (dh):
-        n += 0x08
-    if (n != 0x00):
-        printer._raw(b'\x1c\x21' + n.to_bytes(1, byteorder='big')) # Char size ON
-    printer.text(txt.encode('shift_jis', 'ignore'))
-    if (n != 0x00):
-        printer._raw(b'\x1c\x21\x00') # Char size OFF
+		n += 0x08
+	if (n != 0x00):
+		printer._raw(b'\x1c\x21' + n.to_bytes(1, byteorder='big')) # Char size ON
+	printer.text(txt.encode('shift_jis', 'ignore'))
+	if (n != 0x00):
+		printer._raw(b'\x1c\x21\x00') # Char size OFF
 	printer._raw(b'\x1c\x2e')         # Kanji mode OFF
 
 WEEKDAY = ["8c8e", "89CE", "9085", "96D8", "8BE0", "9379", "93FA"]	# ['月', '火', '水', '木', '金', '土', '日']
