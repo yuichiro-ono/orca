@@ -9,7 +9,7 @@ def jpInit(printer):
 	printer.charcode('JIS')
 	printer._raw(b'\x1b\x40')
 	printer._raw(b'\x1b\x52\x08')		# International characer select
-	printer._raw(b'\x1c\x43\x01')	# Kanji Code System Selection: FS 'C'
+	printer._raw(b'\x1c\x43\x01')	# Kanji Code System Selection: FS 'C' 1 (Shift_JIS)
 
 def text(printer, txt):
 	""" Print alpha-numeric text """
@@ -49,13 +49,13 @@ Seiko = Network(PRINTER_IP)
 
 jpInit(Seiko)
 jpText(Seiko, '受付日時：' + acceptDatetime_outtext + '\n')
-
 Seiko.set("center")
-jpText(Seiko, '受付番号')
+jpText(Seiko, '受付番号\n')
 Seiko.set("center", text_type="bold", width=8, height=8)
 Seiko.text(accept_ID + '\n')
+Seiko.set("left", width=1, height=1)
 #Seiko.ln(2)
-#Seiko.qr("http://ashiyaekimaeclinic.aaa.com/wait/" + accept_ID)
+Seiko.qr("http://ashiyaekimaeclinic.aaa.com/wait/" + accept_ID)
 #Seiko.ln(1)
 
 
