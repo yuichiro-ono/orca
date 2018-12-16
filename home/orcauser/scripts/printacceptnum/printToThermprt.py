@@ -9,7 +9,7 @@ def jpInit(printer):
     printer.charcode('JIS')
     printer._raw(b'\x1c\x43\x01')	# Kanji Code System Selection: FS 'C'
 
-def text(printer), txt:
+def text(printer, txt):
 	""" Print alpha-numeric text """
 	if txt:
 		printer._raw(txt)
