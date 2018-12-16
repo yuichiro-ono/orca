@@ -5,6 +5,24 @@ from escpos.printer import *
 import sys
 from datetime import datetime
 
+def jpInit(printer):
+    printer.charcode('JIS')
+    printer._raw(b'\x1c\x43\x01')	# Kanji Code System Selection: FS 'C'
+
+def jpText(printer, txt, dw=False, dh=False):
+    printer._raw(b'\x1c\x26')    # Kanji mode ON
+    n = 0x00
+    if (dw):
+        n += 0x04
+    if (dh):
+        n += 0x08
+    if (n != 0x00):
+        self._raw(b'\x1c\x21' + n.to_bytes(1, byteorder='big')) # Char size ON
+    printer.text(txt.encode('shift-jis', 'ignore'))
+    if (n != 0x00):
+        printer._raw(b'\x1c\x21\x00')  # Char size OFF
+	printer._raw(b'\x1c\x2e') # Kanji mode OFF
+
 WEEKDAY = ["8c8e", "89CE", "9085", "96D8", "8BE0", "9379", "93FA"]	# ['月', '火', '水', '木', '金', '土', '日']
 PRINTER_IP = "192.168.0.17"
 args = sys.argv
@@ -19,12 +37,16 @@ acceptDatetime_outtext = format(acceptDatetime.year, "x") + '944e' + format(acce
 Seiko = Network(PRINTER_IP)
 print '0AH'.encode('ascii')
 
-Seiko._raw('0AH'.encode('ascii'))
-Seiko._raw('1BH 4AH 1'.encode('ascii'))
-Seiko._raw('1BH 40H'.encode('ascii'))
-Seiko._raw('1BH 52H 8'.encode('ascii'))		# International characer select
-Seiko._raw('1CH 43H 1'.encode('ascii'))	    # FS C （Shift JISコード体系を選択する）電源offまで有効
-Seiko.text("ABCD")
+Seiko._raw(b'\x1b\x40')
+Seiko._raw(b'\x1b\x52\x08')		# International characer select
+
+jpInit(Seiko)
+
+#Seiko._raw(b'\x1C\x43\x01)	    # FS C （Shift JISコード体系を選択する）電源offまで有効
+#Seiko._raw(b'\x1c\x26')			# Kanji code ON	
+
+jpText(Seiko, 'アイウエオ')
+
 Seiko.cut()
 #Seiko.text("8ef3957493fa8e9e8146H" + acceptDatetime_outtext)
 '''
