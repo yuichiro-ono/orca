@@ -9,6 +9,11 @@ def jpInit(printer):
     printer.charcode('JIS')
     printer._raw(b'\x1c\x43\x01')	# Kanji Code System Selection: FS 'C'
 
+def text(printer), txt:
+	""" Print alpha-numeric text """
+	if txt:
+		printer._raw(txt)
+
 def jpText(printer, txt, dw=False, dh=False):
 
 	txt = txt.decode('utf-8')
@@ -20,7 +25,7 @@ def jpText(printer, txt, dw=False, dh=False):
 		n += 0x08
 	if (n != 0x00):
 		printer._raw(b'\x1c\x21' + n.to_bytes(1, byteorder='big')) # Char size ON
-	printer.text(txt.encode('shift_jis', 'ignore'))
+	text(txt.encode('shift_jis', 'ignore'))
 	if (n != 0x00):
 		printer._raw(b'\x1c\x21\x00') # Char size OFF
 	printer._raw(b'\x1c\x2e')         # Kanji mode OFF
