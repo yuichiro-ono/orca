@@ -1,3 +1,5 @@
+coding:utf-8
+
 from escpos import * 
 import sys
 import datetime
