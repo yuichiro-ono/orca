@@ -17,6 +17,7 @@ acceptDatetime = datetime.strptime(accept_date + ' ' + accept_time, '%Y-%m-%d %H
 acceptDatetime_outtext = format(acceptDatetime.year, "x") + '944e' + format(acceptDatetime.month,"x") + '8c8e' + format(acceptDatetime.day, "x") + '93fa8169' + WEEKDAY[acceptDatetime.weekday()] + '816a20' + format(acceptDatetime.hour,"x") + '8e9e' + format(acceptDatetime.minute,"x") + '95aa'
 
 Seiko = Network(PRINTER_IP)
+print '0AH'.encode('ascii')
 
 Seiko._raw('0AH'.encode('ascii'))
 Seiko._raw('1BH 4AH 1'.encode('ascii'))
