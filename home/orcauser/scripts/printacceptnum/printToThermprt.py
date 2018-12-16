@@ -10,6 +10,8 @@ def jpInit(printer):
     printer._raw(b'\x1c\x43\x01')	# Kanji Code System Selection: FS 'C'
 
 def jpText(printer, txt, dw=False, dh=False):
+
+	txt = txt.decode('utf-8')
     printer._raw(b'\x1c\x26')    # Kanji mode ON
     n = 0x00
     if (dw):
