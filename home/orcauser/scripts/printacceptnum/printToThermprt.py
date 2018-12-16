@@ -22,9 +22,9 @@ Seiko._raw("1BH 52H 8")		# International characer select
 Seiko._raw("1CH 43H 1")	    # FS C （Shift JISコード体系を選択する）電源offまで有効
 Seiko.text("8ef3957493fa8e9e8146H" + acceptDatetime_outtext)
 Seiko.set("center")
-Seiko.textln("8ef3957494d48d86H")
+Seiko.text("8ef3957494d48d86H")
 Seiko.set("center", bold=TRUE, width=8, height=8)
-Seiko.textln(accept_ID)
+Seiko.text(accept_ID)
 Seiko.ln(2)
 Seiko.qr("http://ashiyaekimaeclinic.aaa.com/wait/" + accept_ID)
 Seiko.ln(1)
