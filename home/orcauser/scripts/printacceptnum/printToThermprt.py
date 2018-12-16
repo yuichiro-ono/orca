@@ -44,7 +44,7 @@ jpInit(Seiko)
 #Seiko._raw(b'\x1C\x43\x01)	    # FS C （Shift JISコード体系を選択する）電源offまで有効
 #Seiko._raw(b'\x1c\x26')			# Kanji code ON	
 
-jpText(Seiko, '領収書')
+jpText(Seiko, "領収書")
 
 Seiko.cut()
 #Seiko.text("8ef3957493fa8e9e8146H" + acceptDatetime_outtext)
