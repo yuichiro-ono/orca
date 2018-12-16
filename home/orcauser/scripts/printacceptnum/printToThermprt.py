@@ -6,7 +6,7 @@ import sys
 from datetime import datetime
 
 def jpInit(printer):
-    printer.charcode('Shift-JIS')
+    printer.charcode('S-JIS')
     printer._raw(b'\x1c\x43\x01')	# Kanji Code System Selection: FS 'C'
 
 def jpText(printer, txt, dw=False, dh=False):
