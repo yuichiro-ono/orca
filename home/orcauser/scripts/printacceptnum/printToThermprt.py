@@ -18,7 +18,6 @@ def jpText(printer, txt, dw=False, dh=False):
         n += 0x08
     if (n != 0x00):
         printer._raw(b'\x1c\x21' + n.to_bytes(1, byteorder='big')) # Char size ON
-    print txt.encode('shift-jis', 'ignore')
     printer.text(txt.encode('shift-jis', 'ignore'))
     if (n != 0x00):
         printer._raw(b'\x1c\x21\x00')  # Char size OFF
@@ -45,7 +44,7 @@ jpInit(Seiko)
 #Seiko._raw(b'\x1C\x43\x01)	    # FS C （Shift JISコード体系を選択する）電源offまで有効
 #Seiko._raw(b'\x1c\x26')			# Kanji code ON	
 
-jpText(Seiko, "領収書")
+jpText(Seiko, u"領収書")
 
 Seiko.cut()
 #Seiko.text("8ef3957493fa8e9e8146H" + acceptDatetime_outtext)
