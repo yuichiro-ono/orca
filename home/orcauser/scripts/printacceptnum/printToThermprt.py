@@ -73,6 +73,17 @@ def _print_image(printer, line, size):
 			buffer = ""
 	cont = 0
 
+def _check_image_size(size):
+	""" Check and fix the size of the image to 32 bits """
+	if size % 32 == 0:
+		return (0, 0)
+		else:
+		image_border = 32 - (size % 32)
+		if (image_border % 2) == 0:
+			return (image_border / 2, image_border / 2)
+		else:
+	return (image_border / 2, (image_border / 2) + 1)
+
 def _convert_image(printer, im):
 	""" Parse image and prepare it to a printable format """
 	pixels   = []
@@ -88,7 +99,7 @@ def _convert_image(printer, im):
 	if im.size[1] > 255:
 		raise ImageSizeError()
 
-	im_border = printer._check_image_size(im.size[0])
+	im_border = _check_image_size(im.size[0])
 	for i in range(int(im_border[0])):
 		im_left += "0"
 	for i in range(int(im_border[1])):
