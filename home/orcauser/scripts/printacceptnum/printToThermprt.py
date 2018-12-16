@@ -18,6 +18,7 @@ def jpText(printer, txt, dw=False, dh=False):
         n += 0x08
     if (n != 0x00):
         printer._raw(b'\x1c\x21' + n.to_bytes(1, byteorder='big')) # Char size ON
+    print txt.encode('shift-jis', 'ignore')
     printer.text(txt.encode('shift-jis', 'ignore'))
     if (n != 0x00):
         printer._raw(b'\x1c\x21\x00')  # Char size OFF
