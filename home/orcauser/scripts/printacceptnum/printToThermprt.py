@@ -1,7 +1,7 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-from escpos import * 
+from escpos.printer import * 
 import sys
 import datetime
 
