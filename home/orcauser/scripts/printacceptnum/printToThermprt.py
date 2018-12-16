@@ -18,9 +18,9 @@ acceptDatetime_outtext = format(acceptDatetime.year, "x") + '944e' + format(acce
 
 Seiko = Network(PRINTER_IP)
 
-Seiko._raw("0x1B 0x40".encode())
-Seiko._raw("0x1B 0x52 8".encode())		# International characer select
-Seiko._raw("0x1C 0x43 1".encode())	    # FS C （Shift JISコード体系を選択する）電源offまで有効
+Seiko._raw("1BH 40H".encode())
+Seiko._raw("1BH 52H 8".encode())		# International characer select
+Seiko._raw("1CH 43H 1".encode())	    # FS C （Shift JISコード体系を選択する）電源offまで有効
 Seiko.text("ABCD")
 Seiko.cut()
 #Seiko.text("8ef3957493fa8e9e8146H" + acceptDatetime_outtext)
