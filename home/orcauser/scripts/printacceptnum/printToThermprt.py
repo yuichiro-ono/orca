@@ -18,7 +18,7 @@ def jpText(printer, txt, dw=False, dh=False):
         n += 0x08
     if (n != 0x00):
         printer._raw(b'\x1c\x21' + n.to_bytes(1, byteorder='big')) # Char size ON
-    	printer.text(txt.encode('shift-jis', 'ignore'))
+    printer.text(txt.encode('shift-jis', 'ignore'))
     if (n != 0x00):
         printer._raw(b'\x1c\x21\x00')  # Char size OFF
 	printer._raw(b'\x1c\x2e') # Kanji mode OFF
@@ -35,7 +35,6 @@ acceptDatetime = datetime.strptime(accept_date + ' ' + accept_time, '%Y-%m-%d %H
 acceptDatetime_outtext = format(acceptDatetime.year, "x") + '944e' + format(acceptDatetime.month,"x") + '8c8e' + format(acceptDatetime.day, "x") + '93fa8169' + WEEKDAY[acceptDatetime.weekday()] + '816a20' + format(acceptDatetime.hour,"x") + '8e9e' + format(acceptDatetime.minute,"x") + '95aa'
 
 Seiko = Network(PRINTER_IP)
-print '0AH'.encode('ascii')
 
 Seiko._raw(b'\x1b\x40')
 Seiko._raw(b'\x1b\x52\x08')		# International characer select
@@ -45,7 +44,7 @@ jpInit(Seiko)
 #Seiko._raw(b'\x1C\x43\x01)	    # FS C （Shift JISコード体系を選択する）電源offまで有効
 #Seiko._raw(b'\x1c\x26')			# Kanji code ON	
 
-jpText(Seiko, 'アイウエオ')
+jpText(Seiko, '領収書')
 
 Seiko.cut()
 #Seiko.text("8ef3957493fa8e9e8146H" + acceptDatetime_outtext)
