@@ -2,7 +2,7 @@ from escpos import *
 import sys
 import datetime
 
-WEEKDAY = ['8c8e', '89CE', '9085', '96D8', '8BE0', '9379', '93FA']  	 # ['月', '火', '水', '木', '金', '土', '日']
+WEEKDAY = ["8c8e", "89CE", "9085", "96D8", "8BE0", "9379", "93FA"]  	 # ['月', '火', '水', '木', '金', '土', '日']
 PRINTER_IP = "192.168.0.17"
 args = sys.argv
 
