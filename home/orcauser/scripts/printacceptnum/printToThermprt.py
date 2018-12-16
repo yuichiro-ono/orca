@@ -14,9 +14,8 @@ accept_date = args[2]
 accept_time = args[3]
 
 acceptDatetime = datetime.strptime(accept_date + ' ' + accept_time, '%Y-%m-%d %H:%M:%S')
-print hex(acceptDatetime.year)
-acceptDatetime_outtext = format(acceptDatetime.year, "x") + '944e' + format(acceptDatetime.month(),"x") + '8c8e' + format(acceptDatetime.day(), "x") + \
-	'93fa8169' + WEEKDAY[acceptDatetime.weekday()] + '816a20' + format(acceptDatetime.hour(),"x") + '8e9e' + format(acceptDatetime.minute(),"x") + '95aa'
+print format(acceptDatetime.year, "x")
+acceptDatetime_outtext = format(acceptDatetime.year, "x") + '944e' + format(acceptDatetime.month,"x") + '8c8e' + format(acceptDatetime.day, "x") + '93fa8169' + WEEKDAY[acceptDatetime.weekday()] + '816a20' + format(acceptDatetime.hour,"x") + '8e9e' + format(acceptDatetime.minute,"x") + '95aa'
 
 Seiko = printer.Network(PRINTER_IP)
 Seiko._raw("1BH 52H 8")		# International characer select
