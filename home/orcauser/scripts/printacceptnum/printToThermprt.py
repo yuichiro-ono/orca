@@ -1,6 +1,11 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
+import os
+import sys
+
+sys.path.insert(0, "/usr/local/lib/python2.7/dist-packages")
+
 try:
     import Image
 except ImportError:
@@ -9,9 +14,9 @@ except ImportError:
 import qrcode
 import time
 import binascii
-import sys
 
 from escpos.printer import * 
+from escpos.escpos import *
 from datetime import datetime
 
 # Image format  
