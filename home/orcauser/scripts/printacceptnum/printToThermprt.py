@@ -82,7 +82,7 @@ def _check_image_size(size):
 		if (image_border % 2) == 0:
 			return (image_border / 2, image_border / 2)
 		else:
-	return (image_border / 2, (image_border / 2) + 1)
+			return (image_border / 2, (image_border / 2) + 1)
 
 def _convert_image(printer, im):
 	""" Parse image and prepare it to a printable format """
