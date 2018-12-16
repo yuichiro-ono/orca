@@ -9,7 +9,7 @@ except ImportError:
 import qrcode
 import time
 import binascii
-impor sys
+import sys
 
 from escpos.printer import * 
 from datetime import datetime
