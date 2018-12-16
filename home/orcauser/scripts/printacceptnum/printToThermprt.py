@@ -12,7 +12,7 @@ def jpInit(printer):
 def jpText(printer, txt, dw=False, dh=False):
 
 	txt = txt.decode('utf-8')
-    printer._raw(b'\x1c\x26')         # Kanji mode ON
+	printer._raw(b'\x1c\x26')         # Kanji mode ON
     n = 0x00
     if (dw):
         n += 0x04
