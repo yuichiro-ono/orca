@@ -160,7 +160,7 @@ Seiko.set("center", text_type="bold", width=8, height=8)
 Seiko.text(accept_ID + '\n')
 #Seiko.ln(2)
 Seiko._raw(b'\x1b\x52\x00')
-Seiko.qr(Seiko, "http://ashiyaekimaeclinic.aaa.com/wait/" + accept_ID, center=True, size=15)
+Seiko.qr("http://ashiyaekimaeclinic.aaa.com/wait/" + accept_ID, center=True, size=15)
 jpText(Seiko, 'おしまい')
 Seiko.cut()
 
