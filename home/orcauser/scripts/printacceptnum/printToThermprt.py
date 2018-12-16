@@ -58,6 +58,7 @@ Seiko.set("left", width=1, height=1)
 Seiko.qr("http://ashiyaekimaeclinic.aaa.com/wait/" + accept_ID)
 Seiko.ln(3)
 Seiko.cut()
+Seiko.cut()
 
 
 #Seiko.text("8ef3957493fa8e9e8146H" + acceptDatetime_outtext)
