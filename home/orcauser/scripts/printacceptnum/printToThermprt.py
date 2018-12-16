@@ -26,7 +26,7 @@ S_RASTER_2H     = '\x1d\x76\x30\x02' # Set raster image double height
 S_RASTER_Q = '\x1d\x76\x30\x03' # Set raster image quadruple
 
 def jpInit(printer):
-	printer.charcode('JIS')
+#	printer.charcode('JIS')
 	printer._raw(b'\x1b\x40')
 	printer._raw(b'\x1b\x52\x08')		# International characer select
 	printer._raw(b'\x1c\x43\x01')	# Kanji Code System Selection: FS 'C' 1 (Shift_JIS)
