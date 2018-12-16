@@ -6,10 +6,10 @@ import sys
 from datetime import datetime
 
 def jpInit(printer):
-    printer.charcode('JIS')
-    printer._raw(b'\x1b\x40')
+	printer.charcode('JIS')
+	printer._raw(b'\x1b\x40')
 	printer._raw(b'\x1b\x52\x08')		# International characer select
-    printer._raw(b'\x1c\x43\x01')	# Kanji Code System Selection: FS 'C'
+	printer._raw(b'\x1c\x43\x01')	# Kanji Code System Selection: FS 'C'
 
 def text(printer, txt):
 	""" Print alpha-numeric text """
