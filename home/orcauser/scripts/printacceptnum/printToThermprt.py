@@ -98,25 +98,25 @@ def _convert_image(printer, im):
 		img_size[1] += 1
 		pix_line += im_left
 		img_size[0] += im_border[0]
-	    for x in range(im.size[0]):
+		for x in range(im.size[0]):
 			img_size[0] += 1
 			RGB = im.getpixel((x, y))
 			im_color = (RGB[0] + RGB[1] + RGB[2])
 			im_pattern = "1X0"
 			pattern_len = len(im_pattern)
 			switch = (switch - 1 ) * (-1)
-	        for x in range(pattern_len):
-	            if im_color <= (255 * 3 / pattern_len * (x+1)):
+			for x in range(pattern_len):
+				if im_color <= (255 * 3 / pattern_len * (x+1)):
 					if im_pattern[x] == "X":
 						pix_line += "%d" % switch
 					else:
 						pix_line += im_pattern[x]
 					break
-	            elif im_color > (255 * 3 / pattern_len * pattern_len) and im_color <= (255 * 3):
+				elif im_color > (255 * 3 / pattern_len * pattern_len) and im_color <= (255 * 3):
 					pix_line += im_pattern[-1]
 					break
-	    pix_line += im_right
-	    img_size[0] += im_border[1]
+		pix_line += im_right
+		img_size[0] += im_border[1]
 
 	_print_image(printer, pix_line, img_size)
 
