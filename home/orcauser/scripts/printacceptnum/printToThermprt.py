@@ -16,7 +16,7 @@ def jpText(printer, txt, dw=False, dh=False):
 	n = 0x00
 	if (dw):
 		n += 0x04
-    if (dh):
+	if (dh):
 		n += 0x08
 	if (n != 0x00):
 		printer._raw(b'\x1c\x21' + n.to_bytes(1, byteorder='big')) # Char size ON
