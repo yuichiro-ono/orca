@@ -14,6 +14,12 @@ import sys
 from escpos.printer import * 
 from datetime import datetime
 
+# Image format  
+S_RASTER_N      = '\x1d\x76\x30\x00' # Set raster image normal size
+S_RASTER_2W     = '\x1d\x76\x30\x01' # Set raster image double width
+S_RASTER_2H     = '\x1d\x76\x30\x02' # Set raster image double height
+S_RASTER_Q = '\x1d\x76\x30\x03' # Set raster image quadruple
+
 def jpInit(printer):
 	printer.charcode('JIS')
 	printer._raw(b'\x1b\x40')
