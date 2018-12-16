@@ -17,8 +17,8 @@ def jpText(printer, txt, dw=False, dh=False):
     if (dh):
         n += 0x08
     if (n != 0x00):
-        self._raw(b'\x1c\x21' + n.to_bytes(1, byteorder='big')) # Char size ON
-    printer.text(txt.encode('shift-jis', 'ignore'))
+        printer._raw(b'\x1c\x21' + n.to_bytes(1, byteorder='big')) # Char size ON
+    	printer.text(txt.encode('shift-jis', 'ignore'))
     if (n != 0x00):
         printer._raw(b'\x1c\x21\x00')  # Char size OFF
 	printer._raw(b'\x1c\x2e') # Kanji mode OFF
