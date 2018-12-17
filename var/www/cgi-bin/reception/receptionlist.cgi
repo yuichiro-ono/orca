@@ -309,7 +309,7 @@ def renderedHTML
 
           }); 
 
-          $('.re_issue_acceptnumber').onClick(function() {
+          $('.re_issue_acceptnumber').click(function() {
                  var today = new Date();
                  var ajax = $.ajax({
                       type: 'POST',
