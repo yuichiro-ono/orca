@@ -69,7 +69,8 @@ Seiko = Network(PRINTER_IP)
 
 jpInit(Seiko)
 jpText(Seiko, '受付日時：' + acceptDatetime_outtext + '\n')
-jpText(Seiko, '受付番号：' + accept_ID + '\n\n')
+jpText(Seiko, '受付番号：' + accept_ID + '\n')
+Seiko.control("LF")
 #Seiko.text(accept_ID + '\n')
 #Seiko.set(align="center", bold=True, double_width=True, double_height=True)
 #Seiko.ln(2)
@@ -77,6 +78,7 @@ jpText(Seiko, '受付番号：' + accept_ID + '\n\n')
 Seiko.set(align="center")
 Seiko.qr("http://ashiyaekimaeclinic.aaa.com/wait/" + accept_ID, size=4, center=True)
 jpText(Seiko, '↑のQRコードを読み込むと，待ち時間が表示されます')
+Seiko.control("VT")
 Seiko.cut()
 
 
