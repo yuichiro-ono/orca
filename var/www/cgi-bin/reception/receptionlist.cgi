@@ -196,6 +196,7 @@ def renderedHTML
               <th>主治医</th>
               <th>状態</th>
               <th>10分前<br />呼び出し</th>
+              <th>受付番号シート</th>
             </tr>
         </thead>
         <tbody>
@@ -250,6 +251,7 @@ def renderedHTML
                 </select>
             </td>
             <td><a href="#{CGI_URI}?smsto=#{acceptantPatient["Phonenumber"]}" class="square_btn">Send SMS</a></td>
+            <td><button class="re_issue_acceptnumber" accetid="#{acceptantPatient["acceptance_id"]}" accepttime="#{acceptantPatient["acceptance_time"]}">再発行</button></td>
             </tr>
             TOHERE
     end
@@ -305,7 +307,21 @@ def renderedHTML
                     alert( "XMLHttpRequest : " + XMLHttpRequest.status + "; textStatus     : " + textStatus + "; errorThrown    : " + errorThrown.message );
                   });
 
-          })
+          }); 
+
+          $('.re_issue_acceptnumber').onClick(function() {
+                 var today = new Date();
+                 var ajax = $.ajax({
+                      type: 'POST',
+                      url: '#{DBUPDATE_REISSUE_URI}',
+                      data: { acceptid: $(this).attr('acceptid'), accepttime: $(this)..attr('accepttime'), acceptdate: today.getFullYear + "-" + (today.getMonth() + 1) + "-" + today.getDate()}
+                 });
+
+                 ajax.fail(function( XMLHttpRequest, textStatus, errorThrown ) {
+                    alert( "XMLHttpRequest : " + XMLHttpRequest.status + "; textStatus     : " + textStatus + "; errorThrown    : " + errorThrown.message );
+                  });
+
+          }); 
         })
     </script>
     </body>

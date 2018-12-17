@@ -52,6 +52,10 @@ post '/wtst' do
 	DB.exec("UPDATE t_reception SET waitingstatus = #{newStatus} WHERE (patient_id = '#{patientId}' And acceptance_date = '#{date}');")
 end
 
+put '/reissue' do 
+	system("python printToThermprt.py #{params['acceptid']} #{params['acceptdate']} #{params['accepttime']}")
+end
+
 get '/' do
     "Hello World!"
 end

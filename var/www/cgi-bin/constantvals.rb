@@ -17,6 +17,7 @@ module ConstantValues
 	CGI_URI = '/cgi-bin/receptionlist/receptionlist.cgi'
 	DBUPDATE_ORDERNO_URI = 'http://192.168.0.3:4567/ordno'
 	DBUPDATE_WAITINGSTATUS_URI = 'http://192.168.0.3:4567/wtst'
+    DBUPDATE_REISSUE_URI = 'http://192.168.0.3:4567/reissue'
 
 	# XML Formatter
 	Formatter = REXML::Formatters::Default.new
@@ -131,6 +132,7 @@ module ConstantValues
         DB.exec('DROP TABLE t_export;')
         DB.exec("CREATE TABLE t_export AS SELECT acceptance_date, acceptance_id, acceptance_time, order_no, waitingstatus from t_reception_today;")
         system('pg_dump --no-acl --no-owner -h localhost -U orcauser -t t_export reception_db > /var/tmp/export.dump')
+        system('heroku config:get DATABASE_URL -a wait-1210')
         system('DATABASE_URL=$(heroku config:get DATABASE_URL --app wait-1210) heroku pg:reset DATABASE -a wait-1210 -c wait-1210')
         system('heroku pg:psql -a wait-1210 < /var/tmp/export.dump')
         system('rm /var/tmp/export.dump')
