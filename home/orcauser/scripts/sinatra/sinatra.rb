@@ -4,6 +4,7 @@ require 'sinatra/cross_origin'
 require 'rubygems'
 require 'date'
 require '/var/www/cgi-bin/constantvals'
+require 'os'
 
 include ConstantValues
  
