@@ -45,7 +45,7 @@ EOS
       data_hash = res_hash["data"]
       body_hash = data_hash["body"]
 
-      if (res_hash["sub.id"] == subId && data_hash["event"] == "patient_accept")
+      if (res_hash["sub.id"] == subId && body_hash["Patient_Mode"] == "add" && data_hash["event"] == "patient_accept")
         printAcceptanceNumber(body_hash)
       end
     end
