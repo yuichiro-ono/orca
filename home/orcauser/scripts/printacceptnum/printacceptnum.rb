@@ -3,7 +3,7 @@ require 'eventmachine'
 require 'json'
 require 'logger'
 
-HOME_DIR = '/home/orcauser/printacceptnum'
+HOME_DIR = '/home/orcauser/scripts/printacceptnum'
 
 logger = Logger.new("#{HOME_DIR}/error.log")
 
