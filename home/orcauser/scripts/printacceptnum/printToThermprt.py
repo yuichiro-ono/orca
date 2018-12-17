@@ -70,7 +70,7 @@ Seiko = Network(PRINTER_IP)
 
 jpInit(Seiko)
 jpText(Seiko, '受付日時：' + acceptDatetime_outtext + '\n\n')
-jpText(Seiko, '受付番号：' + accept_ID + '\n', dw=True, dh=True)
+jpText(Seiko, '受付番号：' + accept_ID.to_s + '\n', dw=True, dh=True)
 #Seiko.set(align="center", bold=True, double_width=True, double_height=True)
 #Seiko.ln(2)
 #Seiko._raw(b'\x1b\x52\x00')
