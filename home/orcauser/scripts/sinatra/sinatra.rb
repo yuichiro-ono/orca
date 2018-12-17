@@ -53,7 +53,10 @@ post '/wtst' do
 end
 
 put '/reissue' do 
-	system("python /home/orcauser/scripts/printacceptnum/printToThermprt.py #{params['acceptid']} #{params['acceptdate']} #{params['accepttime']}")
+	acceptId = params['acceptid']
+	acceptDate = Date.today.strftime('%Y-%m-%d')
+	acceptTime = params['accepttime']
+	system("python /home/orcauser/scripts/printacceptnum/printToThermprt.py #{acceptId} #{acceptDate} #{acceptTime}")
 end
 
 get '/' do
