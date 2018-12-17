@@ -4,7 +4,7 @@
 import os
 import sys
 
-sys.path.insert(0, "/usr/local/lib/python2.7/dist-packages/python_escpos-3.0a5.dev1+g52719c0-py2.7.egg/escpos")
+sys.path.insert(0, "/usr/local/lib/python2.7/dist-packages/python_escpos-3.0a5.dev1+g52719c0-py2.7.egg")
 
 try:
     import Image
@@ -74,6 +74,7 @@ jpText(Seiko, '受付番号：' + accept_ID + '\n\n')
 #Seiko.set(align="center", bold=True, double_width=True, double_height=True)
 #Seiko.ln(2)
 #Seiko._raw(b'\x1b\x52\x00')
+Seiko.set(align="center")
 Seiko.qr("http://ashiyaekimaeclinic.aaa.com/wait/" + accept_ID, size=4, center=True)
 jpText(Seiko, '↑のQRコードを読み込むと，待ち時間が表示されます')
 Seiko.cut()
