@@ -251,7 +251,7 @@ def renderedHTML
                 </select>
             </td>
             <td><a href="#{CGI_URI}?smsto=#{acceptantPatient["Phonenumber"]}" class="square_btn">Send SMS</a></td>
-            <td><button class="re_issue_acceptnumber" accetid="#{acceptantPatient["acceptance_id"]}" accepttime="#{acceptantPatient["acceptance_time"]}">再発行</button></td>
+            <td><button class="re_issue_acceptnumber" acceptid="#{acceptantPatient["acceptance_id"]}" accepttime="#{acceptantPatient["acceptance_time"]}">再発行</button></td>
             </tr>
             TOHERE
     end
