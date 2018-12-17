@@ -9,6 +9,7 @@ logger = Logger.new("#{HOME_DIR}/print_acceptnum.log")
 
 def printAcceptanceNumber(body_hash)
   system("python printToThermprt.py #{body_hash["Accept_Id"]} #{body_hash["Accept_Date"]} #{body_hash["Accept_Time"]}")
+  logger.error($?)
 end
 
 EM.run {
