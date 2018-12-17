@@ -75,7 +75,7 @@ jpText(Seiko, '受付番号：' + accept_ID + '\n\n')
 #Seiko.ln(2)
 #Seiko._raw(b'\x1b\x52\x00')
 Seiko.set(align="center")
-Seiko.qr("http://ashiyaekimaeclinic.aaa.com/wait/" + accept_ID, size=5, center=True)
+Seiko.qr("http://ashiyaekimaeclinic.aaa.com/wait/" + accept_ID, size=4, center=True)
 jpText(Seiko, '↑のQRコードを読み込むと，待ち時間が表示されます')
 Seiko.cut()
 
