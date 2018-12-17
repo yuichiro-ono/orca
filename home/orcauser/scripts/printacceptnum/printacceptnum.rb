@@ -48,7 +48,9 @@ EOS
       logger.debug(body_hash["Patient_Mode"])
 
       if (res_hash["sub.id"] == subId && body_hash["Patient_Mode"] == "add" && data_hash["event"] == "patient_accept")
+        logger.debug("Print mode in")
         printAcceptanceNumber(body_hash)
+
       end
     end
 
