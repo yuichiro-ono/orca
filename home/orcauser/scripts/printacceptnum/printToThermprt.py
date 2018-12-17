@@ -16,7 +16,6 @@ import binascii
 import struct
 
 from escpos.printer import * 
-from escpos.escpos import *
 from datetime import datetime
 
 # Image format  
