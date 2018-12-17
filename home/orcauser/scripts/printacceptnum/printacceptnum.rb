@@ -42,7 +42,7 @@ EOS
     res_hash= JSON.parse(event.data)
 
     if res_hash["command"] == 'subscribed'
-      logger.info("Patient_accept request was subscribed.")
+      @logger.info("Patient_accept request was subscribed.")
       subId = res_hash["sub.id"]
     elsif res_hash["command"] == 'event'
       data_hash = res_hash["data"]
