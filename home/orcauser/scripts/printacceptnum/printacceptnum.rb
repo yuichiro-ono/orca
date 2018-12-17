@@ -11,7 +11,6 @@ HOME_DIR = '/home/orcauser/scripts/printacceptnum'
 def printAcceptanceNumber(body_hash)
 #  out, err, status = Open3.capture3("python printToThermprt.py #{body_hash['Accept_Id']} #{body_hash['Accept_Date']} #{body_hash['Accept_Time']}")
   system("python printToThermprt.py #{body_hash["Accept_Id"]} #{body_hash["Accept_Date"]} #{body_hash["Accept_Time"]}")
-  @logger.error(status)
 end
 
 EM.run {
