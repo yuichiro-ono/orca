@@ -9,8 +9,8 @@ HOME_DIR = '/home/orcauser/scripts/printacceptnum'
 logger = Logger.new("#{HOME_DIR}/print_acceptnum.log")
 
 def printAcceptanceNumber(body_hash)
-  out, err, status = Open3.capture3("python printToThermprt.py #{body_hash['Accept_Id']} #{body_hash['Accept_Date']} #{body_hash['Accept_Time']}")
-#  system("python printToThermprt.py #{body_hash["Accept_Id"]} #{body_hash["Accept_Date"]} #{body_hash["Accept_Time"]}")
+#  out, err, status = Open3.capture3("python printToThermprt.py #{body_hash['Accept_Id']} #{body_hash['Accept_Date']} #{body_hash['Accept_Time']}")
+  system("python printToThermprt.py #{body_hash["Accept_Id"]} #{body_hash["Accept_Date"]} #{body_hash["Accept_Time"]}")
   logger.error(status)
 end
 
@@ -50,9 +50,7 @@ EOS
       logger.debug(body_hash["Patient_Mode"])
 
       if (res_hash["sub.id"] == subId && body_hash["Patient_Mode"] == "add" && data_hash["event"] == "patient_accept")
-        logger.debug("Print mode in")
         printAcceptanceNumber(body_hash)
-
       end
     end
 
