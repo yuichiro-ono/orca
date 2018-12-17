@@ -53,8 +53,7 @@ post '/wtst' do
 end
 
 put '/reissue' do 
-	"Hello World!"
-#	system("python /home/orcauser/scripts/printacceptnum/printToThermprt.py #{params['acceptid']} #{params['acceptdate']} #{params['accepttime']}")
+	system("python /home/orcauser/scripts/printacceptnum/printToThermprt.py #{params['acceptid']} #{params['acceptdate']} #{params['accepttime']}")
 end
 
 get '/' do
