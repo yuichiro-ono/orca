@@ -121,7 +121,7 @@ module ConstantValues
         # 受付取り消し患者のT_RECEPTIONからの削除
         if !canceledPatientIDs.empty?
             # T_RECEPTIONに新規受付情報を追加
-            DB.exec("DELETE FROM t_reception WHERE t_reception.patient_id IN (\'#{canceledPatientIDs.join("\', \'")}\");")
+            DB.exec("DELETE FROM t_reception WHERE t_reception.patient_id IN (\'#{canceledPatientIDs.join("\', \'")}\');")
         end       
 
         DB.exec('COMMIT;')
@@ -132,7 +132,7 @@ module ConstantValues
         DB.exec("CREATE TABLE t_export AS SELECT acceptance_date, acceptance_id, acceptance_time, order_no, waitingstatus from t_reception_today;")
         system('pg_dump --no-acl --no-owner -h localhost -U orcauser -t t_export reception_db > /var/tmp/export.dump')
         system('DATABASE_URL=$(heroku config:get DATABASE_URL --app wait-1210) heroku pg:reset DATABASE -a wait-1210 -c wait-1210')
-        system('DATABASE_URL=$(heroku config:get DATABASE_URL --app wait-1210) heroku pg:psql -a wait-1210 < /var/tmp/export.dump')
+        system('heroku pg:psql -a wait-1210 < /var/tmp/export.dump')
         system('rm /var/tmp/export.dump')
     end
 
