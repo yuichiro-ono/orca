@@ -5,7 +5,7 @@ require 'logger'
 
 HOME_DIR = '/home/orcauser/scripts/printacceptnum'
 
-logger = Logger.new("#{HOME_DIR}/error.log")
+logger = Logger.new("#{HOME_DIR}/print_acceptnum.log")
 
 def printAcceptanceNumber(body_hash)
   system("python printToThermprt.py #{body_hash["Accept_Id"]} #{body_hash["Accept_Date"]} #{body_hash["Accept_Time"]}")
@@ -44,7 +44,7 @@ EOS
     elsif res_hash["command"] == 'event'
       data_hash = res_hash["data"]
       body_hash = data_hash["body"]
-      print body_hash["Patient_Mode"]
+      logger.debug(body_hash["Patient_Mode"])
 
       if (res_hash["sub.id"] == subId && body_hash["Patient_Mode"] == "add" && data_hash["event"] == "patient_accept")
         printAcceptanceNumber(body_hash)
