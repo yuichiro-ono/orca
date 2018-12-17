@@ -314,7 +314,7 @@ def renderedHTML
                  var ajax = $.ajax({
                       type: 'POST',
                       url: '#{DBUPDATE_REISSUE_URI}',
-                      data: { acceptid: $(this).attr('acceptid'), accepttime: $(this)..attr('accepttime'), acceptdate: today.getFullYear + "-" + (today.getMonth() + 1) + "-" + today.getDate()}
+                      data: { acceptid: $(this).attr('acceptid'), accepttime: $(this).attr('accepttime'), acceptdate: today.getFullYear + "-" + (today.getMonth() + 1) + "-" + today.getDate()}
                  });
 
                  ajax.fail(function( XMLHttpRequest, textStatus, errorThrown ) {
