@@ -158,14 +158,14 @@ acceptDatetime_outtext = acceptDatetime.strftime('%Y年%m月%d日') + '(' + WEEK
 Seiko = Network(PRINTER_IP)
 
 jpInit(Seiko)
-jpText(Seiko, '受付日時：' + acceptDatetime_outtext + '\n')
+jpText(Seiko, '受付日時：' + acceptDatetime_outtext + '\n\n')
 Seiko.set("center")
 jpText(Seiko, '受付番号\n\n')
 Seiko.set("center", bold=True, width=8, height=8)
 Seiko.text(accept_ID + '\n')
 #Seiko.ln(2)
-Seiko._raw(b'\x1b\x52\x00')
-Seiko.qr("http://ashiyaekimaeclinic.aaa.com/wait/" + accept_ID, center=True, size=15)
+#Seiko._raw(b'\x1b\x52\x00')
+Seiko.qr("http://ashiyaekimaeclinic.aaa.com/wait/" + accept_ID, size=4, center=True)
 jpText(Seiko, 'おしまい')
 Seiko.cut()
 
