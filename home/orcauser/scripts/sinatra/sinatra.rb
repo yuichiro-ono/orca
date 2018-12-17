@@ -56,6 +56,7 @@ put '/reissue' do
 	acceptId = params['acceptid']
 	acceptDate = Date.today.strftime('%Y-%m-%d')
 	acceptTime = params['accepttime']
+	"aaaa"
 	system("python /home/orcauser/scripts/printacceptnum/printToThermprt.py #{acceptId} #{acceptDate} #{acceptTime}")
 end
 
