@@ -6,11 +6,6 @@ import sys
 
 sys.path.insert(0, "/usr/local/lib/python2.7/dist-packages/python_escpos-3.0a5.dev1+g52719c0-py2.7.egg")
 
-try:
-    import Image
-except ImportError:
-    from PIL import Image
-
 import time
 import binascii
 import struct
