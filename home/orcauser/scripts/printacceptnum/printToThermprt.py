@@ -47,7 +47,7 @@ def jpText(printer, txt, dw=False, dh=False):
 	if (dh):
 		n += 0x08
 	if (n != 0x00):
-		printer._raw(b'\x1c\x21' + struct(">B", n)) # Char size ON
+		printer._raw(b'\x1c\x21' + struct.pack(">B", n)) # Char size ON
 	text(printer, txt.encode('shift_jis', 'ignore'))
 	if (n != 0x00):
 		printer._raw(b'\x1c\x21\x00') # Char size OFF
