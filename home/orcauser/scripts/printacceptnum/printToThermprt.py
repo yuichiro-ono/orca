@@ -64,9 +64,9 @@ acceptDatetime_outtext = acceptDatetime.strftime('%Y年%m月%d日') + '(' + WEEK
 Seiko = Network(PRINTER_IP)
 
 jpInit(Seiko)
-Seiko.set(align="center", bold=False, double_width=True, double_height=True)
+Seiko.set(align="center", bold=True, width=3, height=3, custom_size=True, invert=True)
 jpText(Seiko, 'ご案内\n\n')
-Seiko.set(align="left", bold=False, double_width=False, double_height=False)
+Seiko.set(align="left", bold=False, double_width=False, double_height=False, custom_size=False, invert=False)
 jpText(Seiko, '受付日時：' + acceptDatetime_outtext + '\n')
 jpText(Seiko, '受付番号：', dw=True, dh=True)
 Seiko.set(align="left", bold=True, double_width=True, double_height=True)
