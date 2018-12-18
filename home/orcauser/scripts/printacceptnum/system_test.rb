@@ -1,5 +1,5 @@
 #!/usr/bin/ruby
 
-system ("ls")
-status = $?
-print status
+#system ("ls")
+#status = $?
+print "Hello, world!"
