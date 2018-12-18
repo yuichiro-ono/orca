@@ -1,3 +1,3 @@
-#system ("ls")
-#status = $?
-print "Hello, world!"
+system ("ls")
+status = $?
+print status
