@@ -57,7 +57,6 @@ accept_date = args[2]
 accept_time = args[3]
 
 acceptDatetime = datetime.strptime(accept_date + ' ' + accept_time, '%Y-%m-%d %H:%M:%S')
-#acceptDatetime_outtext = format(acceptDatetime.year, "x") + '944e' + format(acceptDatetime.month,"x") + '8c8e' + format(acceptDatetime.day, "x") + '93fa8169' + WEEKDAY[acceptDatetime.weekday()] + '816a20' + format(acceptDatetime.hour,"x") + '8e9e' + format(acceptDatetime.minute,"x") + '95aa'
 acceptDate_outtext = acceptDatetime.strftime('%Y年%m月%d日 ') + WEEKDAY[acceptDatetime.weekday()]
 acceptTime_outtext = acceptDatetime.strftime('%H時%M分')
 
@@ -67,7 +66,7 @@ jpInit(Seiko)
 Seiko.set(align="center", bold=True, width=3, height=3, custom_size=True, invert=True)
 jpText(Seiko, 'ご案内\n\n')
 Seiko.set(align="left", bold=False, width=2, height=2, custom_size=True, invert=False)
-jpText(Seiko, '受付日：' + acceptDate_outtext + '\n')
+jpText(Seiko, '受付：' + acceptDate_outtext + '\n')
 jpText(Seiko, '受付時間：' + acceptTime_outtext + '\n')
 jpText(Seiko, '呼出番号：【')
 Seiko.set(align="left", bold=True, double_width=True, double_height=True)
