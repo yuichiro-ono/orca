@@ -64,7 +64,8 @@ acceptDatetime_outtext = acceptDatetime.strftime('%Y年%m月%d日') + '(' + WEEK
 Seiko = Network(PRINTER_IP)
 
 jpInit(Seiko)
-jpText(Seiko, 'ご案内\n\n', dw=True, dh=True)
+Seiko.set(align="center", bold=True, double_width=True, double_height=True)
+jpText(Seiko, 'ご案内\n\n')
 Seiko.set(align="left", bold=False, double_width=False, double_height=False)
 jpText(Seiko, '受付日時：' + acceptDatetime_outtext + '\n')
 jpText(Seiko, '受付番号：', dw=True, dh=True)
@@ -76,7 +77,8 @@ Seiko.text(accept_ID + '\n')
 Seiko._raw(b'\x1b\x52\x00')
 Seiko.set(align="center")
 Seiko.qr("http://ashiyaekimaeclinic.aaa.com/wait/" + accept_ID, size=3, center=True)
-jpText(Seiko, '↑のQRコードを読み込むと，待ち時間が表示されます')
+jpText(Seiko, '↑のQRコードを読み込むと，待ち時間が表示されます\n\n')
+jpText(Seiko, '--芦屋駅前内科クリニック--')
 Seiko.cut()
 
 
