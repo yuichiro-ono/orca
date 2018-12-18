@@ -58,7 +58,7 @@ accept_time = args[3]
 
 acceptDatetime = datetime.strptime(accept_date + ' ' + accept_time, '%Y-%m-%d %H:%M:%S')
 #acceptDatetime_outtext = format(acceptDatetime.year, "x") + '944e' + format(acceptDatetime.month,"x") + '8c8e' + format(acceptDatetime.day, "x") + '93fa8169' + WEEKDAY[acceptDatetime.weekday()] + '816a20' + format(acceptDatetime.hour,"x") + '8e9e' + format(acceptDatetime.minute,"x") + '95aa'
-acceptDate_outtext = acceptDatetime.strftime('%Y年%m月%d日') + '(' + WEEKDAY[acceptDatetime.weekday()] + ') '
+acceptDate_outtext = acceptDatetime.strftime('%Y年%m月%d日 ') + WEEKDAY[acceptDatetime.weekday()]
 acceptTime_outtext = acceptDatetime.strftime('%H時%M分')
 
 Seiko = Network(PRINTER_IP)
