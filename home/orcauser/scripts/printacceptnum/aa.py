@@ -1,4 +1,5 @@
 import os
 import sys
+import pprint
 
-print(sys.path)
+pprint.pprint(sys.path)
