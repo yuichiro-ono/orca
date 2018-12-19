@@ -53,7 +53,7 @@ post '/wtst' do
 	DB.exec("UPDATE t_reception SET waitingstatus = #{newStatus} WHERE (patient_id = '#{patientId}' And acceptance_date = '#{date}');")
 end
 
-put '/reissue' do 
+post '/reissue' do 
 	acceptId = params['acceptid']
 	acceptDate = Date.today.strftime('%Y-%m-%d')
 	acceptTime = params['accepttime']
