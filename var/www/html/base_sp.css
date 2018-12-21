@@ -63,12 +63,12 @@ ul#menu {
 サブメニュー
 ============================================*/
 h2 {
-	width:100%; height:40px;	/*幅と高さ*/
-	padding:15px 0px 0px 10px;	/*パディング*/
+	width:100%; height:30px;	/*幅と高さ*/
+	padding:10px 0px 0px 10px;	/*パディング*/
 	font-size:16px;			/*フォントサイズ*/
 	background-image:none;		/*背景画像を無しにする*/
 	background-repeat:no-repeat;	/*背景画像を繰り返さない*/
-	background-color:#000033;	/*背景色*/
+	background-color:#003399;	/*背景色*/
 	color:#ffffff;			/*文字色*/
 	clear:both;			/*フロートをクリアする*/
 }
@@ -98,6 +98,12 @@ div#info {
 	padding:0px;			/*パディング*/
 }
 div#wait {
+	width:100%;			/*幅の指定*/
+	float:none;			/*フロートしない*/
+	padding:100px;			/*パディング*/
+	font-size: 14pt;
+}
+div.description {
 	width:100%;			/*幅の指定*/
 	float:none;			/*フロートしない*/
 	padding:100px;			/*パディング*/
