@@ -100,8 +100,8 @@ div#info {
 div#wait {
 	width:100%;			/*幅の指定*/
 	float:none;			/*フロートしない*/
-	padding:0px;			/*パディング*/
-	font-size: 18pt;
+	padding:100px;			/*パディング*/
+	font-size: 14pt;
 }
 h3 {
 	font-size:14px;			/*文字サイズ*/
