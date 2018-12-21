@@ -106,7 +106,7 @@ div#wait {
 div.description {
 	width:100%;			/*幅の指定*/
 	float:none;			/*フロートしない*/
-	padding:100px;			/*パディング*/
+	padding-left: 100px;			/*パディング*/
 	font-size: 14pt;
 }
 h3 {
