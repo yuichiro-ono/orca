@@ -50,6 +50,7 @@ def jpText(printer, txt, dw=False, dh=False):
 
 WEEKDAY = ['月', '火', '水', '木', '金', '土', '日']
 PRINTER_IP = "192.168.0.17"
+HEROKU_URL = "http://wait-1210.herokuapp.com".freeze
 args = sys.argv
 
 accept_ID = args[1]
@@ -77,7 +78,7 @@ jpText(Seiko, '】\n')
 #Seiko.ln(2)
 Seiko._raw(b'\x1b\x52\x00')
 Seiko.set(align="center")
-Seiko.qr("http://ashiyaekimaeclinic.aaa.com/wait/" + accept_ID, size=3, center=True)
+Seiko.qr("#{HEROKU_URL}/wait/" + accept_ID, size=3, center=True)
 Seiko.set(align="center", bold=False, double_width=True, double_height=True)
 jpText(Seiko, '↑のQRコードを読み込むと待ち時間が表示されます\n\n')
 Seiko.set(align="center", bold=False, double_width=False, double_height=False)
