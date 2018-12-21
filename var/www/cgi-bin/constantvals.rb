@@ -2,6 +2,7 @@ require 'rexml/document'
 require 'twilio-ruby'
 require 'faraday'
 require 'pg'
+require 'securerandom'
 
 module ConstantValues
 
