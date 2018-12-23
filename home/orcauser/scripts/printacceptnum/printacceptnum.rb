@@ -3,9 +3,11 @@ require 'eventmachine'
 require 'json'
 require 'logger'
 require 'securerandom'
+require 'var/www/cgi-bin/constantvals'
+
+include ConstantValues
 
 HOME_DIR = '/home/orcauser/scripts/printacceptnum'
-
 @logger = Logger.new("#{HOME_DIR}/print_acceptnum.log")
 
 def printAcceptanceNumber(body_hash)

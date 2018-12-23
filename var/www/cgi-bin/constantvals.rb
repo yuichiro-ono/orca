@@ -135,56 +135,6 @@ module ConstantValues
         DB.exec('COMMIT;')
 	end
 
-    def updateReceptionListIndividual(acceptance_date, acceptance_id, acceptance_time, appo_time, patient_id, namekanji, namekana, sex, birthday, phycisian, phonenumber, uuid)
-
-        DB.exec('BEGIN;') 
-        # 当日（TODAY）のORCA上の受付患者を収める一時テーブル（T_ORCA_RECEPTION）
-        DB.exec('CREATE TEMPORARY TABLE t_orca_reception (
-            acceptance_date date,
-            acceptance_id text,
-            acceptance_time time,
-            appointment_time time,
-            order_no integer,
-            patient_id text not null,
-            namekanji text,
-            namekana text,
-            sex text,
-            birthday text,
-            physician text,
-            phonenumber text,
-            waitingstatus integer,
-            uuid text
-            );')
-
-		newLine = [   
-		            acceptance_date,	# 受付日付
-		            acceptance_id,		# AcceptanceID
-		            acceptance_time,  	# AcceptanceTime
-		            acceptance_time,	# AppointmentTime
-		            0,                	# OrdNo (後で割り付ける)
-		            patient_id,   		# ID_Patient
-		            namekanji,		# NameKanji
-		            namekana,		# NameKana
-		            sex == '1' ? '男' : '女',    # Sex
-		            birthday,			# Birthday
-		            phycisian,			# Physician
-		            phonenumber,		# Phonenumber
-		            0,					# 診察待ち状況（0: 診察待ち）
-		            uuid
-		        ]
-		DB.exec("INSERT INTO t_orca_reception VALUES (\'#{newLine.join("\', \'")}\');")
-
-        # 新規受付患者のT_RECEPTIONへの追加
-        lastOrdNo = DB.exec('SELECT MAX(Order_no) FROM t_reception_today')[0][0] 
-        currentOrdNo = lastOrdNo.nil? ? 1 : lastOrdNo + 1
-        DB.exec("UPDATE t_orca_reception SET order_no = #{currentOrdNo} WHERE (patient_id = \'#{id}\');")
-
-        # T_RECEPTIONに新規受付情報を追加
-        DB.exec("INSERT INTO t_reception SELECT * FROM t_orca_reception WHERE (t_orca_reception.patient_id = \'#{id}\');")
-
-        DB.exec('COMMIT;')
-    end
-
     def exportDataToHeroku
     	begin 
 	        DB.exec('DROP TABLE t_export;')
