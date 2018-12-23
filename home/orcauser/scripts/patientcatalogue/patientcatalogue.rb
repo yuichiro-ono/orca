@@ -9,7 +9,7 @@ require 'logger'
 include Clockwork
 include ConstantValues
 
-SCRIPT_HOME = '/home/orcauser/patientcatalogue'.freeze
+SCRIPT_HOME = '/home/orcauser/scripts/patientcatalogue'.freeze
 PATIENT_CATOLOGUE_DIR = "/home/orcauser/WorklistsDatabase/PatientCatalogue".freeze
 @logger = Logger.new("#{SCRIPT_HOME}/patient_catalogue.log")
 
