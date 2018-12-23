@@ -103,6 +103,11 @@ div#wait {
 	padding:20px;			/*パディング*/
 	font-size: 14pt;
 }
+div#copyright {
+	text-align: center;
+	font-size: 9pt;
+	color: #484848;
+}
 div.description {
 	width:100%;			/*幅の指定*/
 	float:none;			/*フロートしない*/
@@ -146,4 +151,5 @@ hr {
 	width:100%;			/*幅の指定*/
 	margin:10px 0px;		/*マージン*/
 	border:1px dotted #cccccc;	/*内容の区切りをグレーの点線表示にする*/
+	border-top: 1px solid #8c8b8b;
 }
