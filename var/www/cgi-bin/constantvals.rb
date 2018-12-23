@@ -149,7 +149,7 @@ module ConstantValues
             HEROKU_PSQL = PG::Connection.new(:host => DB_HOST, :dbname => DB_NAME, :user => DB_USER, :password => DB_PASSWD, :sslmode => 'require')
             DB.internal_encoding = "UTF-8"
 
-	        system('heroku pg:reset -a wait-1210')
+	        system('heroku pg:reset -a wait-1210 --confirm wait-1210')
 	        system('heroku pg:psql -a wait-1210 < /var/tmp/export.dump')
 	        system('rm /var/tmp/export.dump')
     	rescue Exception => e 
