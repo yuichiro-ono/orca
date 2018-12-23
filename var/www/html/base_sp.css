@@ -8,6 +8,7 @@ body {
 	background-color:#ffffff;	/*ページ全体の背景色*/
 	background-image:none;		/*ウェブページ全体の背景画像を無しにする*/
 	font-size:100%;			/* フォントサイズを100%にする */
+	font-family: 'Avenir','Helvetica Neue','Helvetica','Arial','Hiragino Sans','ヒラギノ角ゴシック',YuGothic,'Yu Gothic','メイリオ', Meiryo,'ＭＳ Ｐゴシック','MS PGothic' 
 }
 div#pagebody {
 	width:100%; margin:0 auto;	/*内容全体をセンタリング*/
@@ -23,6 +24,8 @@ div#header {
 }
 div#header h1 {
 	padding:0px;			/*見出しの位置調整*/
+	font-size: 16pt;
+	font-
 }
 div#header img {
 	width:320px; height:46px;	/*会社ロゴ画像の幅と高さ*/
