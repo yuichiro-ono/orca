@@ -29,12 +29,14 @@ module ConstantValues
 	TwilioClient = Twilio::REST::Client.new(ACCOUNT_SID, AUTH_TOKEN)
 	SMSFROM = '+18503785426'.freeze # Your Twilio number
 
+    @logger = Logger.new("constantvals.log")
+
 	# DB
 	begin
 		DB = PG::connect(:host => "localhost", :user => "orcauser", :password => "orca", :dbname => "reception_db")
 		DB.internal_encoding = "UTF-8"
 	rescue PG::ConnectionBad => e
-		logger.error(e)
+		@logger.error(e)
 	end
 
 	def connectionToORCA
@@ -140,12 +142,23 @@ module ConstantValues
 	        DB.exec('DROP TABLE t_export;')
     	    DB.exec("CREATE TABLE t_export AS SELECT acceptance_date, acceptance_id, acceptance_time, order_no, waitingstatus, uuid from t_reception_today;")
 	    	system('pg_dump --no-acl --no-owner -h localhost -U orcauser -t t_export reception_db > /var/tmp/export.dump')
+            if !$?.success?
+                @logger.error($?.inspect)
+            end
 
 	        system('heroku pg:reset -a wait-1210 --confirm wait-1210')
+            if !$?.success?
+                @logger.error($?.inspect)
+            end
+
 	        system('heroku pg:psql -a wait-1210 < /var/tmp/export.dump')
+            if !$?.success?
+                @logger.error($?.inspect)
+            end
+
 	        system('rm /var/tmp/export.dump')
     	rescue Exception => e 
-    		logger.error(e)
+    		@logger.error(e)
     	end
     end
 
