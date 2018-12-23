@@ -1,4 +1,4 @@
 #!/bin/bash
 
 cd /home/orcauser/scripts/printacceptnum
-ruby system_test.rb
+sudo orcauser ruby system_test.rb
