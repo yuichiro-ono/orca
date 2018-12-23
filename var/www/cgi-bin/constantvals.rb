@@ -30,7 +30,10 @@ module ConstantValues
 	TwilioClient = Twilio::REST::Client.new(ACCOUNT_SID, AUTH_TOKEN)
 	SMSFROM = '+18503785426'.freeze # Your Twilio number
 
-    @logger = Logger.new("constantvals.log")
+    # Other
+    SCRIPT_DIR = '/var/www/cgi-bin'
+
+    @logger = Logger.new("#{SCRIPT_DIR}/constantvals.log")
 
 	# DB
 	begin

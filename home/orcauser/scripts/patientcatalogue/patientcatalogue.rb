@@ -84,5 +84,6 @@ end
 every(5.minutes, 'making_patient_catalogue.job') {
   pc = PatientCatalogue.new
   pc.makePatientCatalogue
+  puts 'Made patient catalogue.'
 }
 
