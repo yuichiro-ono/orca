@@ -3,6 +3,7 @@ require 'twilio-ruby'
 require 'faraday'
 require 'pg'
 require 'securerandom'
+require 'logger'
 
 module ConstantValues
 
@@ -36,7 +37,7 @@ module ConstantValues
 		DB = PG::connect(:host => "localhost", :user => "orcauser", :password => "orca", :dbname => "reception_db")
 		DB.internal_encoding = "UTF-8"
 	rescue PG::ConnectionBad => e
-		@logger.error(e)
+		
 	end
 
 	def connectionToORCA
