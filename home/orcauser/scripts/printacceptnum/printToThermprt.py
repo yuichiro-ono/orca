@@ -44,7 +44,7 @@ def jpText(printer, txt, dw=False, dh=False):
 
 WEEKDAY = ['月', '火', '水', '木', '金', '土', '日']
 PRINTER_IP = "192.168.0.17"
-HEROKU_URL = "http://wait-1210.herokuapp.com".freeze
+HEROKU_URL = "http://wait-1210.herokuapp.com"
 args = sys.argv
 
 accept_ID = args[1]
