@@ -141,14 +141,6 @@ module ConstantValues
     	    DB.exec("CREATE TABLE t_export AS SELECT acceptance_date, acceptance_id, acceptance_time, order_no, waitingstatus, uuid from t_reception_today;")
 	    	system('pg_dump --no-acl --no-owner -h localhost -U orcauser -t t_export reception_db > /var/tmp/export.dump')
 
-            # DB
-            HEROKU_PSQL_HOST = 'ec2-54-163-245-64.compute-1.amazonaws.com'.freeze
-            HEROKU_PSQL_NAME = 'd6190mj636qia0'.freeze
-            HEROKU_PSQL_USER = 'ikezymvynmeniz'.freeze
-            HEROKU_PSQL_PASSWD = '669297b5ee9de1d2e7379f50cde455105447d14718b3a538510da4230caa28e7'.freeze
-            HEROKU_PSQL = PG::Connection.new(:host => DB_HOST, :dbname => DB_NAME, :user => DB_USER, :password => DB_PASSWD, :sslmode => 'require')
-            DB.internal_encoding = "UTF-8"
-
 	        system('heroku pg:reset -a wait-1210 --confirm wait-1210')
 	        system('heroku pg:psql -a wait-1210 < /var/tmp/export.dump')
 	        system('rm /var/tmp/export.dump')
