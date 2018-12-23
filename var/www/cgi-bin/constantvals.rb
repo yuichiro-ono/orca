@@ -30,8 +30,12 @@ module ConstantValues
 	SMSFROM = '+18503785426'.freeze # Your Twilio number
 
 	# DB
-	DB = PG::connect(:host => "localhost", :user => "orcauser", :password => "orca", :dbname => "reception_db")
-	DB.internal_encoding = "UTF-8"
+	begin
+		DB = PG::connect(:host => "localhost", :user => "orcauser", :password => "orca", :dbname => "reception_db")
+		DB.internal_encoding = "UTF-8"
+	rescue PG::ConnectionBad => e
+		logger.error(e)
+	end
 
 	def connectionToORCA
 	  # ORCAへのConnection作成
@@ -48,7 +52,7 @@ module ConstantValues
 	  return conn
 	end
 
-	def writeReceptionListToDb(receptionXML)
+	def updateReceptionListAll(receptionXML)
 	    newPatientIDs = Array.new
 	    canceledPatientIDs = Array.new
 
@@ -67,7 +71,8 @@ module ConstantValues
             birthday text,
             physician text,
             phonenumber text,
-            waitingstatus integer
+            waitingstatus integer,
+            uuid text
             );')
 
         receptionXML.xpath('//Acceptlst_Information_child').each do |patientInfo|
@@ -84,7 +89,8 @@ module ConstantValues
                         patientInfo.at_xpath('Patient_Information/BirthDate').nil? ? 'null': patientInfo.at_xpath('Patient_Information/BirthDate').text,     # Birthday
                         patientInfo.at_xpath('Physician_WholeName').text,               # Physician
                         patientInfo.at_xpath('Patient_Information/PhoneNumber').nil? ? 'null': patientInfo.at_xpath('Patient_Information/PhoneNumber').text,  # Phonenumber
-                        0
+                        0,
+                        SecureRandom.uuid
                     ]
           DB.exec("INSERT INTO t_orca_reception VALUES (\'#{newLine.join("\', \'")}\');")
         end
@@ -129,14 +135,68 @@ module ConstantValues
         DB.exec('COMMIT;')
 	end
 
+    def updateReceptionListIndividual(acceptance_date, acceptance_id, acceptance_time, appo_time, patient_id, namekanji, namekana, sex, birthday, phycisian, phonenumber, uuid)
+
+        DB.exec('BEGIN;') 
+        # 当日（TODAY）のORCA上の受付患者を収める一時テーブル（T_ORCA_RECEPTION）
+        DB.exec('CREATE TEMPORARY TABLE t_orca_reception (
+            acceptance_date date,
+            acceptance_id text,
+            acceptance_time time,
+            appointment_time time,
+            order_no integer,
+            patient_id text not null,
+            namekanji text,
+            namekana text,
+            sex text,
+            birthday text,
+            physician text,
+            phonenumber text,
+            waitingstatus integer,
+            uuid text
+            );')
+
+		newLine = [   
+		            acceptance_date,	# 受付日付
+		            acceptance_id,		# AcceptanceID
+		            acceptance_time,  	# AcceptanceTime
+		            acceptance_time,	# AppointmentTime
+		            0,                	# OrdNo (後で割り付ける)
+		            patient_id,   		# ID_Patient
+		            namekanji,		# NameKanji
+		            namekana,		# NameKana
+		            sex == '1' ? '男' : '女',    # Sex
+		            birthday,			# Birthday
+		            phycisian,			# Physician
+		            phonenumber,		# Phonenumber
+		            0,					# 診察待ち状況（0: 診察待ち）
+		            uuid
+		        ]
+		DB.exec("INSERT INTO t_orca_reception VALUES (\'#{newLine.join("\', \'")}\');")
+
+        # 新規受付患者のT_RECEPTIONへの追加
+        lastOrdNo = DB.exec('SELECT MAX(Order_no) FROM t_reception_today')[0][0] 
+        currentOrdNo = lastOrdNo.nil? ? 1 : lastOrdNo + 1
+        DB.exec("UPDATE t_orca_reception SET order_no = #{currentOrdNo} WHERE (patient_id = \'#{id}\');")
+
+        # T_RECEPTIONに新規受付情報を追加
+        DB.exec("INSERT INTO t_reception SELECT * FROM t_orca_reception WHERE (t_orca_reception.patient_id = \'#{id}\');")
+
+        DB.exec('COMMIT;')
+    end
+
     def exportDataToHeroku
-        DB.exec('DROP TABLE t_export;')
-        DB.exec("CREATE TABLE t_export AS SELECT acceptance_date, acceptance_id, acceptance_time, order_no, waitingstatus from t_reception_today;")
-        system('pg_dump --no-acl --no-owner -h localhost -U orcauser -t t_export reception_db > /var/tmp/export.dump')
-        system('DATABASE_URL=$(heroku config:get DATABASE_URL --app wait-1210) heroku config:get DATABASE_URL -a wait-1210')
-        system('DATABASE_URL=$(heroku config:get DATABASE_URL --app wait-1210) heroku pg:reset DATABASE -a wait-1210 -c wait-1210')
-        system('DATABASE_URL=$(heroku config:get DATABASE_URL --app wait-1210) heroku pg:psql -a wait-1210 < /var/tmp/export.dump')
-        system('rm /var/tmp/export.dump')
+    	begin 
+	        DB.exec('DROP TABLE t_export;')
+    	    DB.exec("CREATE TABLE t_export AS SELECT acceptance_date, acceptance_id, acceptance_time, order_no, waitingstatus, uuid from t_reception_today;")
+	    	system('pg_dump --no-acl --no-owner -h localhost -U orcauser -t t_export reception_db > /var/tmp/export.dump')
+	        system('DATABASE_URL=$(heroku config:get DATABASE_URL --app wait-1210) heroku config:get DATABASE_URL -a wait-1210')
+	        system('DATABASE_URL=$(heroku config:get DATABASE_URL --app wait-1210) heroku pg:reset DATABASE -a wait-1210 -c wait-1210')
+	        system('DATABASE_URL=$(heroku config:get DATABASE_URL --app wait-1210) heroku pg:psql -a wait-1210 < /var/tmp/export.dump')
+	        system('rm /var/tmp/export.dump')
+    	rescue Exception => e 
+    		logger.error(e)
+    	end
     end
 
     ## 受付一覧をXMLで取得する．

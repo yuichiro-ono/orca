@@ -2,7 +2,7 @@ require 'faye/websocket'
 require 'eventmachine'
 require 'json'
 require 'logger'
-require "open3"
+require 'securerandom'
 
 HOME_DIR = '/home/orcauser/scripts/printacceptnum'
 
@@ -10,7 +10,7 @@ HOME_DIR = '/home/orcauser/scripts/printacceptnum'
 
 def printAcceptanceNumber(body_hash)
 #  out, err, status = Open3.capture3("python printToThermprt.py #{body_hash['Accept_Id']} #{body_hash['Accept_Date']} #{body_hash['Accept_Time']}")
-  system("python printToThermprt.py #{body_hash["Accept_Id"]} #{body_hash["Accept_Date"]} #{body_hash["Accept_Time"]}")
+  system("python printToThermprt.py #{body_hash["Accept_Id"]} #{body_hash["Accept_Date"]} #{body_hash["Accept_Time"]} #{body_hash["uuid"]}")
 end
 
 EM.run {
@@ -47,6 +47,7 @@ EOS
       data_hash = res_hash["data"]
       body_hash = data_hash["body"]
       @logger.debug(body_hash["Patient_Mode"])
+      body_hash["uuid"] = SecureRandom.uuid
 
       if (res_hash["sub.id"] == subId && body_hash["Patient_Mode"] == "add" && data_hash["event"] == "patient_accept")
         printAcceptanceNumber(body_hash)

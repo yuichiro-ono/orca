@@ -217,7 +217,7 @@ if SMSTO.nil?
     #getReceptionXML = Nokogiri::XML(file)
     #completeDocument = getReceptionXML
     completeDocument = combineWithPhonenumber(getReceptionXML)
-    writeReceptionListToDb(completeDocument)
+    updateReceptionListAll(completeDocument)
 
     print "Content-type: text/html\n\n"
     print renderedHTML
