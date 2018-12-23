@@ -4,6 +4,7 @@ require 'romkan'
 require 'nkf'
 require 'clockwork'
 require 'active_support/time'
+require 'logger'
 
 include Clockwork
 include ConstantValues
@@ -80,7 +81,7 @@ EOS
 end
 
 ## 10分毎に患者カタログを作成する　##
-every(10.minutes, 'making_patient_catalogue.job') {
+every(5.minutes, 'making_patient_catalogue.job') {
   pc = PatientCatalogue.new
   pc.makePatientCatalogue
 }
