@@ -77,7 +77,7 @@ Seiko.set(align="center", bold=False, double_width=True, double_height=True)
 jpText(Seiko, '↑のQRコードを読み込むと待ち時間が表示されます\n\n')
 Seiko.set(align="center", bold=False, double_width=False, double_height=False)
 Seiko.text('-------------------------------------\n')
-jpText(Seiko, '芦屋駅前内科クリニック')
+jpText(Seiko, '芦屋駅前小野内科クリニック')
 Seiko.cut()
 
 

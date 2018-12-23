@@ -64,7 +64,7 @@ def renderedHTML
         <thead>
             <tr>
               <th>呼び出し順</th>
-              <th>受付ID</th>
+              <th>呼出番号</th>
               <th>受付時間</th>
               <th>予約時間</th>
               <th>待ち時間</th>
@@ -76,7 +76,7 @@ def renderedHTML
               <th>主治医</th>
               <th>状態</th>
               <th>10分前<br />呼び出し</th>
-              <th>受付番号シート</th>
+              <th>呼出番号シート</th>
             </tr>
         </thead>
         <tbody>
