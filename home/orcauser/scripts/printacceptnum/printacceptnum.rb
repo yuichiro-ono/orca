@@ -55,7 +55,7 @@ EOS
         printAcceptanceNumber(body_hash)
         completeDocument = combineWithPhonenumber(getReceptionXML)
         updateReceptionListAll(completeDocument)
-#        exportDataToHeroku
+        exportDataToHeroku
       end
     end
 
