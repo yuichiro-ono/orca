@@ -15,49 +15,7 @@ LOCKFILE = "#{SCRIPT_HOME}/pid".freeze
 
 @logger = Logger.new("#{SCRIPT_HOME}/patient_catalogue.log")
 
-def file_check
-   # ファイルチェック
-   if File.exist?(LOCKFILE)
-      # pidのチェック
-      pid = 0
-      File.open(LOCKFILE, "r"){|f|
-         pid = f.read.chomp!.to_i
-      }
-      if exist_process(pid)
-         $logger.info("The process has already started.")
-         exit
-      else
-         $logger.error("プロセス途中で死んでファイル残ったままっぽいっす")
-         exit
-      end
-   else
-   # なければLOCKファイル作成
-      File.open(LOCKFILE, "w"){|f|
-         # LOCK_NBのフラグもつける。もしぶつかったとしてもすぐにやめさせる。
-         locked = f.flock(File::LOCK_EX | File::LOCK_NB)
-         if locked
-            f.puts $$
-         else
-            $logger.error("lock failed -> pid: #{$$}")
-         end
-      }
-   end
-end
- 
-# プロセスの生き死に確認
-def exist_process(pid)
-   begin
-      gid = Process.getpgid(pid)
-      return true
-   rescue => ex
-      puts ex
-      return false
-   end
-end
-
 def main
-  file_check
-
   begin
     response = connectionToORCA.post do |req| 
       req.url '/api01rv2/patientlst1v2', {:class => '01'}
