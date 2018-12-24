@@ -59,7 +59,7 @@ module ConstantValues
 	def updateReceptionListAll(receptionXML)
 	    newPatientIDs = Array.new
 	    canceledPatientIDs = Array.new
-        log = Looger.new("/home/orcauser/scripts/makereceptionlist")
+        log = Looger.new("/home/orcauser/scripts/makereceptionlist/ss.log")
 
         # 当日（TODAY）のORCA上の受付患者を収める一時テーブル（T_ORCA_RECEPTION）
         begin
