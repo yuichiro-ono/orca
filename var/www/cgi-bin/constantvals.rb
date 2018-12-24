@@ -161,6 +161,7 @@ module ConstantValues
             end
 
 	        system('rm /var/tmp/export.dump')
+            @logger.info('Sent reception date to heroku!')
     	rescue Exception => e 
     		@logger.error(e)
     	end
