@@ -59,7 +59,6 @@ module ConstantValues
 	def updateReceptionListAll(receptionXML)
 	    newPatientIDs = Array.new
 	    canceledPatientIDs = Array.new
-        log = Looger.new("/home/orcauser/scripts/makereceptionlist/ss.log")
 
         # 当日（TODAY）のORCA上の受付患者を収める一時テーブル（T_ORCA_RECEPTION）
         begin
@@ -123,7 +122,6 @@ module ConstantValues
         # 新規受付患者のT_RECEPTIONへの追加
         if !newPatientIDs.empty?
             lastOrdNo = DB.exec('SELECT MAX(order_no) FROM t_reception_today;').getvalue(0,0)
-            log.info(lastOrdNo.isnNil?)
             currentOrdNo = lastOrdNo.nil? ? 1 : lastOrdNo + 1
 
             newPatientIDs.each do |id|
