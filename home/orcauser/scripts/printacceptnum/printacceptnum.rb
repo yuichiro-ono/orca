@@ -53,6 +53,9 @@ EOS
 
       if (res_hash["sub.id"] == subId && body_hash["Patient_Mode"] == "add" && data_hash["event"] == "patient_accept")
         printAcceptanceNumber(body_hash)
+        completeDocument = combineWithPhonenumber(getReceptionXML)
+        updateReceptionListAll(completeDocument)
+        exportDataToHeroku
       end
     end
 
