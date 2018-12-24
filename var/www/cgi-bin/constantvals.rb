@@ -60,13 +60,13 @@ module ConstantValues
 	    newPatientIDs = Array.new
 	    canceledPatientIDs = Array.new
 
-	    DB.exec('BEGIN;') 
         # 当日（TODAY）のORCA上の受付患者を収める一時テーブル（T_ORCA_RECEPTION）
         begin
             DB.exec('DROP TABLE t_orca_reception;')
-        rescue Exception => e
+        rescue PG::Error => e
         end
 
+        DB.exec('BEGIN;') 
         DB.exec('CREATE TEMPORARY TABLE t_orca_reception (
             acceptance_date date,
             acceptance_id text,
