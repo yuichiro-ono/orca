@@ -116,7 +116,7 @@ module ConstantValues
 
         # 新規受付患者のT_RECEPTIONへの追加
         if !newPatientIDs.empty?
-            lastOrdNo = DB.exec('SELECT MAX(Order_no) FROM t_reception_today')[0][0] 
+            lastOrdNo = DB.exec('SELECT MAX(Order_no) FROM t_reception_today;')[0][0] 
             currentOrdNo = lastOrdNo.nil? ? 1 : lastOrdNo + 1
 
             newPatientIDs.each do |id|
