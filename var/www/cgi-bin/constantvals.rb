@@ -119,10 +119,12 @@ module ConstantValues
                     WHERE t_orca_reception.patient_id is null;').each do |id|
             canceledPatientIDs << id["patient_id"]
         end
+        DB.exec('COMMIT;') 
 
+        DB.exec("BEGIN;")
         # 新規受付患者のT_RECEPTIONへの追加
         if !newPatientIDs.empty?
-            lastOrdNo = DB.exec('select max(order_no) from t_reception_today;').getvalue(0,0)
+            lastOrdNo = DB.exec("select max(order_no) from t_reception_today;").getvalue(0,0)
             p lastOrdNo
             currentOrdNo = lastOrdNo.nil? ? 1 : lastOrdNo + 1
 
