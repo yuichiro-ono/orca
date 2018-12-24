@@ -103,7 +103,7 @@ EOS
     #   f.puts("(0010,0040) CS [#{pat_sex}]")
     # end
 
-    File.open(PATIENT_CATOLOGUE_DIR + '/' + pat_id.to_s, 'w:SJIS:UTF-8') do |f|
+    File.open(PATIENT_CATOLOGUE_DIR + '/' + pat_id.to_s + '.csv', 'w:SJIS:UTF-8') do |f|
       f.puts("#{pat_id}\t#{pat_kanjiName}\t\t#{pat_romaName}\t#{pat_sex}\t#{pat_birthday}")
     end
 
