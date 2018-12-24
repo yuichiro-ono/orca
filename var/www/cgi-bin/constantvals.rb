@@ -126,7 +126,7 @@ module ConstantValues
         if !newPatientIDs.empty?
             lastOrdNo = DB.exec("select max(order_no) from t_reception_today;").getvalue(0,0)
             p lastOrdNo
-            currentOrdNo = lastOrdNo.nil? ? 1 : lastOrdNo + 1
+            currentOrdNo = lastOrdNo.nil? ? 1 : lastOrdNo.to_i + 1
 
             newPatientIDs.each do |id|
                 DB.exec("UPDATE t_orca_reception SET order_no = #{currentOrdNo} WHERE (patient_id = \'#{id}\');")
