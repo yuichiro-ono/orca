@@ -62,6 +62,7 @@ module ConstantValues
 
 	    DB.exec('BEGIN;') 
         # 当日（TODAY）のORCA上の受付患者を収める一時テーブル（T_ORCA_RECEPTION）
+        DB.exec('DROP TABLE t_orca_reception;')
         DB.exec('CREATE TEMPORARY TABLE t_orca_reception (
             acceptance_date date,
             acceptance_id text,
