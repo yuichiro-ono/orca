@@ -9,6 +9,6 @@ end
 DB.exec("BEGIN;")
 # 新規受付患者のT_RECEPTIONへの追加
     lastOrdNo = DB.exec("select max(order_no) from t_reception_today;").getvalue(0,0)
-    puts lastOrdNo.to_s
-    currentOrdNo = lastOrdNo.nil? ? 1 : lastOrdNo + 1
+    puts lastOrdNo
+    currentOrdNo = lastOrdNo.nil? ? 1 : lastOrdNo.to_i + 1
 DB.exec("COMMIT;")
