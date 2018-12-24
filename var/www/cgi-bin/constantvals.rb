@@ -33,8 +33,6 @@ module ConstantValues
     # Other
     SCRIPT_DIR = '/var/www/cgi-bin'
 
-    @logger = Logger.new("#{SCRIPT_DIR}/constantvals.log")
-
 	# DB
 	begin
 		DB = PG::connect(:host => "localhost", :user => "orcauser", :password => "orca", :dbname => "reception_db")
@@ -147,21 +145,17 @@ module ConstantValues
     	    DB.exec("CREATE TABLE t_export AS SELECT acceptance_date, acceptance_id, acceptance_time, order_no, waitingstatus, uuid from t_reception_today;")
 	    	system('pg_dump --no-acl --no-owner -h localhost -U orcauser -t t_export reception_db > /var/tmp/export.dump')
             if !$?.success?
-                @logger.error($?.inspect)
             end
 
 	        system('heroku pg:reset -a wait-1210 --confirm wait-1210')
             if !$?.success?
-                @logger.error($?.inspect)
             end
 
 	        system('heroku pg:psql -a wait-1210 < /var/tmp/export.dump')
             if !$?.success?
-                @logger.error($?.inspect)
             end
 
 	        system('rm /var/tmp/export.dump')
-            @logger.info('Sent reception date to heroku!')
 #    	rescue Exception => e 
 #    		@logger.error(e)
 #    	end
