@@ -19,7 +19,7 @@ end
 EM.run {
   ws = Faye::WebSocket::Client.new('ws://192.168.0.3:9400/ws', [], :headers => {'X-GINBEE-TENANT-ID' => '1'})
 
-  subId = ''
+  subId = Hash.new
   # ORCA PUSH APIへのリクエストID
   patientaccept_req_id  = "PatientAcceptReq_#{Time.now}"
   patientinfo_req_id = "PatientInfoReq_#{Time.now}"
@@ -52,7 +52,6 @@ EOS
   ws.on :message do |event|
     p [:message, event.data]
     res_hash= JSON.parse(event.data)
-    subId = Hash.new
 
     if res_hash["command"] == 'subscribed'
       if res_hash["req.id"] == patientaccept_req_id 
@@ -67,7 +66,7 @@ EOS
       body_hash = data_hash["body"]
 
       @logger.debug("Event: #{data_hash["event"]}; Sub.id: #{res_hash["sub.id"]}")
-      @logger.debug("#{(data_hash["event"] == 'patient_accept') && (res_hash["sub.id"].to_s == subId[:patientaccept].to_s)}")
+      @logger.debug("#{(data_hash["event"] == 'patient_accept') && (res_hash["sub.id"] == subId[:patientaccept])}")
 
       if data_hash["event"] == "patient_accept" && res_hash["sub.id"] == subId[:patientaccept]
         @logger.debug("event and sub.id is correct.")
