@@ -4,6 +4,7 @@ require 'json'
 require 'logger'
 require 'securerandom'
 require '/var/www/cgi-bin/constantvals'
+require '/home/orcauser/scripts/patientcatalogue/patientcatalogue'
 
 include ConstantValues
 
@@ -20,45 +21,73 @@ EM.run {
 
   subId = ''
   # ORCA PUSH APIへのリクエストID
-  req_id  = "PatientAcceptReq_#{Time.now}"
+  patientaccept_req_id  = "PatientAcceptReq_#{Time.now}"
+  patientinfo_req_id = "PatientInfoReq_#{Time.now}"
 
   # ORCA PUSH APIへのリクエスト
-  req_str = <<EOS
+  patientaccept_req_str = <<EOS
 {
 "command" : "subscribe",
-"req.id" : "#{req_id}", 
+"req.id" : "#{patientaccept_req_id}", 
 "event" : "patient_accept" 
+}
+EOS
+
+  patientinfo_req_str = <<EOS  
+{
+"command" : "subscribe",
+"req.id" : "#{patientinfo_req_id}", 
+"event" : "patient_information" 
 }
 EOS
 
   ws.on :open do |event|
     p [:open]
 
-    # patient_accept (新規患者受付)イベントをリクエストする．
-    ws.send(req_str)
+    # patient_accept (新規患者受付)イベントとpatient_information（患者情報）イベントをリクエストする．
+    ws.send(patientaccept_req_str)
+    ws.send(patientinfo_req_str)
   end
 
   ws.on :message do |event|
     p [:message, event.data]
     res_hash= JSON.parse(event.data)
+    subId = Hash.new
 
     if res_hash["command"] == 'subscribed'
       @logger.info("Patient_accept request was subscribed.")
-      subId = res_hash["sub.id"]
+
+      if res_hash["req.id"] == patientaccept_req_id 
+        subId[:patientaccept] = res_hash["sub.id"]
+      elsif res_hash["req.id"] == patientinfo_req_id 
+        subId[:patientinfo] = res_hash["sub.id"]
+      end
     elsif res_hash["command"] == 'event'
       data_hash = res_hash["data"]
       body_hash = data_hash["body"]
-      @logger.debug(body_hash["Patient_Mode"])
-      body_hash["uuid"] = SecureRandom.uuid
 
-      if (res_hash["sub.id"] == subId && body_hash["Patient_Mode"] == "add" && data_hash["event"] == "patient_accept")
-        printAcceptanceNumber(body_hash)
-        completeDocument = combineWithPhonenumber(getReceptionXML)
-        updateReceptionListAll(completeDocument)
-        exportDataToHeroku
+      if data_hash["event"] = "patient_accept" && res_hash["sub.id"] == subId[:patientaccept]
+        @logger.debug(body_hash["Patient_Mode"])
+        body_hash["uuid"] = SecureRandom.uuid
+
+        # 新規受付時に作動（受付情報変更時は作動しない）
+        if body_hash["Patient_Mode"] == "add"
+          printAcceptanceNumber(body_hash)  # ラベル印刷メソッド
+          completeDocument = combineWithPhonenumber(getReceptionXML)
+          updateReceptionListAll(completeDocument)
+          exportDataToHeroku
+        end
+
+      elsif data_hash["event"] = "patient_information" && res_hash["sub.id"] == subId[:patientinfo]
+        @logger.debug(body_hash["Patient_Mode"])
+
+        # 患者情報　追加 or 変更 時に作動
+        if body_hash["Patient_Mode"] == "add" || body_hash["Patient_Mode"] == "modify"
+          PatientCatalogue.makeIndividualPatientCatalog(body_hash["Patient_ID"])
+        end
+
       end
     end
-
   end
 
   ws.on :close do |event|
