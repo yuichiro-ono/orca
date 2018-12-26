@@ -55,8 +55,6 @@ EOS
     subId = Hash.new
 
     if res_hash["command"] == 'subscribed'
-      @logger.info("Patient_accept request was subscribed.")
-
       if res_hash["req.id"] == patientaccept_req_id 
         subId[:patientaccept] = res_hash["sub.id"]
         @logger.info("Patient accept event subscription id is #{subId[:patientaccept]}.")
@@ -68,12 +66,14 @@ EOS
       data_hash = res_hash["data"]
       body_hash = data_hash["body"]
 
+      @logger.debug("Event: #{data_hash["event"]}; Sub.id: #{res_hash["sub.id"]}")
+
       if data_hash["event"] = "patient_accept" && res_hash["sub.id"] == subId[:patientaccept]
-        @logger.info(body_hash["Patient_Mode"])
         body_hash["uuid"] = SecureRandom.uuid
 
         # 新規受付時に作動（受付情報変更時は作動しない）
         if body_hash["Patient_Mode"] == "add"
+          @logger.info("Patient accept event has occurred. ")
           printAcceptanceNumber(body_hash)  # ラベル印刷メソッド
           completeDocument = combineWithPhonenumber(getReceptionXML)
           updateReceptionListAll(completeDocument)
