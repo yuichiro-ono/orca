@@ -67,7 +67,7 @@ EOS
       body_hash = data_hash["body"]
 
       @logger.debug("Event: #{data_hash["event"]}; Sub.id: #{res_hash["sub.id"]}")
-      @logger.debug("#{data_hash["event"].to_s == 'patient_accept'}")
+      @logger.debug("#{data_hash["event"] == 'patient_accept'}")
 
       if data_hash["event"] == "patient_accept" && res_hash["sub.id"] == subId[:patientaccept]
         @logger.debug("event and sub.id is correct.")
