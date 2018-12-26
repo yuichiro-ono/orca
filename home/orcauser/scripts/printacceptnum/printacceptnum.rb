@@ -76,8 +76,8 @@ EOS
           updateReceptionListAll(completeDocument)
           exportDataToHeroku
         end
-
-      elsif data_hash["event"] == "patient_information" && res_hash["sub.id"] == subId[:patientinfo]
+      elsif data_hash["event"] == "patient_information"
+#     elsif data_hash["event"] == "patient_information" && res_hash["sub.id"] == subId[:patientinfo]
         @logger.info("New patient is registered.")
         # 患者情報　追加 or 変更 時に作動
         if body_hash["Patient_Mode"] == "add" || body_hash["Patient_Mode"] == "modify"
