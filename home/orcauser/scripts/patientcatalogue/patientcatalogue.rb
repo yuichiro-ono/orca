@@ -80,6 +80,7 @@ EOS
   end
 
   def self.makeIndividualPatientCatalog(patient_id)
+    @@logger.info("OK")
     begin
       response = connectionToORCA.post do |req| 
         req.url '/api01rv2/patientlst2v2', {:class => '01'}
