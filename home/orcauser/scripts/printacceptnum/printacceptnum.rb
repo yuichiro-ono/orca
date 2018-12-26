@@ -69,6 +69,7 @@ EOS
       @logger.debug("Event: #{data_hash["event"]}; Sub.id: #{res_hash["sub.id"]}")
 
       if data_hash["event"] = "patient_accept" && res_hash["sub.id"] == subId[:patientaccept]
+        @logger.debug("event and sub.id is correct.")
         body_hash["uuid"] = SecureRandom.uuid
 
         # 新規受付時に作動（受付情報変更時は作動しない）
