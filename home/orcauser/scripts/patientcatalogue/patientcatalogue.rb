@@ -103,6 +103,7 @@ EOS
     end
 
     res_xml = Nokogiri::XML(response.body)
+    @@logger.info(res_xml)
 
     if res_xml.at_xpath('//Api_Result').text != '00' 
       @@logger.error('Failed to get patient catalogue')
