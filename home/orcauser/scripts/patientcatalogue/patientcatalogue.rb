@@ -33,16 +33,16 @@ EOS
         req.body = xml
       end
     rescue Exception => e
-      @logger.error(e)
+      @@logger.error(e)
     end
 
     res_xml = Nokogiri::XML(response.body)
 
     if res_xml.at_xpath('//Api_Result').text != '00' 
-      @logger.error('Failed to get patient catalogue')
+      @@logger.error('Failed to get patient catalogue')
       exit
     elsif res_xml.at_xpath('//Target_Patient_Count').text == '0000'
-      @logger.error('No patient is registered.')    
+      @@logger.error('No patient is registered.')    
       exit
     end
 
@@ -67,7 +67,7 @@ EOS
         f.puts("#{pat_id},#{pat_kanjiName},#{pat_hankanaName},#{pat_romaName},#{pat_romaName},#{pat_sex},#{pat_birthday}")
       end
 
-      @logger.info('Made patient catalogue.')
+      @@logger.info('Made patient catalogue.')
     end
 
     ## PATIENT_CATOLOGUE_DIR にあるdumpファイルをDICOMデータに変換
@@ -99,19 +99,19 @@ EOS
         req.body = xml
       end
     rescue Exception => e
-      @logger.error(e)
+      @@logger.error(e)
     end
 
     res_xml = Nokogiri::XML(response.body)
 
     if res_xml.at_xpath('//Api_Result').text != '00' 
-      @logger.error('Failed to get patient catalogue')
+      @@logger.error('Failed to get patient catalogue')
       exit
     elsif res_xml.at_xpath('//Target_Patient_Count').text == '0000'
-      @logger.error('No patient is registered.')    
+      @@logger.error('No patient is registered.')    
       exit
     elsif res_xml.at_xpath('//WholeName').text == '患者番号がありません'
-         @logger.error('No patient is registered.')    
+         @@logger.error('No patient is registered.')    
       exit
     end
 
@@ -136,7 +136,7 @@ EOS
         f.puts("#{pat_id},#{pat_kanjiName},#{pat_hankanaName},#{pat_romaName},#{pat_romaName},#{pat_sex},#{pat_birthday}")
       end
 
-      @logger.info('Made patient catalogue.')
+      @@logger.info('Made patient catalogue.')
     end
 
     ## PATIENT_CATOLOGUE_DIR にあるdumpファイルをDICOMデータに変換

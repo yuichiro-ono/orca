@@ -59,15 +59,17 @@ EOS
 
       if res_hash["req.id"] == patientaccept_req_id 
         subId[:patientaccept] = res_hash["sub.id"]
+        @logger.info("Patient accept event subscription id is #{subId[:patientaccept]}.")
       elsif res_hash["req.id"] == patientinfo_req_id 
         subId[:patientinfo] = res_hash["sub.id"]
+        @logger.info("Patient accept event subscription id is #{subId[:patientinfo]}.")
       end
     elsif res_hash["command"] == 'event'
       data_hash = res_hash["data"]
       body_hash = data_hash["body"]
 
       if data_hash["event"] = "patient_accept" && res_hash["sub.id"] == subId[:patientaccept]
-        @logger.debug(body_hash["Patient_Mode"])
+        @logger.info(body_hash["Patient_Mode"])
         body_hash["uuid"] = SecureRandom.uuid
 
         # 新規受付時に作動（受付情報変更時は作動しない）
