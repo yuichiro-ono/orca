@@ -62,7 +62,7 @@ EOS
         @logger.info("Patient accept event subscription id is #{subId[:patientaccept]}.")
       elsif res_hash["req.id"] == patientinfo_req_id 
         subId[:patientinfo] = res_hash["sub.id"]
-        @logger.info("Patient accept event subscription id is #{subId[:patientinfo]}.")
+        @logger.info("Patient information event subscription id is #{subId[:patientinfo]}.")
       end
     elsif res_hash["command"] == 'event'
       data_hash = res_hash["data"]
