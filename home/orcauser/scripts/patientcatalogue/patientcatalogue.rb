@@ -11,10 +11,7 @@ include ConstantValues
 class PatientCatalogue
   SCRIPT_HOME = '/home/orcauser/scripts/patientcatalogue'.freeze
   PATIENT_CATOLOGUE_DIR = "/home/public/PatientCatalogue".freeze
-
-  def initialize
-     @@logger = Logger.new("#{SCRIPT_HOME}/patient_catalogue.log")
-  end
+  @@logger = Logger.new("#{SCRIPT_HOME}/patient_catalogue.log")
 
   def self.makeAllPatientCatalog
     begin
