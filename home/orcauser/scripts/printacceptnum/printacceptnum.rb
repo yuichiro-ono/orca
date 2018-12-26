@@ -37,7 +37,7 @@ EOS
 {
 "command" : "subscribe",
 "req.id" : "#{patientinfo_req_id}", 
-"event" : "patient_information" 
+"event" : "patient_infomation" 
 }
 EOS
 
