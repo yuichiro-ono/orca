@@ -29,7 +29,7 @@ EM.run {
 {
 "command" : "subscribe",
 "req.id" : "#{patientaccept_req_id}", 
-"event" : "patient_accept" 
+"event" : "*" 
 }
 EOS
 
