@@ -64,6 +64,7 @@ EOS
     elsif res_hash["command"] == 'event'
       data_hash = res_hash["data"]
       body_hash = data_hash["body"]
+      @logger.debug("#{res_hash}")
 
       if data_hash["event"] == "patient_accept" && res_hash["sub.id"] == subId[:patientaccept]
         body_hash["uuid"] = SecureRandom.uuid
