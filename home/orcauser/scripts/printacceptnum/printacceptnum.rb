@@ -78,9 +78,9 @@ EOS
           exportDataToHeroku
         end
      elsif data_hash["event"] == "patient_infomation" && res_hash["sub.id"] == subId[:patientinfo]
-        @logger.info("New patient is registered.")
         # 患者情報　追加 or 変更 時に作動
         if body_hash["Patient_Mode"] == "add" || body_hash["Patient_Mode"] == "modify"
+          @logger.debug('Success!')
           PatientCatalogue.makeIndividualPatientCatalog(body_hash["Patient_ID"])
         end
 
