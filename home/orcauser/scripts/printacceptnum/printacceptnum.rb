@@ -65,9 +65,6 @@ EOS
       data_hash = res_hash["data"]
       body_hash = data_hash["body"]
 
-      @logger.debug("Event: #{data_hash["event"]}; Sub.id: #{res_hash["sub.id"]}")
-      @logger.debug("#{(data_hash["event"] == 'patient_accept') && (res_hash["sub.id"] == subId[:patientaccept])}")
-
       if data_hash["event"] == "patient_accept" && res_hash["sub.id"] == subId[:patientaccept]
         @logger.debug("event and sub.id is correct.")
         body_hash["uuid"] = SecureRandom.uuid
@@ -82,10 +79,10 @@ EOS
         end
 
       elsif data_hash["event"] == "patient_information" && res_hash["sub.id"] == subId[:patientinfo]
-        @logger.debug(body_hash["Patient_Mode"])
 
         # 患者情報　追加 or 変更 時に作動
         if body_hash["Patient_Mode"] == "add" || body_hash["Patient_Mode"] == "modify"
+          @logget.info("New patient is registered.")
           PatientCatalogue.makeIndividualPatientCatalog(body_hash["Patient_ID"])
         end
 
