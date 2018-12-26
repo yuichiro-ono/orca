@@ -78,7 +78,7 @@ EOS
         end
 
       elsif data_hash["event"] == "patient_information" && res_hash["sub.id"] == subId[:patientinfo]
-        @logget.info("New patient is registered.")
+        @logger.info("New patient is registered.")
         # 患者情報　追加 or 変更 時に作動
         if body_hash["Patient_Mode"] == "add" || body_hash["Patient_Mode"] == "modify"
           PatientCatalogue.makeIndividualPatientCatalog(body_hash["Patient_ID"])
