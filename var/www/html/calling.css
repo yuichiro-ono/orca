@@ -30,7 +30,7 @@ div.next {
 	float: left;
 	width: calc(50% - 5px);
 	padding-top: 50px;
-	border-right: 5px solid #E3E3ED;
+	border-right: 2px solid #E3E3ED;
 	height: 400px;
 }
 
@@ -49,8 +49,7 @@ div.footer {
 
 div.title {
 	color: #FFFFFF;
-	//background-color: #7EB808;
-	background: #245410;
+//	background: #245410;
 	font-size: 80pt;
 	font-weight: bold;
 //	border-bottom: solid 5px #64A135;
