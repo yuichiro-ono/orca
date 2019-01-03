@@ -23,7 +23,7 @@ def renderedHTML
       <meta http-equiv="refresh" content="60" />
     </head>
     <body>
-      <video id="bg-video" src="video/bg.mp4" autoplay loop></video>
+      <video id="bg-video" src="/video/bg.mp4" autoplay loop></video>
       <div id="site-box">
         <div class="title">診察順番案内</div>
         <div class="next">
