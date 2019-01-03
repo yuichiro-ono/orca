@@ -2,10 +2,10 @@ require '/var/www/cgi-bin/constantvals'
 require 'logger'
 require 'romkan'
 require 'nkf'
-require 'clockwork'
-require 'active_support/time'
+#require 'clockwork'
+#require 'active_support/time'
 
-include Clockwork
+#include Clockwork
 include ConstantValues
 
 class PatientCatalogue
@@ -61,7 +61,7 @@ EOS
 
       # 患者情報をCSVに出力（１患者(ID)１ファイル）
       File.open(PATIENT_CATOLOGUE_DIR + '/' + pat_id.to_s + '.csv', 'w:SJIS:UTF-8') do |f|
-        f.puts("#{pat_id},#{pat_kanjiName},#{pat_hankanaName},#{pat_romaName},#{pat_romaName},#{pat_sex},#{pat_birthday}")
+        f.puts("#{pat_id},#{pat_kanjiName},#{pat_hankanaName},#{pat_romaName},#{pat_sex},#{pat_birthday}")
       end
 
       @@logger.info('Made patient catalogue.')
@@ -149,10 +149,14 @@ EOS
 end
 
 
-
+### 定期的に患者カタログを更新するのを中止 ###
 ## 4時間毎に患者カタログを作成する　##
-every(4.hours, 'making_patient_catalogue.job') {
+#every(4.hours, 'making_patient_catalogue.job') {
+#  PatientCatalogue.makeAllPatientCatalog
+#  puts 'Made patient catalogue.'
+#}
+
+if ARGV[0] == '--update-all'
   PatientCatalogue.makeAllPatientCatalog
   puts 'Made patient catalogue.'
-}
-
+end
