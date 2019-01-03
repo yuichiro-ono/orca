@@ -11,7 +11,7 @@ include ConstantValues
 class PatientCatalogue
   SCRIPT_HOME = '/home/orcauser/scripts/patientcatalogue'.freeze
   PATIENT_CATOLOGUE_DIR = "/home/public/PatientCatalogue".freeze
-  @@logger = Logger.new("#{SCRIPT_HOME}/patient_catalogue.log")
+  @logger = Logger.new("#{SCRIPT_HOME}/patient_catalogue.log")
 
   def self.makeAllPatientCatalog
     begin
@@ -30,16 +30,16 @@ EOS
         req.body = xml
       end
     rescue Exception => e
-      @@logger.error(e)
+      @logger.error(e)
     end
 
     res_xml = Nokogiri::XML(response.body)
 
     if res_xml.at_xpath('//Api_Result').text != '00' 
-      @@logger.error('Failed to get patient catalogue')
+      @logger.error('Failed to get patient catalogue')
       exit
     elsif res_xml.at_xpath('//Target_Patient_Count').text == '0000'
-      @@logger.error('No patient is registered.')    
+      @logger.error('No patient is registered.')    
       exit
     end
 
@@ -64,7 +64,7 @@ EOS
         f.puts("#{pat_id},#{pat_kanjiName},#{pat_hankanaName},#{pat_romaName},#{pat_sex},#{pat_birthday}")
       end
 
-      @@logger.info('Made patient catalogue.')
+      @logger.info('Made patient catalogue.')
     end
 
     ## PATIENT_CATOLOGUE_DIR にあるdumpファイルをDICOMデータに変換
@@ -77,7 +77,7 @@ EOS
   end
 
   def self.makeIndividualPatientCatalog(patient_id)
-    @@logger.info("OK")
+    @logger.info("OK")
     begin
       response = connectionToORCA.post do |req| 
         req.url '/api01rv2/patientlst2v2', {:class => '01'}
@@ -97,20 +97,20 @@ EOS
         req.body = xml
       end
     rescue Exception => e
-      @@logger.error(e)
+      @logger.error(e)
     end
 
     res_xml = Nokogiri::XML(response.body)
-    @@logger.info(res_xml)
+    @logger.info(res_xml)
 
     if res_xml.at_xpath('//Api_Result').text != '00' 
-      @@logger.error('Failed to get patient catalogue')
+      @logger.error('Failed to get patient catalogue')
       exit
     elsif res_xml.at_xpath('//Target_Patient_Count').text == '0000'
-      @@logger.error('No patient is registered.')    
+      @logger.error('No patient is registered.')    
       exit
     elsif res_xml.at_xpath('//WholeName').text == '患者番号がありません'
-         @@logger.error('No patient is registered.')    
+         @logger.error('No patient is registered.')    
       exit
     end
 
@@ -132,10 +132,10 @@ EOS
 
       # 患者情報をCSVに出力（１患者(ID)１ファイル）
       File.open(PATIENT_CATOLOGUE_DIR + '/' + pat_id.to_s + '.csv', 'w:SJIS:UTF-8') do |f|
-        f.puts("#{pat_id},#{pat_kanjiName},#{pat_hankanaName},#{pat_romaName},#{pat_romaName},#{pat_sex},#{pat_birthday}")
+        f.puts("#{pat_id},#{pat_kanjiName},#{pat_hankanaName},#{pat_romaName},#{pat_sex},#{pat_birthday}")
       end
 
-      @@logger.info('Made patient catalogue.')
+      @logger.info('Made patient catalogue.')
     end
 
     ## PATIENT_CATOLOGUE_DIR にあるdumpファイルをDICOMデータに変換
