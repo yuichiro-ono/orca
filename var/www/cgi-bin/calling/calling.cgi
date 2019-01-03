@@ -23,6 +23,7 @@ def renderedHTML
       <meta http-equiv="refresh" content="60" />
     </head>
     <body>
+      <video id="bg-video" src="video/bg.mp4" autoplay loop></video>
       <div id="site-box">
         <div class="title">診察順番案内</div>
         <div class="next">
@@ -64,7 +65,7 @@ def renderedHTML
           <tr>
     TOHERE
 
-      acceptantPatients.to_a.slice(1..3).each do |patient|
+      acceptantPatients.to_a.slice(1..4).each do |patient|
         outHTML.push(<<-"TOHERE")
           <td>
             <table class="numbers_other">

@@ -1,13 +1,30 @@
 body {
 	font-family: "メイリオ", sans-serif;
-	background: #296112;
+/*	background: #296112; */
+	background: #000000;
 	margin-left: auto;
 	margin-right: auto;
 	color: #FFFFFF;
 	overflow: hidden;
 }
 
-#site-box { min-width : 1024px ; }
+#site-box { 
+ min-width : 1024px ; 
+ position: relative; /*必ず必要*/
+ z-index: 2; /*必ず必要*/
+}
+
+#bg-video {
+ position: fixed;
+ right: 0;
+ bottom: 0;
+ min-width: 100%;
+ min-height: 100%;
+ width: auto;
+ height: auto;
+ z-index: -100;
+ background-size: cover;
+}
 
 div.next {
 	float: left;
@@ -65,11 +82,11 @@ table.frame {
 }
 
 table.numbers_next {
-	border-radius: 20px;
-	border: solid 0px #ffffff;
+	border-radius: 10px;
+	border: solid 1px #ffffff;
 	width: 100px;
 	//background: #EDB000;
-	background: #7A0C00;
+	background: rgba(255,255,255,0.5);
 	//background: #ED9F13;
 }
 
@@ -82,9 +99,10 @@ td.number_cell_next {
 
 table.numbers_other {
 	border-radius: 10px;
-//	border: solid 7px #ffffff;
+	border: solid 1px #ffffff;
 	width: 100px;
 //	background: #ffffff;
+	background: rgba(255,255,255,0.5);
 	border-spacing: 10px;
 }
 
