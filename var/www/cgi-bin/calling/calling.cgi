@@ -26,7 +26,7 @@ def renderedHTML
       <video id="bg-video" src="/video/bg.mp4" autoplay loop></video>
       <div id="site-box">
         <div class="title">■現在の待ち状況</div>
-        <div class="time"><p id="RealtimeClockArea"><img class="clock" src="/images/clock2.png" alt="現在の時刻は"> </p></div>
+        <div class="time"><p id="RealtimeClockArea"><img class="clock" src="/images/clock.png" alt="現在の時刻は"> </p></div>
         <div class="next">
   TOHERE
 
@@ -96,7 +96,7 @@ def renderedHTML
          var nowHour = nowTime.getHours();
          var nowMin  = nowTime.getMinutes();
          var nowSec  = nowTime.getSeconds();
-         var msg = '<img class=\"clock\" src=\"/images/clock2.png\" alt=\"現在の時刻は\">' + nowHour + ":" + nowMin + ":" + nowSec + " です。";
+         var msg = '<img class=\"clock\" src=\"/images/clock.png\" alt=\"現在の時刻は\">' + nowHour + ":" + nowMin + ":" + nowSec + " です。";
          document.getElementById("RealtimeClockArea").innerHTML = msg;
       }
       setInterval('showClock1()',1000);
