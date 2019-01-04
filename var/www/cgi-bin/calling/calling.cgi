@@ -103,7 +103,7 @@ def renderedHTML
          var nowHour = set2fig( nowTime.getHours() );
          var nowMin  = set2fig( nowTime.getMinutes() );
          var nowSec  = set2fig( nowTime.getSeconds() );
-         var msg = '<img class="clock" src="/images/clock.png" alt="現在の時刻は">' + nowHour + ":" + nowMin + ":" + nowSec;
+         var msg = '<img class="clock" src="/images/clock.png" alt="現在の時刻は">' + nowHour + ":" + nowMin;
          document.getElementById("RealtimeClockArea").innerHTML = msg;
       }
       setInterval('showClock2()',1000);
