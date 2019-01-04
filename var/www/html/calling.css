@@ -28,7 +28,7 @@ body {
 
 p .clock {
 	float: left;
-	margin-right: 2em;
+	margin-right: 1em;
 }
 
 div.next {
@@ -72,7 +72,7 @@ div.time {
 	font-weight: bold;
 	padding-left: 10px;
 	margin-left: 0px;
-	margin-top: 0px;
+	margin-top: -10px;
 	letter-spacing: 15px;
 	text-align: right;
 	float: left;
