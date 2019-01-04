@@ -50,7 +50,7 @@ div.footer {
 
 div.title {
 	color: #FFFFFF;
-	font-size: 50pt;
+	font-size: 30pt;
 	font-weight: bold;
 	padding-left: 10px;
 	margin-left: 0px;
@@ -64,17 +64,15 @@ div.title {
 
 div.time {
 	color: #FFFFFF;
-	font-size: 50pt;
+	font-size: 30pt;
 	font-weight: bold;
 	padding-left: 10px;
 	margin-left: 0px;
 	margin-top: 0px;
 	letter-spacing: 15px;
-	width: 50%;
 	text-align: right;
 	line-height: 150px;
 	float: left;
-
 }
 
 div .subtitle {
