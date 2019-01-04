@@ -104,7 +104,7 @@ def renderedHTML
          var nowMin  = set2fig( nowTime.getMinutes() );
          var nowSec  = set2fig( nowTime.getSeconds() );
          var msg = '<img class="clock" src="/images/clock.png" alt="現在の時刻は">' + nowHour + ":" + nowMin + ":" + nowSec;
-         document.getElementById("RealtimeClockArea2").innerHTML = msg;
+         document.getElementById("RealtimeClockArea").innerHTML = msg;
       }
       setInterval('showClock2()',1000);
     </script>
