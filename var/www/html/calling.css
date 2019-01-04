@@ -14,6 +14,11 @@ h2 {
 	text-align: center;
 }
 
+h3 {
+	font-size: 20pt;
+	text-align: center;
+}
+
 #site-box { 
  min-width : 1024px ; 
  position: relative; /*必ず必要*/
@@ -109,20 +114,18 @@ div.content_waiting_time {
 }
 
 
-table.frame {
+table.still_not_called_numbers_table {
 	margin-top: 20px;
-	height: 70px;
-	border-collapse: separate;
-	border-spacing: 10px;
+	border-spacing: 20px;
 	margin-left: auto; 
 	margin-right: auto;
 }
 
 table.numbers_next_box {
 	width: 100px;
-	background: #ffffff;
+	background: #ff8235;
 	background: rgba(255,255,255,0.5);
-	color: #000000;
+	color: #ffffff;
 }
 
 td.number_cell_next {
@@ -132,18 +135,8 @@ td.number_cell_next {
 	text-align: center;
 }
 
-table.numbers_other {
-	border-radius: 10px;
-	border: solid 1px #ffffff;
-	width: 100px;
-//	background: #ffffff;
-	background: rgba(255,255,255,0.5);
-	border-spacing: 10px;
-}
-
 td.number_cell_other {
-	font-size: 45pt;
-//	font-weight: bold;
+	font-size: 20pt;
 	padding: 5px;
 	text-align: center;
 }

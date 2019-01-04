@@ -63,36 +63,50 @@ def renderedHTML
           <div class="content_waiting_time">#{waiting_time} 分</div>
         </div>
     TOHERE
+  end
 
-    if acceptantPatients.to_a.length >= 2
+  if acceptantPatients.to_a.length >= 2
       outHTML.push(<<-"TOHERE")
       <div class="other">
-        <div class="subtitle">
-          以下の受付番号の方はしばらくお待ちください
-        </div>
-        <br style="clear:left;" />
-        <table class="frame">
+        <h3>以下の受付番号の方はしばらくお待ちください</h3>
+        <table class="still_not_called_numbers_table">
           <tr>
-    TOHERE
+      TOHERE
 
-      acceptantPatients.to_a.slice(1..4).each do |patient|
+      acceptantPatients.to_a.slice(2..4).each do |patient|
         outHTML.push(<<-"TOHERE")
-          <td>
-            <table class="numbers_other">
-              <tr><td class="number_cell_other">#{patient["acceptance_id"]}</td></tr>
-            </table>
-          </td>
+            <td class="number_cell_other">#{patient["acceptance_id"]}</td>
           TOHERE
       end
 
+      outHTML.push("</tr>\n")
+        
+      if acceptantPatients.to_a.length >= 5
+        outHTML.push("<tr>\n")
+        acceptantPatients.to_a.slice(5..7).each do |patient|
+          outHTML.push(<<-"TOHERE")
+              <td class="number_cell_other">#{patient["acceptance_id"]}</td>
+            TOHERE
+        end
+        outHTML.push("</tr>\n")
+
+        if acceptantPatients.to_a.length >= 8
+          outHTML.push("<tr>\n")
+          acceptantPatients.to_a.slice(8..10).each do |patient|
+            outHTML.push(<<-"TOHERE")
+                <td class="number_cell_other">#{patient["acceptance_id"]}</td>
+              TOHERE
+          end
+          outHTML.push("</tr>\n")
+        end
+      end
+
       outHTML.push(<<-"TOHERE")
-        </tr>
       </table>
       </div>
       TOHERE
-    end
   end
-
+  
   outHTML.push(<<-"TOHERE")
       <div class="footer">
       更新時間 #{Time.now.strftime("%k:%M")}
