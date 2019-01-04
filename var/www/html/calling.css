@@ -26,6 +26,10 @@ body {
  background-size: cover;
 }
 
+p .clock {
+	float: left;
+}
+
 div.next {
 	clear: left;
 	float: left;
