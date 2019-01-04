@@ -80,7 +80,11 @@ def renderedHTML
         </tr>
       </table>
       </div>
+      TOHERE
+    end
+  end
 
+  outHTML.push(<<-"TOHERE")
       <div class="footer">
       更新時間 #{Time.now.strftime("%k:%M")}
       </div>
@@ -99,9 +103,7 @@ def renderedHTML
     </script>
   </body>
   </html>
-      TOHERE
-    end
-  end
+  TOHERE
 
   return outHTML.join
 end
