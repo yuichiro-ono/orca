@@ -34,7 +34,7 @@ h2 {
 
 p .clock {
 	float: left;
-	margin-right: 1em;
+	margin-right: 0.5em;
 }
 
 div.next {
