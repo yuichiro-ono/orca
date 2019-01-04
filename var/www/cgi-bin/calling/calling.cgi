@@ -32,7 +32,7 @@ def renderedHTML
 
   if acceptantPatients.to_a.empty?
     outHTML.push(<<-"TOHERE")
-          <div class="subtitle">現在受付中の方はおられません</div>
+          <h2>現在受付中の方はおられません</h2>
         </div>
     TOHERE
   else
