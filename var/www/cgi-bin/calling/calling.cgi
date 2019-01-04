@@ -96,7 +96,7 @@ def renderedHTML
          var nowHour = nowTime.getHours();
          var nowMin  = nowTime.getMinutes();
          var nowSec  = nowTime.getSeconds();
-         var msg = "<img class=\"clock\" src=\"/images/clock.png\" alt=\"現在の時刻は\">" + nowHour + ":" + nowMin + ":" + nowSec + " です。";
+         var msg = '<img class=\"clock\" src=\"/images/clock.png\" alt=\"現在の時刻は\">' + nowHour + ":" + nowMin + ":" + nowSec + " です。";
          document.getElementById("RealtimeClockArea").innerHTML = msg;
       }
       setInterval('showClock1()',1000);
