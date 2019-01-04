@@ -27,6 +27,7 @@ body {
 }
 
 div.next {
+	clear: left;
 	float: left;
 	width: calc(50% - 5px);
 	padding-top: 50px;
@@ -49,20 +50,31 @@ div.footer {
 
 div.title {
 	color: #FFFFFF;
-//	background: #245410;
-	font-size: 80pt;
+	font-size: 50pt;
 	font-weight: bold;
-//	border-bottom: solid 5px #64A135;
-//	border-left: solid 5px #64A135;
-	border: solid 0px #E3E3ED;
-//	border-radius: 10px;
 	padding-left: 10px;
 	margin-left: 0px;
 	margin-top: 0px;
 	letter-spacing: 15px;
-	width: 100%;
-	text-align: center;
-	line-height: 200px;
+	width: 50%;
+	text-align: left;
+	line-height: 150px;
+	float: left;
+}
+
+div.time {
+	color: #FFFFFF;
+	font-size: 50pt;
+	font-weight: bold;
+	padding-left: 10px;
+	margin-left: 0px;
+	margin-top: 0px;
+	letter-spacing: 15px;
+	width: 50%;
+	text-align: right;
+	line-height: 150px;
+	float: left;
+
 }
 
 div .subtitle {

@@ -18,14 +18,15 @@ def renderedHTML
     <html>
     <head>
       <meta charset="utf-8" />
-      <title>呼び出しリスト</title>
+      <title>待ち状況</title>
       <link rel="stylesheet" href="/calling.css" />
       <meta http-equiv="refresh" content="60" />
     </head>
     <body>
       <video id="bg-video" src="/video/bg.mp4" autoplay loop></video>
       <div id="site-box">
-        <div class="title">診察順番案内</div>
+        <div class="title">■現在の待ち状況</div>
+        <div class="time"><img src="/images/clock.png" alt="現在の時刻は"> <p id="RealtimeClockArea"></p></div>
         <div class="next">
   TOHERE
 
@@ -84,6 +85,18 @@ def renderedHTML
       更新時間 #{Time.now.strftime("%k:%M")}
       </div>
     </div>
+    
+    <script>
+      function showClock1() {
+         var nowTime = new Date();
+         var nowHour = nowTime.getHours();
+         var nowMin  = nowTime.getMinutes();
+         var nowSec  = nowTime.getSeconds();
+         var msg = nowHour + ":" + nowMin + ":" + nowSec + " です。";
+         document.getElementById("RealtimeClockArea").innerHTML = msg;
+      }
+      setInterval('showClock1()',1000);
+    </script>
   </body>
   </html>
       TOHERE
