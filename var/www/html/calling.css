@@ -8,6 +8,12 @@ body {
 	overflow: hidden;
 }
 
+h2 {
+	font-size: 25pt;
+	font-weight: bold;
+	text-align: center;
+}
+
 #site-box { 
  min-width : 1024px ; 
  position: relative; /*必ず必要*/
@@ -34,7 +40,7 @@ p .clock {
 div.next {
 	clear: left;
 	float: left;
-	width: calc(50% - 5px);
+	width: 50%;
 	padding-top: 50px;
 	border-right: 2px solid #E3E3ED;
 	height: 400px;
@@ -42,7 +48,7 @@ div.next {
 
 div.other {
 	float: right;
-	width: calc(50%);
+	width: 50%;
 	padding-top: 50px;
 }
 
@@ -78,12 +84,6 @@ div.time {
 	float: right;
 }
 
-div .subtitle {
-	font-size: 25pt;
-	font-weight: bold;
-	text-align: center;
-}
-
 table.frame {
 	margin-top: 20px;
 	height: 70px;
@@ -93,17 +93,15 @@ table.frame {
 	margin-right: auto;
 }
 
-table.numbers_next {
-	border-radius: 10px;
-	border: solid 1px #ffffff;
+table.numbers_next_box {
 	width: 100px;
-	//background: #EDB000;
+	background: #ffffff;
 	background: rgba(255,255,255,0.5);
-	//background: #ED9F13;
+	color: #000000;
 }
 
 td.number_cell_next {
-	font-size: 80pt;
+	font-size: 40pt;
 	font-weight: bold;
 	padding: 5px;
 	text-align: center;
