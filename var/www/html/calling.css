@@ -78,10 +78,36 @@ div.time {
 	padding-left: 10px;
 	margin-left: 0px;
 	margin-top: -30px;
-	letter-spacing: 15px;
 	text-align: right;
 	float: right;
 }
+
+div.label_waiting_people {
+	background: #4286f4;
+	background: rgba(255,255,255,0.5);
+	font-size: 25pt;
+	letter-spacing: 10px;
+	text-align: center;
+}
+
+div.content_waiting_people {
+	font-size: 20pt;
+	text-align: center;
+}
+
+div.label_waiting_time {
+	background: #3f95ff;
+	background: rgba(255,255,255,0.5);
+	font-size: 25pt;
+	letter-spacing: 10px;
+	text-align: center;
+}
+
+div.content_waiting_time {
+	font-size: 20pt;
+	text-align: center;
+}
+
 
 table.frame {
 	margin-top: 20px;

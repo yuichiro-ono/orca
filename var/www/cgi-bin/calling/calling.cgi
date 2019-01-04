@@ -9,8 +9,19 @@ require '../constantvals'
 
 include ConstantValues
 
+# 患者1人あたりの平均診察時間（単位：分）
+TIME_FOR_ONE_PATIENT = 7
+
 def renderedHTML
-  acceptantPatients = DB.exec('SELECT * FROM t_reception_today WHERE (waitingstatus = 0) ORDER BY order_no ASC;')
+  acceptantPatients = DB.exec('select * from t_reception_today where (waitingstatus = 0) order by order_no ASC;')
+  query_waiting_people = DB.exec("select count(*) from t_reception_today where (waitingstatus = 0);")
+  waiting_people = 0
+  waiting_time = 0
+
+    if query_waiting_people.ntuples > 0
+      waiting_people = query_waiting_people.getvalue(0,0).to_i - 1
+      waiting_time = TIME_FOR_ONE_PATIENT * waiting_people
+    end
 
   outHTML = Array.new
 
@@ -45,6 +56,11 @@ def renderedHTML
               <td class="number_cell_next">#{acceptantPatients[0]["acceptance_id"]}</td>
             </tr>
           </table>
+
+          <div class="label_waiting_people">ただいまの受付人数</div>
+          <div id="content_waiting_people">#{waiting_people} 人</div>
+          <div class="label_waiting_time">ただいまの待ち時間</div>
+          <div class="content_waiting_time">#{waiting_time} 分</div>
         </div>
     TOHERE
 
