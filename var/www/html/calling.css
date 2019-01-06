@@ -24,7 +24,7 @@ h4.label_waiting_people {
 	letter-spacing: 10px;
 	text-align: center;
 	margin: 0px auto 10px auto;
-	width: 90%;
+	width: 600px;
 }
 
 h4.label_waiting_time {
@@ -33,7 +33,7 @@ h4.label_waiting_time {
 	letter-spacing: 10px;
 	text-align: center;
 	margin: 0px auto 10px auto;
-	width: 90%;
+	width: 600px;
 }
 
 #site-box { 
@@ -162,6 +162,6 @@ td.number_cell_other {
 
 img.people {
 	position: absolute;
-	top: -20px;
-	left: 10px;
+	top: -40px;
+	left: 50px;
 }
