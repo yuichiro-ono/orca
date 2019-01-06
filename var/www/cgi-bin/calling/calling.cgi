@@ -48,7 +48,7 @@ def renderedHTML
     TOHERE
   else
     outHTML.push(<<-"TOHERE")
-          <h2 class="label_next_patient">以下の番号の方は診察室にお入りください </h2>
+          <h2 class="label_next_patient">下の番号の方を次に診察室にお呼びします</h2>
 
           <table class="next_patient_box">
             <tr>

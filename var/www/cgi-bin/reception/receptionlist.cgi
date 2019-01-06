@@ -87,7 +87,7 @@ def renderedHTML
     nowTime = Time.local(2018, 11, 21, t.hour, t.min)
 
     # 診察状態
-    waiting_status = ['診察待ち', '診察中断', '診察終了']
+    waiting_status = ['診察待ち', '診察中・中断', '診察終了']
 
     acceptantPatients.each do |acceptantPatient|
         acceptantTime_min = acceptantPatient["acceptance_time"].match(/([0-9][0-9]):([0-9][0-9]):([0-9][0-9])/)[2]
