@@ -72,7 +72,7 @@ EOS
         # 新規受付時に作動（受付情報変更時は作動しない）
         if body_hash["Patient_Mode"] == "add"
           @logger.info("Patient accept event has occurred. ")
-          printAcceptanceNumber(body_hash)  # ラベル印刷メソッド
+          printAcceptanceNumber(body_hash)  # ラベル印刷
           completeDocument = combineWithPhonenumber(getReceptionXML)
           updateReceptionListAll(completeDocument)
           exportDataToHeroku
@@ -80,7 +80,6 @@ EOS
       elsif data_hash["event"] == "patient_infomation" && res_hash["sub.id"] == subId[:patientinfo]
         # 患者情報　追加 or 変更 時に作動
         if body_hash["Patient_Mode"] == "add" || body_hash["Patient_Mode"] == "modify"
-          @logger.debug('Success!')
           PatientCatalogue.makeIndividualPatientCatalog(body_hash["Patient_ID"])
         end
 

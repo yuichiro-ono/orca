@@ -51,14 +51,14 @@ def renderedHTML
           <h2>
             以下の番号の方は診察室にお入りください
           </h2>
-          <table class="numbers_next_box">
+          <table class="next_patient_box">
             <tr>
               <td class="number_cell_next">#{acceptantPatients[0]["acceptance_id"]}</td>
             </tr>
           </table>
 
           <div class="label_waiting_people">ただいまの受付人数</div>
-          <div id="content_waiting_people">#{waiting_people} 人</div>
+          <div class="content_waiting_people">#{waiting_people} 人</div>
           <div class="label_waiting_time">ただいまの待ち時間</div>
           <div class="content_waiting_time">#{waiting_time} 分</div>
         </div>

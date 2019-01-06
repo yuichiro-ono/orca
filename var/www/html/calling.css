@@ -9,7 +9,7 @@ body {
 }
 
 h2 {
-	font-size: 30pt;
+	font-size: 20pt;
 	font-weight: bold;
 	text-align: center;
 }
@@ -88,11 +88,11 @@ div.time {
 }
 
 div.label_waiting_people {
-	background: #4286f4;
-	background: rgba(255,255,255,0.5);
+	background: #4286f4, rgba(255,255,255,0.5);
 	font-size: 25pt;
 	letter-spacing: 10px;
 	text-align: center;
+	margin-top: 20px;
 }
 
 div.content_waiting_people {
@@ -101,8 +101,7 @@ div.content_waiting_people {
 }
 
 div.label_waiting_time {
-	background: #3f95ff;
-	background: rgba(255,255,255,0.5);
+	background: #3f95ff, rgba(255,255,255,0.5);
 	font-size: 25pt;
 	letter-spacing: 10px;
 	text-align: center;
@@ -113,19 +112,20 @@ div.content_waiting_time {
 	text-align: center;
 }
 
-
 table.still_not_called_numbers_table {
+	table-layout: auto;
 	margin-top: 20px;
-	border-spacing: 20px;
+	border-collapse: separate;
+	border-spacing: 10px 50px;
 	margin-left: auto; 
 	margin-right: auto;
 }
 
-table.numbers_next_box {
-	width: 100px;
-	background: #ff8235;
-	background: rgba(255,255,255,0.5);
+table.next_patient_box {
+	background: #ff8235, rgba(255,255,255,0.5);
 	color: #ffffff;
+	margin-left: auto; 
+	margin-right: auto;
 }
 
 td.number_cell_next {
@@ -139,4 +139,5 @@ td.number_cell_other {
 	font-size: 20pt;
 	padding: 5px;
 	text-align: center;
+	background: #ff8235, rgba(255,255,255,0.5);
 }
