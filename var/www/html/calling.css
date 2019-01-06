@@ -153,5 +153,6 @@ td.number_cell_other {
 
 img.people {
 	position: absolute;
+	top: 0px;
 	left: 0px;
 }
