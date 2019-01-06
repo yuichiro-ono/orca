@@ -107,9 +107,6 @@ def renderedHTML
   end
   
   outHTML.push(<<-"TOHERE")
-      <div class="footer">
-      更新時間 #{Time.now.strftime("%k:%M")}
-      </div>
     </div>
     
     <script>
