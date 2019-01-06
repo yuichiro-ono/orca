@@ -23,7 +23,7 @@ h4.label_waiting_people {
 	font-size: 25pt;
 	letter-spacing: 10px;
 	text-align: center;
-	margin: 0px auto 10px auto;
+	margin: 40px auto 10px auto;
 	width: 90%;
 }
 
@@ -117,6 +117,7 @@ div.content_waiting_time {
 }
 
 div.waiting_people{
+	width: 100%;
 	position: relative;
 }
 
