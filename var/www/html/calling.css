@@ -24,7 +24,7 @@ h4.label_waiting_people {
 	letter-spacing: 10px;
 	text-align: center;
 	margin: 0px auto 10px auto;
-	width: 600px;
+	width: 700px;
 }
 
 h4.label_waiting_time {
@@ -33,7 +33,7 @@ h4.label_waiting_time {
 	letter-spacing: 10px;
 	text-align: center;
 	margin: 0px auto 10px auto;
-	width: 600px;
+	width: 700px;
 }
 
 #site-box { 
@@ -64,14 +64,14 @@ div.next {
 	float: left;
 	width: 50%;
 	padding-top: 50px;
-	height: 600px;
+	height: 500px;
 }
 
 div.other {
 	float: right;
 	width: 50%;
 	padding-top: 50px;
-	height: 600px;
+	height: 500px;
 }
 
 div.footer {
