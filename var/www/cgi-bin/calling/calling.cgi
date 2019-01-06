@@ -56,9 +56,9 @@ def renderedHTML
             </tr>
           </table>
 
-          <div class="label_waiting_people">ただいまの受付人数</div>
+          <h4 class="label_waiting_people">ただいまの受付人数</h4>
           <div class="content_waiting_people">#{waiting_people} 人</div>
-          <div class="label_waiting_time">ただいまの待ち時間</div>
+          <h4 class="label_waiting_time">ただいまの待ち時間</h4>
           <div class="content_waiting_time">#{waiting_time} 分</div>
         </div>
     TOHERE

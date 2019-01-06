@@ -89,8 +89,8 @@ div.time {
 	height: 50px;
 }
 
-div.label_waiting_people {
-	background: #4286f4, rgba(255,255,255,0.5);
+h4.label_waiting_people {
+	background-color: rgba(66,134,244,0.5);
 	font-size: 25pt;
 	letter-spacing: 10px;
 	text-align: center;
@@ -102,8 +102,8 @@ div.content_waiting_people {
 	text-align: center;
 }
 
-div.label_waiting_time {
-	background: #3f95ff, rgba(255,255,255,0.5);
+h4.label_waiting_time {
+	background-color: rgba(63,149,255,0.5);
 	font-size: 25pt;
 	letter-spacing: 10px;
 	text-align: center;
