@@ -144,6 +144,7 @@ table.next_patient_box {
 	padding: 20px;
 	margin-left: auto; 
 	margin-right: auto;
+	border: solid 2px #ffffff;
 }
 
 td.number_cell_next {
