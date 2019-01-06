@@ -62,7 +62,7 @@ def renderedHTML
             <div class="content_waiting_people">#{waiting_people} 人</div>
           </div>
           <div class="waiting_time">
-            <h4 class="label_waiting_time">ただいまの待ち時間</h4>
+            <h4 class="label_waiting_time">ただいまの最大待ち時間</h4>
             <img src="/images/sunadokei.png" class="sunadokei">
             <div class="content_waiting_time">#{waiting_time} 分</div>
           </div>
