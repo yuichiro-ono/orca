@@ -141,6 +141,7 @@ table.still_not_called_numbers_table {
 table.next_patient_box {
 	background-color: rgba(255,0,0,0.5);
 	color: #ffffff;
+	padding: 20px;
 	margin-left: auto; 
 	margin-right: auto;
 }

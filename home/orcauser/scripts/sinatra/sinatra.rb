@@ -50,7 +50,7 @@ post '/wtst' do
 	end
 
 	date = Date.today.strftime('%Y-%m-%d')
-	DB.exec("UPDATE t_reception SET waitingstatus = #{newStatus} WHERE (patient_id = '#{patientId}' And acceptance_date = '#{date}');")
+	DB.exec("update t_reception set waitingstatus = #{newStatus} where (patient_id = '#{patientId}' And acceptance_date = '#{date}');")
 end
 
 post '/reissue' do 
