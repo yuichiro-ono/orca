@@ -23,7 +23,7 @@ h4.label_waiting_people {
 	font-size: 25pt;
 	letter-spacing: 10px;
 	text-align: center;
-	margin: 40px auto 10px auto;
+	margin: 0px auto 10px auto;
 	width: 90%;
 }
 
@@ -33,7 +33,6 @@ h4.label_waiting_time {
 	letter-spacing: 10px;
 	text-align: center;
 	margin: 10px auto 10px auto;
-	width: 90%;
 }
 
 #site-box { 
@@ -64,14 +63,14 @@ div.next {
 	float: left;
 	width: 50%;
 	padding-top: 50px;
-	height: 400px;
+	height: 500px;
 }
 
 div.other {
 	float: right;
 	width: 50%;
 	padding-top: 50px;
-	height: 400px;
+	height: 500px;
 }
 
 div.footer {
@@ -117,6 +116,10 @@ div.content_waiting_time {
 	text-align: center;
 }
 
+div.waiting_people{
+	position: relative;
+}
+
 table.still_not_called_numbers_table {
 	table-layout: auto;
 	margin-top: 20px;
@@ -146,4 +149,9 @@ td.number_cell_other {
 	text-align: center;
 	background-color: rgba(255,130,53,0.5);
 	border: solid 2px;
+}
+
+img.people {
+	position: absolute;
+	left 20px;
 }

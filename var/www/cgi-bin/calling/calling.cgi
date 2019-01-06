@@ -56,8 +56,11 @@ def renderedHTML
             </tr>
           </table>
 
-          <h4 class="label_waiting_people">ただいまの受付人数</h4>
-          <div class="content_waiting_people">#{waiting_people} 人</div>
+          <div class="waiting_people">
+            <h4 class="label_waiting_people">ただいまの受付人数</h4>
+            <img src="/images/people.png" class="people">
+            <div class="content_waiting_people">#{waiting_people} 人</div>
+          </div>
           <h4 class="label_waiting_time">ただいまの待ち時間</h4>
           <div class="content_waiting_time">#{waiting_time} 分</div>
         </div>
