@@ -126,7 +126,7 @@ def renderedHTML
             <td>
                 <select class="waiting_status" patid="#{acceptantPatient["patient_id"]}">
                     <option value="診察待ち" #{isSelected(0,acceptantPatient['waitingstatus'])}>診察待ち</option>
-                    <option value="診察中断" #{isSelected(1,acceptantPatient['waitingstatus'])}>診察中断</option>
+                    <option value="診察中" #{isSelected(1,acceptantPatient['waitingstatus'])}>診察中・診察中断</option>
                     <option value="診察終了" #{isSelected(2,acceptantPatient['waitingstatus'])}>診察終了</option>
                 </select>
             </td>
