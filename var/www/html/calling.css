@@ -49,7 +49,7 @@ div.next {
 	height: 400px;
 }
 
-div.next .next_patient_box {
+div.next table {
 	background: #ff8235, rgba(255,255,255,0.5);
 	color: #ffffff;
 	margin-left: auto; 
