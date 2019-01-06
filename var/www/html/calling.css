@@ -18,6 +18,23 @@ h3 {
 	text-align: center;
 }
 
+h4.label_waiting_people {
+	background-color: rgba(66,134,244,0.5);
+	font-size: 25pt;
+	letter-spacing: 10px;
+	text-align: center;
+	margin-top: 40px;
+	margin-bottom: 10px;
+}
+
+h4.label_waiting_time {
+	background-color: rgba(63,149,255,0.5);
+	font-size: 25pt;
+	letter-spacing: 10px;
+	text-align: center;
+	margin-bottom: 10px;
+}
+
 #site-box { 
  min-width : 1024px ; 
  position: relative; /*必ず必要*/
@@ -89,23 +106,8 @@ div.time {
 	height: 50px;
 }
 
-h4.label_waiting_people {
-	background-color: rgba(66,134,244,0.5);
-	font-size: 25pt;
-	letter-spacing: 10px;
-	text-align: center;
-	margin-top: 20px;
-}
-
 div.content_waiting_people {
 	font-size: 20pt;
-	text-align: center;
-}
-
-h4.label_waiting_time {
-	background-color: rgba(63,149,255,0.5);
-	font-size: 25pt;
-	letter-spacing: 10px;
 	text-align: center;
 }
 
