@@ -63,6 +63,7 @@ def renderedHTML
           </div>
           <div class="waiting_time">
             <h4 class="label_waiting_time">ただいまの待ち時間</h4>
+            <img src="/images/sunadokei.png" class="sunadokei">
             <div class="content_waiting_time">#{waiting_time} 分</div>
           </div>
         </div>
