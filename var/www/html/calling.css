@@ -8,12 +8,12 @@ body {
 	overflow: hidden;
 }
 
-h2 {
-	font-size: 18pt;
+h2.label_next_patient {
+	font-size: 20pt;
 	text-align: center;
 }
 
-h3 {
+h2.label_other_patient {
 	font-size: 18pt;
 	text-align: center;
 }
@@ -25,6 +25,7 @@ h4.label_waiting_people {
 	text-align: center;
 	margin-top: 40px;
 	margin-bottom: 10px;
+	width: 90%;
 }
 
 h4.label_waiting_time {
@@ -34,6 +35,7 @@ h4.label_waiting_time {
 	text-align: center;
 	margin-top: 10px;
 	margin-bottom: 10px;
+	width: 90%;
 }
 
 #site-box { 
