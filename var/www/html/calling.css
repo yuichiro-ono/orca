@@ -9,13 +9,12 @@ body {
 }
 
 h2 {
-	font-size: 20pt;
-	font-weight: bold;
+	font-size: 18pt;
 	text-align: center;
 }
 
 h3 {
-	font-size: 20pt;
+	font-size: 18pt;
 	text-align: center;
 }
 
@@ -48,6 +47,13 @@ div.next {
 	width: 50%;
 	padding-top: 50px;
 	height: 400px;
+}
+
+div.next .next_patient_box {
+	background: #ff8235, rgba(255,255,255,0.5);
+	color: #ffffff;
+	margin-left: auto; 
+	margin-right: auto;
 }
 
 div.other {
