@@ -1,6 +1,5 @@
 body {
 	font-family: "メイリオ", sans-serif;
-/*	background: #296112; */
 	background: #000000;
 	margin-left: auto;
 	margin-right: auto;
@@ -40,6 +39,7 @@ h4.label_waiting_time {
  min-width : 1024px ; 
  position: relative; /*必ず必要*/
  z-index: 2; /*必ず必要*/
+ margin-left: 10px;
 }
 
 #bg-video {
