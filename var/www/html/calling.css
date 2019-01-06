@@ -74,6 +74,7 @@ div.title {
 	width: 50%;
 	text-align: left;
 	float: left;
+	height: 50px;
 }
 
 div.time {
@@ -85,6 +86,7 @@ div.time {
 	margin-top: -30px;
 	text-align: right;
 	float: right;
+	height: 50px;
 }
 
 div.label_waiting_people {
