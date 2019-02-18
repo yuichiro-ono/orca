@@ -70,9 +70,12 @@ EOS
         body_hash["uuid"] = SecureRandom.uuid
 
         # 新規受付時に作動（受付情報変更時は作動しない）
-        if body_hash["Patient_Mode"] == "add"
-          @logger.info("Patient accept event has occurred. ")
-          printAcceptanceNumber(body_hash)  # ラベル印刷
+        if body_hash["Patient_Mode"] == "add" || body_hash["Patient_Mode"] == "delete"
+          @logger.info("Patient accept/delete event has occurred. ")
+
+          # ラベル印刷
+          printAcceptanceNumber(body_hash) if body_hash["Patient_Mode"] == "add" 
+          
           completeDocument = combineWithPhonenumber(getReceptionXML)
           updateReceptionListAll(completeDocument)
           exportDataToHeroku
@@ -81,6 +84,8 @@ EOS
         # 患者情報　追加 or 変更 時に作動
         if body_hash["Patient_Mode"] == "add" || body_hash["Patient_Mode"] == "modify"
           PatientCatalogue.makeIndividualPatientCatalog(body_hash["Patient_ID"])
+        elsif body_hash["Patient_Mode"] == "del"
+          PatientCatalogue.deleteIndividualPatientCatalog(body_hash["Patient_ID"])
         end
 
       end

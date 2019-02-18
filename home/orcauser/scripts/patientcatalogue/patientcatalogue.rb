@@ -77,7 +77,6 @@ EOS
   end
 
   def self.makeIndividualPatientCatalog(patient_id)
-    @logger.info("OK")
     begin
       response = connectionToORCA.post do |req| 
         req.url '/api01rv2/patientlst2v2', {:class => '01'}
@@ -110,7 +109,7 @@ EOS
       @logger.error('No patient is registered.')    
       exit
     elsif res_xml.at_xpath('//WholeName').text == '患者番号がありません'
-         @logger.error('No patient is registered.')    
+      @logger.error('No patient is registered.')    
       exit
     end
 
@@ -145,6 +144,10 @@ EOS
     #     `dump2dcm +te -q #{file} ../#{file}.wl`
     #   end
     # end
+  end
+
+  def self.deleteIndividualPatientCatalog(patient_id)
+    File.delete(PATIENT_CATOLOGUE_DIR + '/' + patient_id.to_s + '.csv')
   end
 end
 
