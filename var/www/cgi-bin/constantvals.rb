@@ -12,7 +12,7 @@ module ConstantValues
 	PHYSICIAN_CODE  = '10000'.freeze       # ドクターコード．現在は固定．人が増えたら，拡張する．
 	APPOINTMENT_INFORMATION = '01'  # 予約内容区分（01:患者による予約、 02:医師による予約）
 	ORCanswer_USER ='ormaster'.freeze
-	ORCanswer_PASSWD = 'orcamaster'.freeze
+	ORCanswer_PASSWD = 'ormaster'.freeze
 
 	# Test URL
 	ORCA_URI = 'http://192.168.0.3:8000/'.freeze
