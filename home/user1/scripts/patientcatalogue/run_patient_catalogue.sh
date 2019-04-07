@@ -1,4 +1,4 @@
 #!/bin/bash
 
-cd /home/orcauser/scripts/patientcatalogue
+cd /home/user1/scripts/patientcatalogue
 clockwork patientcatalogue.rb &
