@@ -99,6 +99,8 @@ EOS
       @logger.error(e)
     end
 
+    p response
+
     res_xml = Nokogiri::XML(response.body)
     @logger.info(res_xml)
 
