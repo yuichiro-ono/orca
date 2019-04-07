@@ -4,11 +4,11 @@ require 'json'
 require 'logger'
 require 'securerandom'
 require '/var/www/cgi-bin/constantvals'
-require '/home/orcauser/scripts/patientcatalogue/patientcatalogue'
+require '/home/user1/scripts/patientcatalogue/patientcatalogue'
 
 include ConstantValues
 
-HOME_DIR = '/home/orcauser/scripts/printacceptnum'
+HOME_DIR = '/home/user1/scripts/printacceptnum'
 
 @logger = Logger.new("#{HOME_DIR}/print_acceptnum.log")
 
@@ -17,7 +17,7 @@ def printAcceptanceNumber(body_hash)
 end
 
 EM.run {
-  ws = Faye::WebSocket::Client.new('ws://192.168.0.3:9400/ws', [], :headers => {'X-GINBEE-TENANT-ID' => '1'})
+  ws = Faye::WebSocket::Client.new('ws://localhost:9400/ws', [], :headers => {'X-GINBEE-TENANT-ID' => '1'})
 
   subId = Hash.new
   # ORCA PUSH APIへのリクエストID
