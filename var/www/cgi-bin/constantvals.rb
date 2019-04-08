@@ -15,11 +15,11 @@ module ConstantValues
 	ORCanswer_PASSWD = 'ormaster'.freeze
 
 	# Test URL
-	ORCA_URI = 'http://192.168.0.3:8000/'.freeze
+	ORCA_URI = 'http://localhost:8000/'.freeze
 	CGI_URI = '/cgi-bin/receptionlist/receptionlist.cgi'
-	DBUPDATE_ORDERNO_URI = 'http://192.168.0.3:4567/ordno'
-	DBUPDATE_WAITINGSTATUS_URI = 'http://192.168.0.3:4567/wtst'
-    DBUPDATE_REISSUE_URI = 'http://192.168.0.3:4567/reissue'
+	DBUPDATE_ORDERNO_URI = 'http://localhost:4567/ordno'
+	DBUPDATE_WAITINGSTATUS_URI = 'http://localhost:4567/wtst'
+    DBUPDATE_REISSUE_URI = 'http://localhost:4567/reissue'
 
 	# XML Formatter
 	Formatter = REXML::Formatters::Default.new
