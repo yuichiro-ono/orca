@@ -10,7 +10,7 @@ require 'cgi'
 require 'twilio-ruby'
 require 'rubygems'
 require 'sqlite3'
-require 'constantvals'
+require './constantvals'
 
 include ConstantValues
 

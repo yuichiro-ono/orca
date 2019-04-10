@@ -5,7 +5,7 @@ require 'rexml/document'
 require 'date'
 require 'cgi'
 require 'rubygems'
-require 'constantvals'
+require './constantvals'
 
 include ConstantValues
 
