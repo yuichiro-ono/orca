@@ -4,8 +4,8 @@
 import os
 import sys
 
-sys.path.insert(0, "/usr/local/lib/python2.7/dist-packages/python_escpos-3.0a5.dev1+g52719c0-py2.7.egg")
-sys.path.insert(1, "/home/orcauser/.local/lib/python2.7/site-packages")
+#sys.path.insert(0, "/usr/local/lib/python2.7/dist-packages/python_escpos-3.0a5.dev1+g52719c0-py2.7.egg")
+sys.path.insert(1, "/home/user1/.local/lib/python2.7/site-packages")
 
 import time
 import binascii
@@ -43,7 +43,7 @@ def jpText(printer, txt, dw=False, dh=False):
 
 
 WEEKDAY = ['月', '火', '水', '木', '金', '土', '日']
-PRINTER_IP = "192.168.0.17"
+PRINTER_IP = "192.168.0.42"
 HEROKU_URL = "http://wait-1210.herokuapp.com"
 args = sys.argv
 
