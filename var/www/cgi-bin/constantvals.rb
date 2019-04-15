@@ -34,10 +34,8 @@ module ConstantValues
     SCRIPT_DIR = '/var/www/cgi-bin'
 
 	# DB
-	begin
-		DB = PG::connect(:host => "localhost", :user => "orcauser", :password => "orca", :dbname => "reception_db")
-		DB.internal_encoding = "UTF-8"
-	rescue PG::ConnectionBad => e
+	DB = PG::connect(:host => "localhost", :user => "orca", :dbname => "reception_db")
+	DB.internal_encoding = "UTF-8"
 		
 	end
 
