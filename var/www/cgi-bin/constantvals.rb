@@ -37,8 +37,6 @@ module ConstantValues
 	DB = PG::connect(:host => "localhost", :user => "orca", :dbname => "reception_db")
 	DB.internal_encoding = "UTF-8"
 		
-	end
-
 	def connectionToORCA
 	  # ORCAへのConnection作成
 	  conn = Faraday.new(:url => ORCA_URI) do |builder|
