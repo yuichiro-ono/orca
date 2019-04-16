@@ -36,7 +36,7 @@ def renderedHTML
     <body>
       <video id="bg-video" src="/video/bg.mp4" autoplay loop></video>
       <div id="site-box">
-        <div class="title">■現在の待ち状況</div>
+        <div class="waitingstatus_title">■現在の待ち状況</div>
         <div class="time"><p id="RealtimeClockArea"><img class="clock" src="/images/clock.png" alt="現在の時刻は"> </p></div>
         <div class="next">
   TOHERE
@@ -48,7 +48,7 @@ def renderedHTML
     TOHERE
   else
     outHTML.push(<<-"TOHERE")
-          <h2 class="label_next_patient">下の番号の方を次に診察室にお呼びします</h2>
+          <h2 class="label_next_patient">次に診察室にお呼びします</h2>
 
           <table class="next_patient_box">
             <tr>

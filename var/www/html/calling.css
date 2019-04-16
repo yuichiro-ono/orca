@@ -63,6 +63,7 @@ div.next {
 	clear: left;
 	float: left;
 	width: 50%;
+	margin-top: 50px;
 	padding-top: 50px;
 	height: 500px;
 }
@@ -81,9 +82,9 @@ div.footer {
 	font-size: 20pt;
 }
 
-div.title {
+div.waitingstatus_title {
 	color: #FFFFFF;
-	font-size: 30pt;
+	font-size: 36pt;
 	font-weight: bold;
 	padding-left: 10px;
 	margin-left: 0px;
@@ -97,7 +98,7 @@ div.title {
 
 div.time {
 	color: #FFFFFF;
-	font-size: 30pt;
+	font-size: 36pt;
 	font-weight: bold;
 	padding-left: 10px;
 	margin-right: 100px;
@@ -148,14 +149,14 @@ table.next_patient_box {
 }
 
 td.number_cell_next {
-	font-size: 50pt;
+	font-size: 70pt;
 	font-weight: bold;
 	padding: 5px;
 	text-align: center;
 }
 
 td.number_cell_other {
-	font-size: 26pt;
+	font-size: 36pt;
 	padding: 8px;
 	text-align: center;
 	background-color: rgba(255,130,53,0.5);
