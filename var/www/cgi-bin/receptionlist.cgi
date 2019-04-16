@@ -153,7 +153,6 @@ def renderedHTML
         }
 
         $(function() {
-          $('#acceptance-patients tbody').disableSelection();
           $('#acceptance-patients tbody').sortable({
                cursor: 'move',
                opacity: 0.5,
