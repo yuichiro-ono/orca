@@ -37,7 +37,7 @@ module ConstantValues
 	DB = PG::connect(:host => "localhost", :user => "orca", :dbname => "reception_db")
 	DB.internal_encoding = "UTF-8"
 
-    LOGGER = Logger.new("#{SCRIPT_DIR}/constantvals.log")
+    ConstantvalsLog = Logger.new("#{SCRIPT_DIR}/constantvals.log")
 
 	def connectionToORCA
 	  # ORCAへのConnection作成
@@ -46,7 +46,7 @@ module ConstantValues
 	    builder.request :retry, max: 2, interval: 0.05
 	    ## ログを標準出力に出したい時(本番はコメントアウトでいいかも)
 	    #builder.use Faraday::Response::Logger
-	    #builder.response :LOGGER  ## エラー対応
+	    #builder.response :ConstantvalsLogger  ## エラー対応
 	    builder.response :raise_error
 	    builder.use Faraday::Request::BasicAuthentication, ORCanswer_USER, ORCanswer_PASSWD  ## Basic認証する
 	    builder.adapter :net_http  ## アダプター選択（選択肢は他にもあり）
@@ -62,7 +62,7 @@ module ConstantValues
         begin
             DB.exec('DROP TABLE t_orca_reception;')
         rescue PG::Error => e
-            #LOGGER.error(e)
+            ConstantvalsLogger.error(e)
         end
 
         DB.exec('BEGIN;') 
@@ -150,7 +150,7 @@ module ConstantValues
     	begin 
 	        DB.exec('DROP TABLE t_export;')
         rescue => error
-            LOGGER.error(error)
+            ConstantvalsLogger.error(error)
         end
 
 	    DB.exec("CREATE TABLE t_export AS SELECT acceptance_date, acceptance_id, acceptance_time, order_no, waitingstatus, uuid from t_reception_today;")
@@ -204,7 +204,7 @@ module ConstantValues
             req.body = xml
           end
         rescue Exception => e
-          #LOGGER.error(e)
+          #ConstantvalsLogger.error(e)
         end
 
         return reception_response
@@ -248,7 +248,7 @@ module ConstantValues
             req.body = xml
           end
         rescue Exception => e
-          #LOGGER.error(e)
+          #ConstantvalsLogger.error(e)
         end
 
         res_xml = Nokogiri::XML(phonenums_response.body)
