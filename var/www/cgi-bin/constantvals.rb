@@ -147,7 +147,7 @@ module ConstantValues
 #    	begin 
 	        DB.exec('DROP TABLE t_export;')
     	    DB.exec("CREATE TABLE t_export AS SELECT acceptance_date, acceptance_id, acceptance_time, order_no, waitingstatus, uuid from t_reception_today;")
-	    	system('pg_dump --no-acl --no-owner -h localhost -U orcauser -t t_export reception_db > /var/tmp/export.dump')
+	    	system('pg_dump --no-acl --no-owner -h localhost -U orca -t t_export reception_db > /var/tmp/export.dump')
             if !$?.success?
             end
 
