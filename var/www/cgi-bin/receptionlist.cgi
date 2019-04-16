@@ -140,9 +140,9 @@ def renderedHTML
         </tbody>
     </table>
 
-    <script src="/jquery-3.3.1.min.js"></script>
-    <script src="/jquery/external/jquery/jquery.js"></script>
-    <script src="/jquery/jquery-ui.js"></script>
+    <script src="/jquery-3.4.0.js"></script>
+    <script src="/external/jquery/jquery.js"></script>
+    <script src="/jquery-ui.js"></script>
     <script type="text/javascript">
         startTimeout = function() {
             var reloadInterval = 60000;
@@ -239,7 +239,7 @@ else
 <body>
     <h1>案内メールを送信しました</h1>
 
-    <a href="http://192.168.0.3/cgi-bin/receptionlist.cgi" class="square_btn">受付一覧に戻る</a>
+    <a href="http://192.168.0.81/cgi-bin/receptionlist.cgi" class="square_btn">受付一覧に戻る</a>
 </body>
 </html>
 EOF
