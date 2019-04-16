@@ -16,11 +16,6 @@ def printAcceptanceNumber(body_hash)
   system("python printToThermprt.py #{body_hash["Accept_Id"]} #{body_hash["Accept_Date"]} #{body_hash["Accept_Time"]}")
 end
 
-def newWebsocket
-  ws = Faye::WebSocket::Client.new('ws://localhost:9400/ws', [], :headers => {'X-GINBEE-TENANT-ID' => '1'})
-  return ws
-end
-
 def newPatientAcceptRequestStr(id)
   # ORCA PUSH APIへのリクエスト
   patientaccept_req_str = <<EOS
@@ -46,7 +41,7 @@ EOS
 end
 
 EM.run {
-  ws = newWebsocket
+  ws = Faye::WebSocket::Client.new('ws://localhost:9400/ws', [], :headers => {'X-GINBEE-TENANT-ID' => '1'})
 
   subId = Hash.new
   # ORCA PUSH APIへのリクエストID
@@ -109,10 +104,15 @@ EM.run {
 
   ws.on :close do |event|
     p [:close, event.code, event.reason]
-      ws = newWebsocket
+    
+    ws = Faye::WebSocket::Client.new('ws://localhost:9400/ws', [], :headers => {'X-GINBEE-TENANT-ID' => '1'})
 
+    subId = Hash.new
     # ORCA PUSH APIへのリクエストID
-    patientaccept_req_str  = newPatientAcceptRequestStr
-    patientinfo_req_str = newPatientInfoRequestStr
+    patientaccept_req_id = "PatientAcceptReq_#{Time.now}"
+    patientinfo_req_id = "PatientInfoReq_#{Time.now}"
+
+    patientaccept_req_str  = newPatientAcceptRequestStr(patientaccept_req_id)
+    patientinfo_req_str = newPatientInfoRequestStr(patientinfo_req_id)
   end
 }
