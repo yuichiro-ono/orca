@@ -144,25 +144,26 @@ module ConstantValues
 	end
 
     def exportDataToHeroku
-#    	begin 
+    	begin 
 	        DB.exec('DROP TABLE t_export;')
-    	    DB.exec("CREATE TABLE t_export AS SELECT acceptance_date, acceptance_id, acceptance_time, order_no, waitingstatus, uuid from t_reception_today;")
-	    	system('pg_dump --no-acl --no-owner -h localhost -U postgres -t t_export reception_db > /var/tmp/export.dump')
-            if !$?.success?
-            end
+        rescue => error
+            @logger.error(error)
+        end
 
-	        system('heroku pg:reset -a wait-1210 --confirm wait-1210')
-            if !$?.success?
-            end
+	    DB.exec("CREATE TABLE t_export AS SELECT acceptance_date, acceptance_id, acceptance_time, order_no, waitingstatus, uuid from t_reception_today;")
+    	system('pg_dump --no-acl --no-owner -h localhost -U postgres -t t_export reception_db > /var/tmp/export.dump')
+        if !$?.success?
+        end
 
-	        system('heroku pg:psql -a wait-1210 < /var/tmp/export.dump')
-            if !$?.success?
-            end
+        system('heroku pg:reset -a wait-1210 --confirm wait-1210')
+        if !$?.success?
+        end
 
-	        system('rm /var/tmp/export.dump')
-#    	rescue Exception => e 
-#    		@logger.error(e)
-#    	end
+        system('heroku pg:psql -a wait-1210 < /var/tmp/export.dump')
+        if !$?.success?
+        end
+
+        system('rm /var/tmp/export.dump')
     end
 
     ## 受付一覧をXMLで取得する．
