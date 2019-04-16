@@ -130,7 +130,7 @@ def renderedHTML
                     <option value="診察終了" #{isSelected(2,acceptantPatient['waitingstatus'])}>診察終了</option>
                 </select>
             </td>
-            <td><a href="#{CGI_URI}?smsto=#{acceptantPatient["Phonenumber"]}" class="square_btn">Send SMS</a></td>
+            <td><a href="#{RECEPTIONLIST_CGI_URI}?smsto=#{acceptantPatient["Phonenumber"]}" class="square_btn">Send SMS</a></td>
             <td><button class="re_issue_acceptnumber" acceptid="#{acceptantPatient["acceptance_id"]}" accepttime="#{acceptantPatient["acceptance_time"]}">再発行</button></td>
             </tr>
             TOHERE
