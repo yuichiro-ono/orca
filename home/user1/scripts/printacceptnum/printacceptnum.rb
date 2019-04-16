@@ -18,21 +18,15 @@ end
 
 def newWebsocket
   ws = Faye::WebSocket::Client.new('ws://localhost:9400/ws', [], :headers => {'X-GINBEE-TENANT-ID' => '1'})
-
-  subId = Hash.new
-  # ORCA PUSH APIへのリクエストID
-  patientaccept_req_id  = "PatientAcceptReq_#{Time.now}"
-  patientinfo_req_id = "PatientInfoReq_#{Time.now}"
   return ws
-
 end
 
-def newPatientAcceptRequestStr
+def newPatientAcceptRequestStr(id)
   # ORCA PUSH APIへのリクエスト
   patientaccept_req_str = <<EOS
 {
 "command" : "subscribe",
-"req.id" : "PatientAcceptReq_#{Time.now}", 
+"req.id" : "#{id}", 
 "event" : "patient_accept" 
 }
 EOS
@@ -40,11 +34,11 @@ EOS
   return patientaccept_req_str
 end
 
-def newPatientInfoRequestStr
+def newPatientInfoRequestStr(id)
   patientinfo_req_str = <<EOS  
 {
 "command" : "subscribe",
-"req.id" : "PatientInfoReq_#{Time.now}", 
+"req.id" : "#{id}", 
 "event" : "patient_infomation" 
 }
 EOS
@@ -56,8 +50,11 @@ EM.run {
 
   subId = Hash.new
   # ORCA PUSH APIへのリクエストID
-  patientaccept_req_str  = newPatientAcceptRequestStr
-  patientinfo_req_str = newPatientInfoRequestStr
+  patientaccept_req_id = "PatientAcceptReq_#{Time.now}"
+  patientinfo_req_id = "PatientInfoReq_#{Time.now}"
+
+  patientaccept_req_str  = newPatientAcceptRequestStr(patientaccept_req_id)
+  patientinfo_req_str = newPatientInfoRequestStr(patientinfo_req_id)
 
   ws.on :open do |event|
     p [:open]
