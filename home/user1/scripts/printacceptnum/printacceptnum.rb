@@ -56,8 +56,8 @@ EM.run {
 
   subId = Hash.new
   # ORCA PUSH APIへのリクエストID
-  patientaccept_req_id  = newPatientAcceptRequestStr
-  patientinfo_req_id = newPatientInfoRequestStr
+  patientaccept_req_str  = newPatientAcceptRequestStr
+  patientinfo_req_str = newPatientInfoRequestStr
 
   ws.on :open do |event|
     p [:open]
@@ -114,9 +114,8 @@ EM.run {
     p [:close, event.code, event.reason]
       ws = newWebsocket
 
-      subId = Hash.new
-      # ORCA PUSH APIへのリクエストID
-      patientaccept_req_id  = newPatientAcceptRequestStr
-      patientinfo_req_id = newPatientInfoRequestStr
+    # ORCA PUSH APIへのリクエストID
+    patientaccept_req_str  = newPatientAcceptRequestStr
+    patientinfo_req_str = newPatientInfoRequestStr
   end
 }
