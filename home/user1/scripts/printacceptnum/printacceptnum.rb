@@ -36,6 +36,8 @@ def newPatientAcceptRequestStr
 "event" : "patient_accept" 
 }
 EOS
+
+  return patientaccept_req_str
 end
 
 def newPatientInfoRequestStr
@@ -46,6 +48,7 @@ def newPatientInfoRequestStr
 "event" : "patient_infomation" 
 }
 EOS
+  return patientinfo_req_str
 end
 
 EM.run {
