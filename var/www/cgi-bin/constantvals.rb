@@ -37,7 +37,7 @@ module ConstantValues
 	DB = PG::connect(:host => "localhost", :user => "orca", :dbname => "reception_db")
 	DB.internal_encoding = "UTF-8"
 
-    LOGGER = Logger.new("#{SCRIPT_DIR}/constantvals.log")
+    #LOGGER = Logger.new("#{SCRIPT_DIR}/constantvals.log")
 
 	def connectionToORCA
 	  # ORCAへのConnection作成
