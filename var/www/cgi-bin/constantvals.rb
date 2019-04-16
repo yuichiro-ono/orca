@@ -16,7 +16,7 @@ module ConstantValues
 
 	# Test URL
 	ORCA_URI = 'http://localhost:8000/'.freeze
-	CGI_URI = '/cgi-bin/receptionlist/receptionlist.cgi'
+	RECEPTIONLIST_CGI_URI = '/cgi-bin/receptionlist.cgi'
 	DBUPDATE_ORDERNO_URI = 'http://localhost:4567/ordno'
 	DBUPDATE_WAITINGSTATUS_URI = 'http://localhost:4567/wtst'
     DBUPDATE_REISSUE_URI = 'http://localhost:4567/reissue'
