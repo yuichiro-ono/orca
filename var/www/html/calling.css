@@ -71,6 +71,7 @@ div.next {
 div.other {
 	float: right;
 	width: 50%;
+	margin-top: 50px;
 	padding-top: 50px;
 	height: 500px;
 }
@@ -156,7 +157,7 @@ td.number_cell_next {
 }
 
 td.number_cell_other {
-	font-size: 36pt;
+	font-size: 40pt;
 	padding: 8px;
 	text-align: center;
 	background-color: rgba(255,130,53,0.5);
