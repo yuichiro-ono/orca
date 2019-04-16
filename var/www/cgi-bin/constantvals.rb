@@ -62,7 +62,7 @@ module ConstantValues
         begin
             DB.exec('DROP TABLE t_orca_reception;')
         rescue PG::Error => e
-            LOGGER.error(e)
+            #LOGGER.error(e)
         end
 
         DB.exec('BEGIN;') 
@@ -248,7 +248,7 @@ module ConstantValues
             req.body = xml
           end
         rescue Exception => e
-          LOGGER.error(e)
+          #LOGGER.error(e)
         end
 
         res_xml = Nokogiri::XML(phonenums_response.body)
