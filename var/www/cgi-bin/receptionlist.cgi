@@ -49,6 +49,7 @@ def renderedHTML
       <link rel="stylesheet" type="text/css" href="/reception.css" />
       <link rel="stylesheet" type="text/css" href="/jquery-ui.css" />
       <meta http-equiv="refresh" content="60" />
+      <meta name="referrer" content="no-referrer">
     </head> 
     
     <body>
