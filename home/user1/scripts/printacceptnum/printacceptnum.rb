@@ -40,8 +40,8 @@ EOS
   return patientinfo_req_str
 end
 
-EM.run {
-  ws = Faye::WebSocket::Client.new('ws://localhost:9400/ws', [], :headers => {'X-GINBEE-TENANT-ID' => '1'})
+def start_connection
+  ws = Faye::WebSocket::Client.new('ws://localhost:9400/ws', [], :headers => {'X-GINBEE-TENANT-ID' => '1'}, ping: 60)
 
   subId = Hash.new
   # ORCA PUSH APIへのリクエストID
@@ -105,14 +105,10 @@ EM.run {
   ws.on :close do |event|
     p [:close, event.code, event.reason]
     
-    ws = Faye::WebSocket::Client.new('ws://localhost:9400/ws', [], :headers => {'X-GINBEE-TENANT-ID' => '1'})
-
-    subId = Hash.new
-    # ORCA PUSH APIへのリクエストID
-    patientaccept_req_id = "PatientAcceptReq_#{Time.now}"
-    patientinfo_req_id = "PatientInfoReq_#{Time.now}"
-
-    patientaccept_req_str  = newPatientAcceptRequestStr(patientaccept_req_id)
-    patientinfo_req_str = newPatientInfoRequestStr(patientinfo_req_id)
+    start_connection
   end
+end
+
+EM.run {
+  start_connection
 }
