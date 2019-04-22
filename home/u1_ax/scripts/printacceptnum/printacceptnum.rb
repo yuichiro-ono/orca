@@ -88,7 +88,7 @@ def start_connection
           
           completeDocument = combineWithPhonenumber(getReceptionXML)
           updateReceptionListAll(completeDocument)
-          exportDataToHeroku
+          #exportDataToHeroku
         end
       elsif data_hash["event"] == "patient_infomation" && res_hash["sub.id"] == subId[:patientinfo]
         # 患者情報　追加 or 変更 時に作動
