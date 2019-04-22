@@ -41,7 +41,7 @@ EOS
 end
 
 def start_connection
-  ws = Faye::WebSocket::Client.new('ws://localhost:9400/ws', [], :headers => {'X-GINBEE-TENANT-ID' => '1'}, ping: 60)
+  ws = Faye::WebSocket::Client.new('ws://192.168.0.81:9400/ws', [], :headers => {'X-GINBEE-TENANT-ID' => '1'}, ping: 60)
 
   subId = Hash.new
   # ORCA PUSH APIへのリクエストID
