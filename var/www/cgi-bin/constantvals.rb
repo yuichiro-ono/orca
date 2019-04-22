@@ -150,7 +150,7 @@ module ConstantValues
     	begin 
 	        DB.exec('DROP TABLE t_export;')
         rescue => error
-            ConstantvalsLogger.error(error)
+            #ConstantvalsLogger.error(error)
         end
 
 	    DB.exec("CREATE TABLE t_export AS SELECT acceptance_date, acceptance_id, acceptance_time, order_no, waitingstatus, uuid from t_reception_today;")
