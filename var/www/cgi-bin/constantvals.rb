@@ -17,9 +17,9 @@ module ConstantValues
 	# Test URL
 	ORCA_URI = 'http://192.168.0.81:8000/'.freeze
 	RECEPTIONLIST_CGI_URI = '/cgi-bin/receptionlist.cgi'
-	DBUPDATE_ORDERNO_URI = 'http://192.168.0.81:4567/ordno'
-	DBUPDATE_WAITINGSTATUS_URI = 'http://192.168.0.81:4567/wtst'
-    DBUPDATE_REISSUE_URI = 'http://192.168.0.81:4567/reissue'
+	DBUPDATE_ORDERNO_URI = 'http://192.168.20.2:4567/ordno'
+	DBUPDATE_WAITINGSTATUS_URI = 'http://192.168.20.2:4567/wtst'
+    DBUPDATE_REISSUE_URI = 'http://192.168.20.2:4567/reissue'
 
 	# XML Formatter
 	Formatter = REXML::Formatters::Default.new
