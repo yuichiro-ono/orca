@@ -15,7 +15,7 @@ module ConstantValues
 	ORCanswer_PASSWD = 'ormaster'.freeze
 
 	# Test URL
-	ORCA_URI = 'http://localhost:8000/'.freeze
+	ORCA_URI = 'http://192.168.0.81:8000/'.freeze
 	RECEPTIONLIST_CGI_URI = '/cgi-bin/receptionlist.cgi'
 	DBUPDATE_ORDERNO_URI = 'http://192.168.0.81:4567/ordno'
 	DBUPDATE_WAITINGSTATUS_URI = 'http://192.168.0.81:4567/wtst'
