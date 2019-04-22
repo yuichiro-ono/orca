@@ -1,4 +1,4 @@
 #!/bin/bash
 
-cd /home/user1/scripts/exportheroku
+cd /home/u1_ax/scripts/exportheroku
 clockwork export_heroku.rb

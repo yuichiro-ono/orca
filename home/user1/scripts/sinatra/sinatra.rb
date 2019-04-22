@@ -57,7 +57,7 @@ post '/reissue' do
 	acceptId = params['acceptid']
 	acceptDate = Date.today.strftime('%Y-%m-%d')
 	acceptTime = params['accepttime']
-	system("python /home/user1/scripts/printacceptnum/printToThermprt.py #{acceptId} #{acceptDate} #{acceptTime}")
+	system("python /home/u1_ax/scripts/printacceptnum/printToThermprt.py #{acceptId} #{acceptDate} #{acceptTime}")
 end
 
 get '/' do

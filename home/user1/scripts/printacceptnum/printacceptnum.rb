@@ -4,11 +4,11 @@ require 'json'
 require 'logger'
 require 'securerandom'
 require '/var/www/cgi-bin/constantvals'
-require '/home/user1/scripts/patientcatalogue/patientcatalogue'
+require '/home/u1_ax/scripts/patientcatalogue/patientcatalogue'
 
 include ConstantValues
 
-HOME_DIR = '/home/user1/scripts/printacceptnum'
+HOME_DIR = '/home/u1_ax/scripts/printacceptnum'
 
 @logger = Logger.new("#{HOME_DIR}/print_acceptnum.log")
 

@@ -1,4 +1,4 @@
 #!/bin/bash
 
-cd /home/user1/scripts/sinatra
+cd /home/u1_ax/scripts/sinatra
 ruby sinatra.rb

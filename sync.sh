@@ -1,6 +1,6 @@
 #!/bin/bash
 
-rsync -uvr --exclude=".*" ./ orca:/
+rsync -uvr --exclude=".*" ./ pacs:/
 
 echo "git commit and push."
 git add *

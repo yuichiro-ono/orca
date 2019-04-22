@@ -9,7 +9,7 @@ require 'nkf'
 include ConstantValues
 
 class PatientCatalogue
-  SCRIPT_HOME = '/home/user1/scripts/patientcatalogue'.freeze
+  SCRIPT_HOME = '/home/u1_ax/scripts/patientcatalogue'.freeze
   PATIENT_CATOLOGUE_DIR = "/home/public/PatientCatalogue".freeze
   @logger = Logger.new("#{SCRIPT_HOME}/patient_catalogue.log")
 

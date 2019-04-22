@@ -1,4 +1,4 @@
 #!/bin/bash
 
-cd /home/user1/scripts/printacceptnum
+cd /home/u1_ax/scripts/printacceptnum
 ruby printacceptnum.rb
