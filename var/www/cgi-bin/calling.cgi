@@ -78,7 +78,7 @@ def renderedHTML
           <tr>
       TOHERE
 
-      acceptantPatients.to_a.slice(2..4).each do |patient|
+      acceptantPatients.to_a.slice(1..4).each do |patient|
         outHTML.push(<<-"TOHERE")
             <td class="number_cell_other">#{patient["acceptance_id"]}</td>
           TOHERE
