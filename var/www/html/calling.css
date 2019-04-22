@@ -23,7 +23,7 @@ h4.label_waiting_people {
 	letter-spacing: 10px;
 	text-align: center;
 	margin: 0px auto 10px auto;
-	width: 95%;
+	width: 100%;
 }
 
 h4.label_waiting_time {
@@ -32,7 +32,7 @@ h4.label_waiting_time {
 	letter-spacing: 10px;
 	text-align: center;
 	margin: 0px auto 10px auto;
-	width: 95%;
+	width: 100%;
 }
 
 #site-box { 
