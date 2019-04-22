@@ -9,7 +9,6 @@ require 'time'
 require 'cgi'
 require 'twilio-ruby'
 require 'rubygems'
-require 'sqlite3'
 require './constantvals'
 
 include ConstantValues
