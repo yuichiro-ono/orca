@@ -13,7 +13,6 @@ HOME_DIR = '/home/u1_ax/scripts/printacceptnum'
 @logger = Logger.new("#{HOME_DIR}/print_acceptnum.log")
 
 def printAcceptanceNumber(body_hash)
-  print "#{body_hash["Accept_Id"]} #{body_hash["Accept_Date"]} #{body_hash["Accept_Time"]}"
   system("python printToThermprt.py #{body_hash["Accept_Id"]} #{body_hash["Accept_Date"]} #{body_hash["Accept_Time"]}")
 end
 
@@ -94,6 +93,7 @@ def start_connection
       elsif data_hash["event"] == "patient_infomation" && res_hash["sub.id"] == subId[:patientinfo]
         # 患者情報　追加 or 変更 時に作動
         if body_hash["Patient_Mode"] == "add" || body_hash["Patient_Mode"] == "modify"
+                    print body_hash["Patient_ID"]
           PatientCatalogue.makeIndividualPatientCatalog(body_hash["Patient_ID"])
         elsif body_hash["Patient_Mode"] == "del"
           PatientCatalogue.deleteIndividualPatientCatalog(body_hash["Patient_ID"])
