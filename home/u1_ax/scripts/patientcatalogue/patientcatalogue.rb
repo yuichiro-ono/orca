@@ -10,7 +10,8 @@ include ConstantValues
 
 class PatientCatalogue
   SCRIPT_HOME = '/home/u1_ax/scripts/patientcatalogue'.freeze
-  PATIENT_CATOLOGUE_DIR = "/home/public/PatientCatalogue".freeze
+  PATIENT_CATOLOGUE_DIRS = ["/home/public/PatientCatalogue", "/home/public/PatientCatalogue_US", "/home/public/PatientCatalogue_NR"]
+
   @logger = Logger.new("#{SCRIPT_HOME}/patient_catalogue.log")
 
   def self.makeAllPatientCatalog
@@ -52,7 +53,7 @@ EOS
       pat_birthday = patientInfo.at_xpath('BirthDate').text.gsub(/-/, '')
       pat_sex      = patientInfo.at_xpath('Sex').text == '1' ? 'M' : 'F'
 
-      # File.open(PATIENT_CATOLOGUE_DIR + '/' + pat_id.to_s, 'w') do |f|
+      # File.open(PATIENT_CATOLOGUE_CR_DIR + '/' + pat_id.to_s, 'w') do |f|
       #   f.puts("(0010,0010) PN [#{pat_romaName}]")
       #   f.puts("(0010,0020) LO [#{pat_id}]")
       #   f.puts("(0010,0030) DA [#{pat_birthday}]")
@@ -60,16 +61,18 @@ EOS
       # end
 
       # 患者情報をCSVに出力（１患者(ID)１ファイル）
-      File.open(PATIENT_CATOLOGUE_DIR + '/' + pat_id.to_s + '.csv', 'w:SJIS:UTF-8') do |f|
-        f.puts("#{pat_id},#{pat_kanjiName},#{pat_hankanaName},#{pat_romaName},#{pat_sex},#{pat_birthday}")
+      PATIENT_CATOLOGUE_DIRS.each do |dir|
+        File.open(dir + '/' + pat_id.to_s + '.csv', 'w:SJIS:UTF-8') do |f|
+          f.puts("#{pat_id},#{pat_kanjiName},#{pat_hankanaName},#{pat_romaName},#{pat_sex},#{pat_birthday}")
+        end
       end
 
       @logger.info('Made patient catalogue.')
     end
 
-    ## PATIENT_CATOLOGUE_DIR にあるdumpファイルをDICOMデータに変換
-    # Dir.chdir(PATIENT_CATOLOGUE_DIR)
-    # Dir.open PATIENT_CATOLOGUE_DIR do |dir|
+    ## PATIENT_CATOLOGUE_CR_DIR にあるdumpファイルをDICOMデータに変換
+    # Dir.chdir(PATIENT_CATOLOGUE_CR_DIR)
+    # Dir.open PATIENT_CATOLOGUE_CR_DIR do |dir|
     #   dir.each do |file|
     #     `dump2dcm +te -q #{file} ../#{file}.wl`
     #   end
@@ -124,7 +127,7 @@ EOS
       pat_birthday = patientInfo.at_xpath('BirthDate').text.gsub(/-/, '')
       pat_sex      = patientInfo.at_xpath('Sex').text == '1' ? 'M' : 'F'
 
-      # File.open(PATIENT_CATOLOGUE_DIR + '/' + pat_id.to_s, 'w') do |f|
+      # File.open(PATIENT_CATOLOGUE_CR_DIR + '/' + pat_id.to_s, 'w') do |f|
       #   f.puts("(0010,0010) PN [#{pat_romaName}]")
       #   f.puts("(0010,0020) LO [#{pat_id}]")
       #   f.puts("(0010,0030) DA [#{pat_birthday}]")
@@ -132,16 +135,16 @@ EOS
       # end
 
       # 患者情報をCSVに出力（１患者(ID)１ファイル）
-      File.open(PATIENT_CATOLOGUE_DIR + '/' + pat_id.to_s + '.csv', 'w:SJIS:UTF-8') do |f|
+      File.open(PATIENT_CATOLOGUE_CR_DIR + '/' + pat_id.to_s + '.csv', 'w:SJIS:UTF-8') do |f|
         f.puts("#{pat_id},#{pat_kanjiName},#{pat_hankanaName},#{pat_romaName},#{pat_sex},#{pat_birthday}")
       end
 
       @logger.info('Made patient catalogue.')
     end
 
-    ## PATIENT_CATOLOGUE_DIR にあるdumpファイルをDICOMデータに変換
-    # Dir.chdir(PATIENT_CATOLOGUE_DIR)
-    # Dir.open PATIENT_CATOLOGUE_DIR do |dir|
+    ## PATIENT_CATOLOGUE_CR_DIR にあるdumpファイルをDICOMデータに変換
+    # Dir.chdir(PATIENT_CATOLOGUE_CR_DIR)
+    # Dir.open PATIENT_CATOLOGUE_CR_DIR do |dir|
     #   dir.each do |file|
     #     `dump2dcm +te -q #{file} ../#{file}.wl`
     #   end
@@ -149,7 +152,7 @@ EOS
   end
 
   def self.deleteIndividualPatientCatalog(patient_id)
-    File.delete(PATIENT_CATOLOGUE_DIR + '/' + patient_id.to_s + '.csv')
+    File.delete(PATIENT_CATOLOGUE_CR_DIR + '/' + patient_id.to_s + '.csv')
   end
 end
 
