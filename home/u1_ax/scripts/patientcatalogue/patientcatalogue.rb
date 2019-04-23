@@ -53,13 +53,6 @@ EOS
       pat_birthday = patientInfo.at_xpath('BirthDate').text.gsub(/-/, '')
       pat_sex      = patientInfo.at_xpath('Sex').text == '1' ? 'M' : 'F'
 
-      # File.open(PATIENT_CATOLOGUE_CR_DIR + '/' + pat_id.to_s, 'w') do |f|
-      #   f.puts("(0010,0010) PN [#{pat_romaName}]")
-      #   f.puts("(0010,0020) LO [#{pat_id}]")
-      #   f.puts("(0010,0030) DA [#{pat_birthday}]")
-      #   f.puts("(0010,0040) CS [#{pat_sex}]")
-      # end
-
       # 患者情報をCSVに出力（１患者(ID)１ファイル）
       PATIENT_CATOLOGUE_DIRS.each do |dir|
         File.open(dir + '/' + pat_id.to_s + '.csv', 'w:SJIS:UTF-8') do |f|
@@ -135,8 +128,10 @@ EOS
       # end
 
       # 患者情報をCSVに出力（１患者(ID)１ファイル）
-      File.open(PATIENT_CATOLOGUE_CR_DIR + '/' + pat_id.to_s + '.csv', 'w:SJIS:UTF-8') do |f|
-        f.puts("#{pat_id},#{pat_kanjiName},#{pat_hankanaName},#{pat_romaName},#{pat_sex},#{pat_birthday}")
+      PATIENT_CATOLOGUE_DIRS.each do |dir|
+        File.open(dir + '/' + pat_id.to_s + '.csv', 'w:SJIS:UTF-8') do |f|
+          f.puts("#{pat_id},#{pat_kanjiName},#{pat_hankanaName},#{pat_romaName},#{pat_sex},#{pat_birthday}")
+        end
       end
 
       @logger.info('Made patient catalogue.')
