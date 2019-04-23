@@ -5,7 +5,7 @@ import os
 import sys
 
 #sys.path.insert(0, "/usr/local/lib/python2.7/dist-packages/python_escpos-3.0a5.dev1+g52719c0-py2.7.egg")
-sys.path.insert(1, "/home/u1_ax/.local/lib/python2.7/site-packages")
+sys.path.insert(1, "/home/u1_ax/.local/lib/python2.7/site-packages/python_escpos-3.0a4.dist-info")
 
 import time
 import binascii
