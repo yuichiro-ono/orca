@@ -10,7 +10,8 @@ include ConstantValues
 
 class PatientCatalogue
   SCRIPT_HOME = '/home/u1_ax/scripts/patientcatalogue'.freeze
-  PATIENT_CATOLOGUE_DIRS = ["/home/public/PatientCatalogue", "/home/public/PatientCatalogue_US", "/home/public/PatientCatalogue_NR"]
+  PATIENT_CATOLOGUE_DIRS = ["/home/public/PatientCatalogue", "/home/public/PatientCatalogue_US"]
+  PATIENT_CATOLOGUE_NIHONRINSHO_DIR = "/home/public/PatientCatalogue_NR"
 
   @logger = Logger.new("#{SCRIPT_HOME}/patient_catalogue.log")
 
@@ -132,6 +133,11 @@ EOS
         File.open(dir + '/' + pat_id.to_s + '.csv', 'w:SJIS:UTF-8') do |f|
           f.puts("#{pat_id},#{pat_kanjiName},#{pat_hankanaName},#{pat_romaName},#{pat_sex},#{pat_birthday}")
         end
+      end
+
+      # 日本医学臨床研究所　Planetむけファイル
+      File.open(PATIENT_CATOLOGUE_NIHONRINSHO_DIR + '/' + pat_id.to_s + '.csv', 'w:SJIS:UTF-8') do |f|
+        f.puts("#{pat_id},#{pat_kanjiName},#{pat_hankanaName},#{patientInfo.at_xpath('Sex').text},#{pat_birthday}")
       end
 
       @logger.info('Made patient catalogue.')
