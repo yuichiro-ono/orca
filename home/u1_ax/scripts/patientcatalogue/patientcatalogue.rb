@@ -11,7 +11,7 @@ include ConstantValues
 class PatientCatalogue
   SCRIPT_HOME = '/home/u1_ax/scripts/patientcatalogue'.freeze
   PATIENT_CATOLOGUE_DIRS = ["/home/public/PatientCatalogue", "/home/public/PatientCatalogue_US"]
-  PATIENT_CATOLOGUE_NIHONRINSHO_DIR = "/home/public/PatientCatalogue_NR"
+  PATIENT_CATOLOGUE_NIHONRINSHO_DIR = "/mnt/nr"
 
   @logger = Logger.new("#{SCRIPT_HOME}/patient_catalogue.log")
 
