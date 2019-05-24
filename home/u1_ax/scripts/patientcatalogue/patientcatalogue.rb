@@ -63,7 +63,8 @@ EOS
 
       # 日本医学臨床研究所　Planetむけファイル
       File.open(PATIENT_CATOLOGUE_NIHONRINSHO_DIR + '/' + pat_id.to_s + '.csv', 'w:SJIS:UTF-8') do |f|
-        f.puts("#{pat_id},#{pat_kanjiName},#{pat_hankanaName},#{patientInfo.at_xpath('Sex').text},#{pat_birthday}")
+        # 末尾に改行なし
+        f.print("#{pat_id},#{pat_kanjiName},#{pat_hankanaName},#{patientInfo.at_xpath('Sex').text},#{pat_birthday}")
       end
 
       @logger.info('Made patient catalogue.')
@@ -142,7 +143,7 @@ EOS
 
       # 日本医学臨床研究所　Planetむけファイル
       File.open(PATIENT_CATOLOGUE_NIHONRINSHO_DIR + '/' + pat_id.to_s + '.csv', 'w:SJIS:UTF-8') do |f|
-        f.puts("#{pat_id},#{pat_kanjiName},#{pat_hankanaName},#{patientInfo.at_xpath('Sex').text},#{pat_birthday}")
+        f.print("#{pat_id},#{pat_kanjiName},#{pat_hankanaName},#{patientInfo.at_xpath('Sex').text},#{pat_birthday}")
       end
 
       @logger.info('Made patient catalogue.')
