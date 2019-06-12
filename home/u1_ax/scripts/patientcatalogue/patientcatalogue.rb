@@ -56,13 +56,13 @@ EOS
 
       # 患者情報をCSVに出力（１患者(ID)１ファイル）
       PATIENT_CATOLOGUE_DIRS.each do |dir|
-        File.open(dir + '/' + pat_id.to_s + '.csv', 'w:SJIS:UTF-8') do |f|
+        File.open(dir + '/' + pat_id.to_s + '.csv', 'w:SJIS:UTF-8', perm=0666) do |f|
           f.puts("#{pat_id},#{pat_kanjiName},#{pat_hankanaName},#{pat_romaName},#{pat_sex},#{pat_birthday}")
         end
       end
 
       # 日本医学臨床研究所　Planetむけファイル
-      File.open(PATIENT_CATOLOGUE_NIHONRINSHO_DIR + '/' + pat_id.to_s + '.csv', 'w:SJIS:UTF-8') do |f|
+      File.open(PATIENT_CATOLOGUE_NIHONRINSHO_DIR + '/' + pat_id.to_s + '.csv', 'w:SJIS:UTF-8', perm=0666) do |f|
         # 末尾に改行なし
         f.print("#{pat_id},#{pat_kanjiName},#{pat_hankanaName},#{patientInfo.at_xpath('Sex').text},#{pat_birthday}")
       end
@@ -160,6 +160,7 @@ EOS
 
   def self.deleteIndividualPatientCatalog(patient_id)
     File.delete(PATIENT_CATOLOGUE_CR_DIR + '/' + patient_id.to_s + '.csv')
+    File.delete(PATIENT_CATOLOGUE_NIHONRINSHO_DIR + '/' + patient_id.to_s + '.csv')
   end
 end
 
